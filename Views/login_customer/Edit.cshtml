@@ -1,0 +1,50 @@
+﻿@model WebApp.Models.login_customer
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h1>Editar</h1>
+
+<h4>Clientes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div class="form-group">
+                <label asp-for="LOG_NAME" class="control-label"></label>
+                <input asp-for="LOG_NAME" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="LOG_NAME" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LOG_NICK" class="control-label"></label>
+                <input asp-for="LOG_NICK" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="LOG_NICK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LOG_PASS" class="control-label"></label>
+                <input asp-for="LOG_PASS" type="password" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="LOG_PASS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LOG_ACTIVE" class="control-label"></label>
+                <br />
+                <select asp-for="LOG_ACTIVE" class="form-control" asp-items="@ViewBag.StatusOptions"></select>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

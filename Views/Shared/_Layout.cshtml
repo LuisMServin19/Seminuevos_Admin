@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FP Administration</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Serfitex.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/assets/css/bundle.css?v131">
+    <link rel="stylesheet" href="~/assets/css/app.css?v131">
+    <style>
+        .dropdownmenu ul, .dropdownmenu li {
+            margin: 0;
+            padding: 0;
+        }
+
+        .dropdownmenu ul {
+            background: gray;
+            list-style: none;
+            width: auto;
+        }
+
+        .dropdownmenu li {
+            float: left;
+            position: relative;
+            width: auto;
+        }
+
+        .dropdownmenu a {
+            background: #30A6E6;
+            color: #FFFFFF;
+            display: block;
+            font: bold 12px/20px sans-serif;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            -webkit-transition: all .25s ease;
+            -moz-transition: all .25s ease;
+            -ms-transition: all .25s ease;
+            -o-transition: all .25s ease;
+            transition: all .25s ease;
+        }
+
+        .dropdownmenu li:hover a {
+            background: #000000;
+        }
+
+        .submenu {
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 35px;
+            visibility: hidden;
+            z-index: 1;
+        }
+
+        li:hover ul.submenu {
+            opacity: 1;
+            top: 40px; /* adjust this as per top nav padding top & bottom comes */
+            visibility: visible;
+        }
+
+        .submenu li {
+            float: none;
+            width: 100%;
+        }
+
+        .submenu a:hover {
+            background: #DF4B05;
+        }
+
+        .submenu a {
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FP Administration</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <select id="clientes" class="form-control" onchange="cambiarConexion()">
+                                @{
+                                    string cliente = Context.Request.HttpContext.Session.GetString("conexion") ?? "";
+                                }
+                                @if (cliente == "cetelem")
+                                {
+                                    <option selected>cetelem</option>
+                                }
+                                else
+                                {
+                                    <option>cetelem</option>
+                                }
+
+                                @if (cliente == "navistar")
+                                {
+                                    <option selected>navistar</option>
+                                }
+                                else
+                                {
+                                    <option>navistar</option>
+                                }
+
+                                @if (cliente == "bmw")
+                                {
+                                    <option selected>bmw</option>
+                                }
+                                else
+                                {
+                                    <option>bmw</option>
+                                }
+                                
+                                @if (cliente == "paccar")
+                                {
+                                    <option selected>paccar</option>
+                                }
+                                else
+                                {
+                                    <option>paccar</option>
+                                }
+
+                                @if (cliente == "toyota")
+                                {
+                                    <option selected>toyota</option>
+                                }
+                                else
+                                {
+                                    <option>toyota</option>
+                                }
+
+                                @if (cliente == "volvo")
+                                {
+                                    <option selected>volvo</option>
+                                }
+                                else
+                                {
+                                    <option>volvo</option>
+                                }
+                            </select>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="LogOut" asp-action="Index">Salir</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    </BR>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <nav class="dropdownmenu">
+                <ul>
+                    @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
+                    <li>
+                        <a href="#">MENU</a>
+                        <ul class="submenu">
+                            <li><a href="cat_dealers">Distribuidor</a></li>
+                            <li><a href="cat_branches">Sucursal</a></li>
+                            <li><a href="login_user">Usuarios</a></li>
+                            <li><a href="login_customer">Clientes</a></li>
+                        </ul>
+                        @*</li>
+                        <li><a href="#">YAMAHA</a></li>
+                        <li><a href="LogOut">Salir</a></li> *@
+
+                </ul>
+            </nav>
+            <br />
+            <br />
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <d@* iv class="container">
+             &copy; 2023 - Serfitex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+             </div> *@
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<script>
+    function cambiarConexion() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            // document.getElementById("demo").innerHTML = this.responseText;
+        }
+
+        var e = document.getElementById("clientes");
+        var value = e.value;
+        var cliente = e.options[e.selectedIndex].text;
+
+        xhttp.open("GET", "/FP_Administration/Home/cambiarConexion?cliente=" + cliente, true);
+        xhttp.send();
+
+        location.reload();
+    }
+</script>

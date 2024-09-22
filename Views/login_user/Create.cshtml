@@ -1,0 +1,44 @@
+﻿@model WebApp.Models.login_user
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Agregar usuario</h1>
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="usr_name" class="control-label"></label>
+                <input asp-for="usr_name" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="usr_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="usr_nick" class="control-label"></label>
+                <input asp-for="usr_nick" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="usr_nick" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="usr_pass" class="control-label"></label>
+                <input asp-for="usr_pass" type="password" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="usr_pass" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

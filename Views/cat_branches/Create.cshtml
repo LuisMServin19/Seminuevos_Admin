@@ -1,0 +1,35 @@
+﻿@model WebApp.Models.cat_branches
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Agregar sucursal</h1>
+
+<h4>Sucursal</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BRA_NAME" class="control-label"></label>
+                <input asp-for="BRA_NAME" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="BRA_NAME" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

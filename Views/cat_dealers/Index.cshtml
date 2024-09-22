@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApp.Models.cat_dealers>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Distribuidor</h1>
+
+<p>
+    <a asp-action="Create">Agregar nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DEA_NAME)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DEA_ACTIVE)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DEA_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID_DEA" class="btn btn-primary">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

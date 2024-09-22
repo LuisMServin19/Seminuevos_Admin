@@ -1,0 +1,34 @@
+﻿@model WebApp.Models.cat_dealers
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Agregar distribuidor</h1>
+
+<h4>Distribuidor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DEA_NAME" class="control-label"></label>
+                <input asp-for="DEA_NAME" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="DEA_NAME" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
