@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/luisservin/Documents/REPOSITORIOS/Administration_MySQL/NuevoBanorte.csproj": {}
+    "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/NuevoBanorte.csproj": {}
   },
   "projects": {
-    "/Users/luisservin/Documents/REPOSITORIOS/Administration_MySQL/NuevoBanorte.csproj": {
+    "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/NuevoBanorte.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/luisservin/Documents/REPOSITORIOS/Administration_MySQL/NuevoBanorte.csproj",
+        "projectUniqueName": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/NuevoBanorte.csproj",
         "projectName": "NuevoBanorte",
-        "projectPath": "/Users/luisservin/Documents/REPOSITORIOS/Administration_MySQL/NuevoBanorte.csproj",
+        "projectPath": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/NuevoBanorte.csproj",
         "packagesPath": "/Users/luisservin/.nuget/packages/",
-        "outputPath": "/Users/luisservin/Documents/REPOSITORIOS/Administration_MySQL/obj/",
+        "outputPath": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/luisservin/.nuget/NuGet/NuGet.Config"
