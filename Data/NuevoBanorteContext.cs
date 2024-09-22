@@ -21,7 +21,5 @@ namespace Serfitex.Data
 
         public DbSet<WebApp.Models.TAPerfilMenu>? TAPerfilMenu { get; set; }
 
-
-
     }
 }
