@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Serfitex.Models.Unidades>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Unidades</h1>
+
+<p>
+    <a asp-action="Create">Agregar nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marca)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Modelo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marca)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id_unidad" class="btn btn-primary">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
