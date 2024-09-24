@@ -75,7 +75,7 @@ namespace Serfitex.Controllers
 
                 HttpContext.Session.SetString("conexion", "cetelem");
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Unidades");
             }
         }
     }

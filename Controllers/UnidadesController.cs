@@ -50,8 +50,9 @@ namespace Serfitex.Controllers
                         int Id_unidad = Convert.ToInt32(cursor["Id_unidad"]);
                         string Modelo = Convert.ToString(cursor["Modelo"]);
                         string Marca = Convert.ToString(cursor["Marca"]);
+                        string Num_serie = Convert.ToString(cursor["Num_serie"]);
 
-                        Unidades registro = new Unidades() { Id_unidad = Id_unidad, Modelo = Modelo, Marca = Marca };
+                        Unidades registro = new Unidades() { Id_unidad = Id_unidad, Modelo = Modelo, Marca = Marca, Num_serie = Num_serie };
                         registros.Add(registro);
                     }
                 }
@@ -106,12 +107,19 @@ namespace Serfitex.Controllers
                     cmd.Parameters.AddWithValue("@Id_unidad", newUniddes.Id_unidad);
                     cmd.Parameters.AddWithValue("@Modelo", newUniddes.Modelo);
                     cmd.Parameters.AddWithValue("@Marca", newUniddes.Marca);
-                    
+                    cmd.Parameters.AddWithValue("@Num_serie", newUniddes.Num_serie);
+                    cmd.Parameters.AddWithValue("@Ano", newUniddes.Ano);
+                    cmd.Parameters.AddWithValue("@Fecha_factura", newUniddes.Fecha_factura);
+                    cmd.Parameters.AddWithValue("@Fecha_tenencia", newUniddes.Fecha_tenencia);
+                    cmd.Parameters.AddWithValue("@Seguro", newUniddes.Seguro);
+                    cmd.Parameters.AddWithValue("@Comentario", newUniddes.Comentario);
+                    cmd.Parameters.AddWithValue("@Estatus", newUniddes.Estatus);
+                    cmd.Parameters.AddWithValue("@Fecha_ingreso", newUniddes.Fecha_ingreso);
 
 
                     if (!exist)
                     {
-                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Marca) VALUES (@Modelo,@Marca)";
+                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Marca,Num_serie,Ano,Fecha_factura,Fecha_tenencia,Seguro,Comentario,Estatus,Fecha_ingreso) VALUES (@Modelo,@Marca,@Num_serie,@Ano,@Fecha_factura,@Fecha_tenencia,@Seguro,@Comentario,@Estatus,@Fecha_ingreso)";
                         cmd.ExecuteNonQuery();
                     }
                     else
@@ -156,6 +164,15 @@ namespace Serfitex.Controllers
                             Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
                             Modelo = Convert.ToString(cursor["Modelo"]),
                             Marca = Convert.ToString(cursor["Marca"]),
+                            Num_serie = Convert.ToString(cursor["Num_serie"]),
+                            Ano = Convert.ToString(cursor["Ano"]),
+                            Fecha_factura = Convert.ToDateTime(cursor["Fecha_factura"]),
+                            Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
+                            Seguro = Convert.ToString(cursor["Seguro"]),
+                            Comentario = Convert.ToString(cursor["Comentario"]),
+                            Estatus = Convert.ToBoolean(cursor["Estatus"]),
+                            Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
+
                         };
                     }
                 }
@@ -190,12 +207,20 @@ namespace Serfitex.Controllers
                 {
                     conexion.Open();
 
-                    string query = "UPDATE Unidades SET Modelo = @Modelo, Marca = @Marca WHERE Id_unidad = @Id_unidad";
+                    string query = "UPDATE Unidades SET Modelo = @Modelo, Marca = @Marca Num_serie,Ano = @Ano,Fecha_factura = @Fecha_factura,Fecha_tenencia = @Fecha_tenencia,Seguro = @Seguro,Comentario = @Comentario,Estatus = @Estatus,Fecha_ingreso = @Fecha_ingreso WHERE Id_unidad = @Id_unidad";
                     using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
                     {
+                        updateCmd.Parameters.AddWithValue("@Id_unidad", updatedUnidades.Id_unidad);
                         updateCmd.Parameters.AddWithValue("@Modelo", updatedUnidades.Modelo);
                         updateCmd.Parameters.AddWithValue("@Marca", updatedUnidades.Marca);
-                        updateCmd.Parameters.AddWithValue("@Id_unidad", updatedUnidades.Id_unidad);
+                        updateCmd.Parameters.AddWithValue("@Num_serie", updatedUnidades.Num_serie);
+                        updateCmd.Parameters.AddWithValue("@Ano", updatedUnidades.Ano);
+                        updateCmd.Parameters.AddWithValue("@Fecha_factura", updatedUnidades.Fecha_factura);
+                        updateCmd.Parameters.AddWithValue("@Fecha_tenencia", updatedUnidades.Fecha_tenencia);
+                        updateCmd.Parameters.AddWithValue("@Seguro", updatedUnidades.Seguro);
+                        updateCmd.Parameters.AddWithValue("@Comentario", updatedUnidades.Comentario);
+                        updateCmd.Parameters.AddWithValue("@Estatus", updatedUnidades.Estatus);
+                        updateCmd.Parameters.AddWithValue("@Fecha_ingreso", updatedUnidades.Fecha_ingreso);
 
                         updateCmd.ExecuteNonQuery();
                     }
