@@ -21,6 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Num_serie)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estatus)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,6 +39,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Num_serie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estatus)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id_unidad" class="btn btn-primary">Editar</a>

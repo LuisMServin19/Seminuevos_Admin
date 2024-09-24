@@ -31,7 +31,7 @@ namespace Serfitex.Controllers
 
             if (ModelState.IsValid)
             {
-                string connectionString = Configuration["BDs:cetelem"];
+                string connectionString = Configuration["BDs:SemiCC"];
 
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
                 {

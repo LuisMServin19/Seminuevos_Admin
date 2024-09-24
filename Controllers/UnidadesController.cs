@@ -30,7 +30,7 @@ namespace Serfitex.Controllers
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
 
-            string connectionString = Configuration["BDs:cetelem"];
+            string connectionString = Configuration["BDs:SemiCC"];
 
             List<Unidades> registros = new List<Unidades>();
 
@@ -82,7 +82,7 @@ namespace Serfitex.Controllers
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
 
-            string connectionString = Configuration["BDs:cetelem"];
+            string connectionString = Configuration["BDs:SemiCC"];
 
             if (ModelState.IsValid)
             {
@@ -141,7 +141,7 @@ namespace Serfitex.Controllers
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
 
-            string connectionString = Configuration["BDs:cetelem"];
+            string connectionString = Configuration["BDs:SemiCC"];
 
             Unidades unidades = null;
 
@@ -199,7 +199,7 @@ namespace Serfitex.Controllers
             if (!ModelState.IsValid)
                 return View(updatedUnidades);
 
-            string connectionString = Configuration["BDs:cetelem"];
+            string connectionString = Configuration["BDs:SemiCC"];
 
             try
             {

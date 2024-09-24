@@ -12,6 +12,8 @@ namespace Serfitex.Models
         public string Modelo { get; set; }
 
         public string Marca { get; set; }
+
+        [DisplayName("Número de serie")]
         public string Num_serie { get; set; }
         public string Ano { get; set; }
 
