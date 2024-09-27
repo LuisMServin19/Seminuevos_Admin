@@ -9,6 +9,7 @@ using System.Text;
 using Serfitex.Data;
 using Serfitex.Models;
 using WebApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Serfitex.Controllers
 {
@@ -21,7 +22,6 @@ namespace Serfitex.Controllers
         {
             _logger = logger;
             Configuration = configuration;
-
         }
 
         public IActionResult Index()
@@ -52,13 +52,14 @@ namespace Serfitex.Controllers
                         string Modelo = Convert.ToString(cursor["Modelo"]);
                         string Marca = Convert.ToString(cursor["Marca"]);
                         string Num_serie = Convert.ToString(cursor["Num_serie"]);
+                        int Estatus = Convert.ToInt32(cursor["Estatus"]);
 
-                        Unidades registro = new Unidades() { Id_unidad = Id_unidad, Modelo = Modelo, Marca = Marca, Num_serie = Num_serie };
+                        Unidades registro = new Unidades() { Id_unidad = Id_unidad, Modelo = Modelo, Marca = Marca, Num_serie = Num_serie, Estatus = Estatus };
                         registros.Add(registro);
                     }
                 }
             }
-
+            ViewBag.Estatus = registros.Select(r => r.Estatus == 1 ? "Disponible" : "Vendido").ToList();
             return View(registros);
         }
 
@@ -102,7 +103,7 @@ namespace Serfitex.Controllers
                     Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
                     Seguro = Convert.ToString(cursor["Seguro"]),
                     Comentario = Convert.ToString(cursor["Comentario"]),
-                    Estatus = Convert.ToBoolean(cursor["Estatus"]),
+                    Estatus = Convert.ToInt32(cursor["Estatus"]),
                     Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
                 };
             }
@@ -226,7 +227,7 @@ namespace Serfitex.Controllers
                             Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
                             Seguro = Convert.ToString(cursor["Seguro"]),
                             Comentario = Convert.ToString(cursor["Comentario"]),
-                            Estatus = Convert.ToBoolean(cursor["Estatus"]),
+                            Estatus = Convert.ToInt32(cursor["Estatus"]),
                             Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
 
                         };
