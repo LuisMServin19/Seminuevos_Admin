@@ -44,6 +44,7 @@
                     @Html.DisplayFor(modelItem => item.Estatus)
                 </td>
                 <td>
+                    <a asp-action="Details" asp-route-id="@item.Id_unidad" class="btn btn-primary">Detalles</a>
                     <a asp-action="Edit" asp-route-id="@item.Id_unidad" class="btn btn-primary">Editar</a>
                 </td>
             </tr>

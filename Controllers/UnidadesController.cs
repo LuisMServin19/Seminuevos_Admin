@@ -21,6 +21,7 @@ namespace Serfitex.Controllers
         {
             _logger = logger;
             Configuration = configuration;
+
         }
 
         public IActionResult Index()
@@ -60,6 +61,61 @@ namespace Serfitex.Controllers
 
             return View(registros);
         }
+
+        // GET: Unidades/Details/5
+        public IActionResult Details(int? id)
+{
+    string username = HttpContext.Session.GetString("username") ?? "";
+    if (string.IsNullOrEmpty(username))
+        return RedirectToAction("Index", "Login");
+
+    if (id == null)
+    {
+        return NotFound();
+    }
+
+    string connectionString = Configuration["BDs:SemiCC"];
+    Unidades unidad = null;
+
+    using (MySqlConnection conexion = new MySqlConnection(connectionString))
+    {
+        conexion.Open();
+
+        MySqlCommand cmd = new MySqlCommand();
+        cmd.Connection = conexion;
+        cmd.CommandText = "SELECT * FROM Unidades WHERE Id_unidad = @Id_unidad";
+        cmd.CommandType = System.Data.CommandType.Text;
+        cmd.Parameters.AddWithValue("@Id_unidad", id);
+
+        using (var cursor = cmd.ExecuteReader())
+        {
+            if (cursor.Read())
+            {
+                unidad = new Unidades()
+                {
+                    Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
+                    Modelo = Convert.ToString(cursor["Modelo"]),
+                    Marca = Convert.ToString(cursor["Marca"]),
+                    Num_serie = Convert.ToString(cursor["Num_serie"]),
+                    Ano = Convert.ToString(cursor["Ano"]),
+                    Fecha_factura = Convert.ToDateTime(cursor["Fecha_factura"]),
+                    Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
+                    Seguro = Convert.ToString(cursor["Seguro"]),
+                    Comentario = Convert.ToString(cursor["Comentario"]),
+                    Estatus = Convert.ToBoolean(cursor["Estatus"]),
+                    Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
+                };
+            }
+        }
+    }
+
+    if (unidad == null)
+    {
+        return NotFound();
+    }
+
+    return View(unidad);
+}
 
         // GET: Unidades/Create
         public IActionResult Create()

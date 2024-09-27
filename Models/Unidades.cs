@@ -15,6 +15,8 @@ namespace Serfitex.Models
 
         [DisplayName("Número de serie")]
         public string Num_serie { get; set; }
+
+        [DisplayName("Año")]
         public string Ano { get; set; }
 
         [DisplayName("Fecha factura")]
