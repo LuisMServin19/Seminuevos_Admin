@@ -80,7 +80,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SEMINUEVOS PREMIUM</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Unidades" asp-action="Index">SEMINUEVOS PREMIUM</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -148,9 +148,9 @@
                                 }
                             </select> *@
                         </li>
-                        <li class="nav-item">
+                        @* <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="LogOut" asp-action="Index">Salir</a>
-                        </li>
+                        </li> *@
                     </ul>
                 </div>
             </div>
@@ -163,19 +163,19 @@
                 <ul>
                     @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
                     <li>
-                        <a href="#">MENU</a>
-                        <ul class="submenu">
-                            <li><a href="Unidades">Unidades</a></li>
-                            @* <li><a href="cat_dealers">Distribuidor</a></li>
-                            <li><a href="cat_branches">Sucursal</a></li>
-                            <li><a href="login_user">Usuarios</a></li>
-                            <li><a href="login_customer">Clientes</a></li> *@
-                        </ul>
-                        @*</li>
-                        <li><a href="#">YAMAHA</a></li>
-                        <li><a href="LogOut">Salir</a></li> *@
-
+                        <a href="Unidades">Unidades</a>
                 </ul>
+                <ul>
+                    @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
+                    <li>
+                        <a href="#">Proximos pagos</a>
+                </ul>
+                <ul>
+                    @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
+                    <li>
+                        <a asp-area="" asp-controller="LogOut" asp-action="Index">Salir</a>
+                </ul>
+                
             </nav>
             <br />
             <br />
