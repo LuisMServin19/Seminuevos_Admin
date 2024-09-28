@@ -72,9 +72,9 @@ namespace Serfitex.Controllers
                     while (cursor.Read())
                     {
                         int Id_unidad = Convert.ToInt32(cursor["Id_unidad"]);
-                        string Modelo = Convert.ToString(cursor["Modelo"]);
-                        string Marca = Convert.ToString(cursor["Marca"]);
-                        string Num_serie = Convert.ToString(cursor["Num_serie"]);
+                        string Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty;
+                        string Marca = Convert.ToString(cursor["Marca"]) ?? string.Empty;
+                        string Num_serie = Convert.ToString(cursor["Num_serie"]) ?? string.Empty;
                         int Estatus = Convert.ToInt32(cursor["Estatus"]);
 
                         Unidades registro = new Unidades() { Id_unidad = Id_unidad, Modelo = Modelo, Marca = Marca, Num_serie = Num_serie, Estatus = Estatus };
@@ -99,7 +99,7 @@ namespace Serfitex.Controllers
     }
 
     string connectionString = Configuration["BDs:SemiCC"];
-    Unidades unidad = null;
+    Unidades? unidad = null;
 
     using (MySqlConnection conexion = new MySqlConnection(connectionString))
     {
@@ -225,7 +225,7 @@ namespace Serfitex.Controllers
 
             string connectionString = Configuration["BDs:SemiCC"];
 
-            Unidades unidades = null;
+            Unidades? unidades = null;
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
@@ -311,7 +311,7 @@ namespace Serfitex.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ModelState.AddModelError(string.Empty, "An error occurred while updating the contract.");
                 return View(updatedUnidades);

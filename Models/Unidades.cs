@@ -9,15 +9,15 @@ namespace Serfitex.Models
 
         public int Id_unidad { get; set; }
 
-        public string Modelo { get; set; }
+        public string? Modelo { get; set; }
 
-        public string Marca { get; set; }
+        public string? Marca { get; set; }
 
         [DisplayName("Número de serie")]
-        public string Num_serie { get; set; }
+        public string? Num_serie { get; set; }
 
         [DisplayName("Año")]
-        public string Ano { get; set; }
+        public string? Ano { get; set; }
 
         [DisplayName("Fecha factura")]
         public DateTime Fecha_factura { get; set; }
@@ -25,8 +25,8 @@ namespace Serfitex.Models
         [DisplayName("Fecha tenencia")]
         public DateTime Fecha_tenencia { get; set; }
         
-        public string Seguro { get; set; }
-        public string Comentario { get; set; }
+        public string? Seguro { get; set; }
+        public string? Comentario { get; set; }
         public int? Estatus { get; set; }
 
         [DisplayName("Fecha ingreso")]
