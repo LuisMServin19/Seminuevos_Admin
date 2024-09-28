@@ -25,27 +25,27 @@ namespace Serfitex.Controllers
         }
 
         private void LoadViewBagEstatus()
-    {   
-        string connectionString = Configuration["BDs:SemiCC"];
-        List<Unidades> registros = new List<Unidades>();
-
-        using (MySqlConnection conexion = new MySqlConnection(connectionString))
         {
-            conexion.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM Unidades", conexion);
+            string connectionString = Configuration["BDs:SemiCC"];
+            List<Unidades> registros = new List<Unidades>();
 
-            using (var cursor = cmd.ExecuteReader())
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
-                while (cursor.Read())
+                conexion.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Unidades", conexion);
+
+                using (var cursor = cmd.ExecuteReader())
                 {
-                    int Estatus = Convert.ToInt32(cursor["Estatus"]);
-                    registros.Add(new Unidades { Estatus = Estatus });
+                    while (cursor.Read())
+                    {
+                        int Estatus = Convert.ToInt32(cursor["Estatus"]);
+                        registros.Add(new Unidades { Estatus = Estatus });
+                    }
                 }
             }
+
+            ViewBag.Estatus = registros.Select(r => r.Estatus == 1 ? "Disponible" : "Vendido").ToList();
         }
-        
-        ViewBag.Estatus = registros.Select(r => r.Estatus == 1 ? "Disponible" : "Vendido").ToList();
-    }
 
         public IActionResult Index()
         {
@@ -88,58 +88,58 @@ namespace Serfitex.Controllers
 
         // GET: Unidades/Details/5
         public IActionResult Details(int? id)
-{
-    string username = HttpContext.Session.GetString("username") ?? "";
-    if (string.IsNullOrEmpty(username))
-        return RedirectToAction("Index", "Login");
-
-    if (id == null)
-    {
-        return NotFound();
-    }
-
-    string connectionString = Configuration["BDs:SemiCC"];
-    Unidades? unidad = null;
-
-    using (MySqlConnection conexion = new MySqlConnection(connectionString))
-    {
-        conexion.Open();
-
-        MySqlCommand cmd = new MySqlCommand();
-        cmd.Connection = conexion;
-        cmd.CommandText = "SELECT * FROM Unidades WHERE Id_unidad = @Id_unidad";
-        cmd.CommandType = System.Data.CommandType.Text;
-        cmd.Parameters.AddWithValue("@Id_unidad", id);
-
-        using (var cursor = cmd.ExecuteReader())
         {
-            if (cursor.Read())
-            {
-                unidad = new Unidades()
-                {
-                    Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
-                    Modelo = Convert.ToString(cursor["Modelo"]),
-                    Marca = Convert.ToString(cursor["Marca"]),
-                    Num_serie = Convert.ToString(cursor["Num_serie"]),
-                    Ano = Convert.ToString(cursor["Ano"]),
-                    Fecha_factura = Convert.ToDateTime(cursor["Fecha_factura"]),
-                    Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
-                    Seguro = Convert.ToString(cursor["Seguro"]),
-                    Comentario = Convert.ToString(cursor["Comentario"]),
-                    Estatus = Convert.ToInt32(cursor["Estatus"]),
-                    Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
-                };
-                ViewBag.Estatus = unidad.Estatus == 1 ? "Disponible" : "Vendido";
-            }
-        }
-    }
+            string username = HttpContext.Session.GetString("username") ?? "";
+            if (string.IsNullOrEmpty(username))
+                return RedirectToAction("Index", "Login");
 
-    if (unidad == null)
-    {
-        return NotFound();
-    }
-    return View(unidad);
-}
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            string connectionString = Configuration["BDs:SemiCC"];
+            Unidades? unidad = null;
+
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            {
+                conexion.Open();
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conexion;
+                cmd.CommandText = "SELECT * FROM Unidades WHERE Id_unidad = @Id_unidad";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Id_unidad", id);
+
+                using (var cursor = cmd.ExecuteReader())
+                {
+                    if (cursor.Read())
+                    {
+                        unidad = new Unidades()
+                        {
+                            Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
+                            Modelo = Convert.ToString(cursor["Modelo"]),
+                            Marca = Convert.ToString(cursor["Marca"]),
+                            Num_serie = Convert.ToString(cursor["Num_serie"]),
+                            Ano = Convert.ToString(cursor["Ano"]),
+                            Fecha_factura = Convert.ToDateTime(cursor["Fecha_factura"]),
+                            Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
+                            Seguro = Convert.ToString(cursor["Seguro"]),
+                            Comentario = Convert.ToString(cursor["Comentario"]),
+                            Estatus = Convert.ToInt32(cursor["Estatus"]),
+                            Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
+                        };
+                        unidad.EstatusTexto = unidad.Estatus == 1 ? "Disponible" : "Vendido";
+                    }
+                }
+            }
+
+            if (unidad == null)
+            {
+                return NotFound();
+            }
+            return View(unidad);
+        }
 
         // GET: Unidades/Create
         public IActionResult Create()
@@ -264,7 +264,7 @@ namespace Serfitex.Controllers
             {
                 return NotFound();
             }
-            
+
             LoadViewBagEstatus();
             return View(unidades);
         }
@@ -290,7 +290,8 @@ namespace Serfitex.Controllers
                 {
                     conexion.Open();
 
-                    string query = "UPDATE Unidades SET Modelo = @Modelo, Marca = @Marca Num_serie,Ano = @Ano,Fecha_factura = @Fecha_factura,Fecha_tenencia = @Fecha_tenencia,Seguro = @Seguro,Comentario = @Comentario,Estatus = @Estatus,Fecha_ingreso = @Fecha_ingreso WHERE Id_unidad = @Id_unidad";
+                    string query = "UPDATE Unidades SET Modelo = @Modelo, Marca = @Marca, Num_serie = @Num_serie, Ano = @Ano, Fecha_factura = @Fecha_factura, Fecha_tenencia = @Fecha_tenencia, Seguro = @Seguro, Comentario = @Comentario, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso WHERE Id_unidad = @Id_unidad";
+
                     using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
                     {
                         updateCmd.Parameters.AddWithValue("@Id_unidad", updatedUnidades.Id_unidad);
