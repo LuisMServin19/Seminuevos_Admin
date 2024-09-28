@@ -195,8 +195,8 @@ namespace Serfitex.Controllers
                     cmd.Parameters.AddWithValue("@Fecha_tenencia", newUniddes.Fecha_tenencia);
                     cmd.Parameters.AddWithValue("@Seguro", newUniddes.Seguro);
                     cmd.Parameters.AddWithValue("@Comentario", newUniddes.Comentario);
-                    cmd.Parameters.AddWithValue("@Estatus", newUniddes.Estatus);
-                    cmd.Parameters.AddWithValue("@Fecha_ingreso", newUniddes.Fecha_ingreso);
+                    cmd.Parameters.AddWithValue("@Estatus", 1);
+                    cmd.Parameters.AddWithValue("@Fecha_ingreso", DateTime.Now);
 
 
                     if (!exist)
