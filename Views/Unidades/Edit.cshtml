@@ -53,7 +53,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Estatus" class="control-label"></label>
-                <input asp-for="Estatus" class="form-control" Autocomplete="off" />
+                <select asp-for="Estatus" class="form-control" required>
+                    <option value="1">Disponible</option>
+                    <option value="0">Vendido</option>
+                </select>
                 <span asp-validation-for="Estatus" class="text-danger"></span>
             </div>
             <div class="form-group">

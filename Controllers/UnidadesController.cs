@@ -24,6 +24,29 @@ namespace Serfitex.Controllers
             Configuration = configuration;
         }
 
+        private void LoadViewBagEstatus()
+    {   
+        string connectionString = Configuration["BDs:SemiCC"];
+        List<Unidades> registros = new List<Unidades>();
+
+        using (MySqlConnection conexion = new MySqlConnection(connectionString))
+        {
+            conexion.Open();
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM Unidades", conexion);
+
+            using (var cursor = cmd.ExecuteReader())
+            {
+                while (cursor.Read())
+                {
+                    int Estatus = Convert.ToInt32(cursor["Estatus"]);
+                    registros.Add(new Unidades { Estatus = Estatus });
+                }
+            }
+        }
+        
+        ViewBag.Estatus = registros.Select(r => r.Estatus == 1 ? "Disponible" : "Vendido").ToList();
+    }
+
         public IActionResult Index()
         {
             string username = HttpContext.Session.GetString("username") ?? "";
@@ -59,7 +82,7 @@ namespace Serfitex.Controllers
                     }
                 }
             }
-            ViewBag.Estatus = registros.Select(r => r.Estatus == 1 ? "Disponible" : "Vendido").ToList();
+            LoadViewBagEstatus();
             return View(registros);
         }
 
@@ -106,6 +129,7 @@ namespace Serfitex.Controllers
                     Estatus = Convert.ToInt32(cursor["Estatus"]),
                     Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
                 };
+                ViewBag.Estatus = unidad.Estatus == 1 ? "Disponible" : "Vendido";
             }
         }
     }
@@ -114,7 +138,6 @@ namespace Serfitex.Controllers
     {
         return NotFound();
     }
-
     return View(unidad);
 }
 
@@ -125,6 +148,8 @@ namespace Serfitex.Controllers
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
+
+            LoadViewBagEstatus();
 
             return View();
         }
@@ -239,7 +264,8 @@ namespace Serfitex.Controllers
             {
                 return NotFound();
             }
-
+            
+            LoadViewBagEstatus();
             return View(unidades);
         }
 

@@ -27,7 +27,7 @@ namespace Serfitex.Models
         
         public string Seguro { get; set; }
         public string Comentario { get; set; }
-        public int Estatus { get; set; }
+        public int? Estatus { get; set; }
 
         [DisplayName("Fecha ingreso")]
         public DateTime Fecha_ingreso { get; set; }
