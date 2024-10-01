@@ -60,14 +60,14 @@
             @Html.DisplayNameFor(model => model.Fecha_factura)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fecha_factura)
+            @String.Format("{0:dd/MM/yyyy}", Model.Fecha_factura)
         </dd>
 
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Fecha_tenencia)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fecha_tenencia)
+            @String.Format("{0:dd/MM/yyyy}", Model.Fecha_ingreso)
         </dd>
 
         <dt class="col-sm-2">
@@ -109,19 +109,19 @@
             @Html.DisplayNameFor(model => model.Fecha_ingreso)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fecha_ingreso)
+            @String.Format("{0:dd/MM/yyyy}", Model.Fecha_ingreso)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Fech_prox_tenecia)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fech_prox_tenecia)
+            @String.Format("{0:dd/MM/yyyy}", Model.Fech_prox_tenecia)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Fech_prox_verificacion)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fech_prox_verificacion)
+            @String.Format("{0:dd/MM/yyyy}", Model.Fech_prox_verificacion)
         </dd>
     </dl>
 </div>
