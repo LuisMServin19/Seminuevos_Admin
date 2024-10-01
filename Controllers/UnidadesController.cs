@@ -327,5 +327,95 @@ namespace Serfitex.Controllers
                 return View(updatedUnidades);
             }
         }
+
+        // GET: Unidades/Venta/5
+        public IActionResult Venta(string id)
+        {
+            string username = HttpContext.Session.GetString("username") ?? "";
+
+            if (string.IsNullOrEmpty(username))
+                return RedirectToAction("Index", "LogIn");
+
+            string connectionString = Configuration["BDs:SemiCC"];
+
+            Unidades? unidades = null;
+
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            {
+                conexion.Open();
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conexion;
+                cmd.CommandText = "SELECT * FROM Unidades WHERE Id_unidad = @Id_unidad";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Id_unidad", id);
+
+                using (var cursor = cmd.ExecuteReader())
+                {
+                    if (cursor.Read())
+                    {
+                        unidades = new Unidades()
+                        {
+                            Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
+                            Estatus = Convert.ToInt32(cursor["Estatus"]),
+                            Fecha_venta = cursor["Fecha_venta"] != DBNull.Value ? Convert.ToDateTime(cursor["Fecha_venta"]) : (DateTime?)null
+
+                        };
+                    }
+                }
+            }
+
+            if (unidades == null)
+            {
+                return NotFound();
+            }
+
+            LoadViewBagEstatus();
+            return View(unidades);
+        }
+
+        // POST: Unidades/Venta/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Venta(string id, Unidades updatedUnidades)
+        {
+            string username = HttpContext.Session.GetString("username") ?? "";
+
+            if (string.IsNullOrEmpty(username))
+                return RedirectToAction("Index", "LogIn");
+
+            if (!ModelState.IsValid)
+                return View(updatedUnidades);
+
+            string connectionString = Configuration["BDs:SemiCC"];
+
+            try
+            {
+                using (MySqlConnection conexion = new MySqlConnection(connectionString))
+                {
+                    conexion.Open();
+
+                    int nuevoEstatus = 0;
+
+                    string query = "UPDATE Unidades SET Estatus = @Estatus, Fecha_venta = @Fecha_venta WHERE Id_unidad = @Id_unidad";
+
+                    using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
+                    {
+                        updateCmd.Parameters.AddWithValue("@Id_unidad", updatedUnidades.Id_unidad);
+                        updateCmd.Parameters.AddWithValue("@Estatus", nuevoEstatus);
+                        updateCmd.Parameters.AddWithValue("@Fecha_venta", updatedUnidades.Fecha_venta);
+
+                        updateCmd.ExecuteNonQuery();
+                    }
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty, "An error occurred while updating the contract.");
+                return View(updatedUnidades);
+            }
+        }
     }
 }
