@@ -64,7 +64,7 @@ namespace Serfitex.Controllers
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
-                cmd.CommandText = "SELECT * FROM Unidades ORDER BY Estatus DESC";
+                cmd.CommandText = "SELECT * FROM Unidades WHERE Estatus = 1 ORDER BY Estatus DESC";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 using (var cursor = cmd.ExecuteReader())
@@ -73,16 +73,15 @@ namespace Serfitex.Controllers
                     {
                         int Id_unidad = Convert.ToInt32(cursor["Id_unidad"]);
                         string Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty;
+                        string Tipo = Convert.ToString(cursor["Tipo"]) ?? string.Empty;
                         string Marca = Convert.ToString(cursor["Marca"]) ?? string.Empty;
                         string Num_serie = Convert.ToString(cursor["Num_serie"]) ?? string.Empty;
-                        int Estatus = Convert.ToInt32(cursor["Estatus"]);
 
-                        Unidades registro = new Unidades() { Id_unidad = Id_unidad, Modelo = Modelo, Marca = Marca, Num_serie = Num_serie, Estatus = Estatus };
+                        Unidades registro = new Unidades() { Id_unidad = Id_unidad, Modelo = Modelo, Tipo = Tipo, Marca = Marca, Num_serie = Num_serie };
                         registros.Add(registro);
                     }
                 }
             }
-            LoadViewBagEstatus();
             return View(registros);
         }
 
@@ -266,7 +265,6 @@ namespace Serfitex.Controllers
                             Aseguradora = Convert.ToString(cursor["Aseguradora"]),
                             Duplicado_llave = Convert.ToString(cursor["Duplicado_llave"]),
                             Comentario = Convert.ToString(cursor["Comentario"]),
-                            Estatus = Convert.ToInt32(cursor["Estatus"]),
                             Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
                             Fech_prox_tenecia = Convert.ToDateTime(cursor["Fech_prox_tenecia"]),
                             Fech_prox_verificacion = Convert.ToDateTime(cursor["Fech_prox_verificacion"]),
@@ -281,7 +279,6 @@ namespace Serfitex.Controllers
                 return NotFound();
             }
 
-            LoadViewBagEstatus();
             return View(unidades);
         }
 
@@ -322,7 +319,7 @@ namespace Serfitex.Controllers
                         updateCmd.Parameters.AddWithValue("@Aseguradora", updatedUnidades.Aseguradora);
                         updateCmd.Parameters.AddWithValue("@Duplicado_llave", updatedUnidades.Duplicado_llave);
                         updateCmd.Parameters.AddWithValue("@Comentario", updatedUnidades.Comentario);
-                        updateCmd.Parameters.AddWithValue("@Estatus", updatedUnidades.Estatus);
+                        updateCmd.Parameters.AddWithValue("@Estatus", 1);
                         updateCmd.Parameters.AddWithValue("@Fecha_ingreso", updatedUnidades.Fecha_ingreso);
                         updateCmd.Parameters.AddWithValue("@Fech_prox_tenecia", updatedUnidades.Fech_prox_tenecia);
                         updateCmd.Parameters.AddWithValue("@Fech_prox_verificacion", updatedUnidades.Fech_prox_verificacion);

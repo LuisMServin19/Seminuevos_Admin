@@ -16,14 +16,17 @@
                 @Html.DisplayNameFor(model => model.Modelo)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Marca)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Num_serie)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.Estatus)
-            </th>
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -36,14 +39,17 @@
                     @Html.DisplayFor(modelItem => item.Modelo)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Marca)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Num_serie)
                 </td>
-                <td>
+                @* <td>
                     @ViewBag.Estatus[i]
-                </td>
+                </td> *@
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id_unidad" class="btn btn-primary">Detalles</a>
                     <a asp-action="Edit" asp-route-id="@item.Id_unidad" class="btn btn-primary">Editar</a>
