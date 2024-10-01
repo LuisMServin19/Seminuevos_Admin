@@ -129,6 +129,8 @@ namespace Serfitex.Controllers
                             Comentario = Convert.ToString(cursor["Comentario"]),
                             Estatus = Convert.ToInt32(cursor["Estatus"]),
                             Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
+                            Fech_prox_tenecia = Convert.ToDateTime(cursor["Fech_prox_tenecia"]),
+                            Fech_prox_verificacion = Convert.ToDateTime(cursor["Fech_prox_verificacion"]),
                         };
                         unidad.EstatusTexto = unidad.Estatus == 1 ? "Disponible" : "Vendido";
                     }
@@ -198,11 +200,13 @@ namespace Serfitex.Controllers
                     cmd.Parameters.AddWithValue("@Comentario", newUniddes.Comentario);
                     cmd.Parameters.AddWithValue("@Estatus", 1);
                     cmd.Parameters.AddWithValue("@Fecha_ingreso", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@Fech_prox_tenecia", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@Fech_prox_verificacion", DateTime.Now);
 
 
                     if (!exist)
                     {
-                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Marca,Num_serie,Ano,Fecha_factura,Fecha_tenencia,Seguro,Comentario,Estatus,Fecha_ingreso) VALUES (@Modelo,@Marca,@Num_serie,@Ano,@Fecha_factura,@Fecha_tenencia,@Seguro,@Comentario,@Estatus,@Fecha_ingreso)";
+                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Marca,Num_serie,Ano,Fecha_factura,Fecha_tenencia,Seguro,Comentario,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) VALUES (@Modelo,@Marca,@Num_serie,@Ano,@Fecha_factura,@Fecha_tenencia,@Seguro,@Comentario,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
                         cmd.ExecuteNonQuery();
                     }
                     else
@@ -255,6 +259,8 @@ namespace Serfitex.Controllers
                             Comentario = Convert.ToString(cursor["Comentario"]),
                             Estatus = Convert.ToInt32(cursor["Estatus"]),
                             Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
+                            Fech_prox_tenecia = Convert.ToDateTime(cursor["Fech_prox_tenecia"]),
+                            Fech_prox_verificacion = Convert.ToDateTime(cursor["Fech_prox_verificacion"]),
 
                         };
                     }
@@ -291,7 +297,7 @@ namespace Serfitex.Controllers
                 {
                     conexion.Open();
 
-                    string query = "UPDATE Unidades SET Modelo = @Modelo, Marca = @Marca, Num_serie = @Num_serie, Ano = @Ano, Fecha_factura = @Fecha_factura, Fecha_tenencia = @Fecha_tenencia, Seguro = @Seguro, Comentario = @Comentario, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso WHERE Id_unidad = @Id_unidad";
+                    string query = "UPDATE Unidades SET Modelo = @Modelo, Marca = @Marca, Num_serie = @Num_serie, Ano = @Ano, Fecha_factura = @Fecha_factura, Fecha_tenencia = @Fecha_tenencia, Seguro = @Seguro, Comentario = @Comentario, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion WHERE Id_unidad = @Id_unidad";
 
                     using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
                     {
@@ -306,6 +312,8 @@ namespace Serfitex.Controllers
                         updateCmd.Parameters.AddWithValue("@Comentario", updatedUnidades.Comentario);
                         updateCmd.Parameters.AddWithValue("@Estatus", updatedUnidades.Estatus);
                         updateCmd.Parameters.AddWithValue("@Fecha_ingreso", updatedUnidades.Fecha_ingreso);
+                        updateCmd.Parameters.AddWithValue("@Fech_prox_tenecia", updatedUnidades.Fech_prox_tenecia);
+                        updateCmd.Parameters.AddWithValue("@Fech_prox_verificacion", updatedUnidades.Fech_prox_verificacion);
 
                         updateCmd.ExecuteNonQuery();
                     }

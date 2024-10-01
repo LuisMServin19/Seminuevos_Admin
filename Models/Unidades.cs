@@ -34,6 +34,12 @@ namespace Serfitex.Models
         [DisplayName("Fecha ingreso")]
         public DateTime Fecha_ingreso { get; set; }
 
+        [DisplayName("Proximo pago tenencia")]
+        public DateTime Fech_prox_tenecia { get; set; }
+
+        [DisplayName("Proximo pago verificacion")]
+        public DateTime Fech_prox_verificacion { get; set; }
+
     }
 }
 
