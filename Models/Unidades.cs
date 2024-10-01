@@ -14,6 +14,9 @@ namespace Serfitex.Models
 
         public string? Marca { get; set; }
 
+        [DisplayName("Número de placa")]
+        public string? Num_placa { get; set; }
+
         [DisplayName("Número de serie")]
         public string? Num_serie { get; set; }
 
