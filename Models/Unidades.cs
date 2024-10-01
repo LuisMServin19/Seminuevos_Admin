@@ -34,6 +34,10 @@ namespace Serfitex.Models
         public string? Aseguradora { get; set; }
         public string? Duplicado_llave { get; set; }
         public string? Comentario { get; set; }
+        
+        [Required(ErrorMessage = "El precio es obligatorio")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El campo Precio debe ser un número positivo")]
+        public decimal Precio { get; set; }
         public string? Sucursal { get; set; }
         public int? Estatus { get; set; }
         public string? EstatusTexto { get; set; }

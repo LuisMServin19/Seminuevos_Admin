@@ -25,6 +25,9 @@
                 @Html.DisplayNameFor(model => model.Num_placa)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Sucursal)
             </th>
             @* <th>
@@ -49,6 +52,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Num_placa)
+                </td>
+                <td>
+                    @($"${item.Precio:N2}")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Sucursal)

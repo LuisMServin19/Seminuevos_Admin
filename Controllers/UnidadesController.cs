@@ -56,30 +56,31 @@ namespace Serfitex.Controllers
 
             string connectionString = Configuration["BDs:SemiCC"];
 
-            List<Unidades> registros = new List<Unidades>();
+            var registros = new List<Unidades>();
 
-            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            using (var conexion = new MySqlConnection(connectionString))
             {
                 conexion.Open();
 
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conexion;
-                cmd.CommandText = "SELECT * FROM Unidades WHERE Estatus = 1 ORDER BY Estatus DESC";
-                cmd.CommandType = System.Data.CommandType.Text;
-
-                using (var cursor = cmd.ExecuteReader())
+                using (var cmd = new MySqlCommand("SELECT * FROM Unidades WHERE Estatus = 1 ORDER BY Estatus DESC", conexion))
                 {
-                    while (cursor.Read())
+                    using (var cursor = cmd.ExecuteReader())
                     {
-                        int Id_unidad = Convert.ToInt32(cursor["Id_unidad"]);
-                        string Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty;
-                        string Tipo = Convert.ToString(cursor["Tipo"]) ?? string.Empty;
-                        string Marca = Convert.ToString(cursor["Marca"]) ?? string.Empty;
-                        string Num_placa = Convert.ToString(cursor["Num_placa"]) ?? string.Empty;
-                        string Sucursal = Convert.ToString(cursor["Sucursal"]) ?? string.Empty;
+                        while (cursor.Read())
+                        {
+                            var registro = new Unidades
+                            {
+                                Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
+                                Modelo = cursor["Modelo"].ToString() ?? string.Empty,
+                                Tipo = cursor["Tipo"].ToString() ?? string.Empty,
+                                Marca = cursor["Marca"].ToString() ?? string.Empty,
+                                Num_placa = cursor["Num_placa"].ToString() ?? string.Empty,
+                                Precio = cursor["Precio"] != DBNull.Value ? Convert.ToDecimal(cursor["Precio"]) : 0m,
+                                Sucursal = cursor["Sucursal"].ToString() ?? string.Empty
+                            };
 
-                        Unidades registro = new Unidades() { Id_unidad = Id_unidad, Modelo = Modelo, Tipo = Tipo, Marca = Marca, Num_placa = Num_placa, Sucursal = Sucursal };
-                        registros.Add(registro);
+                            registros.Add(registro);
+                        }
                     }
                 }
             }
@@ -131,6 +132,7 @@ namespace Serfitex.Controllers
                             Aseguradora = Convert.ToString(cursor["Aseguradora"]),
                             Duplicado_llave = Convert.ToString(cursor["Duplicado_llave"]),
                             Comentario = Convert.ToString(cursor["Comentario"]),
+                            Precio = Convert.ToDecimal(cursor["Precio"]),
                             Sucursal = Convert.ToString(cursor["Sucursal"]),
                             Estatus = Convert.ToInt32(cursor["Estatus"]),
                             Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
@@ -207,6 +209,7 @@ namespace Serfitex.Controllers
                     cmd.Parameters.AddWithValue("@Aseguradora", newUniddes.Aseguradora);
                     cmd.Parameters.AddWithValue("@Duplicado_llave", newUniddes.Duplicado_llave);
                     cmd.Parameters.AddWithValue("@Comentario", newUniddes.Comentario);
+                    cmd.Parameters.AddWithValue("@Precio", newUniddes.Precio);
                     cmd.Parameters.AddWithValue("@Sucursal", newUniddes.Sucursal);
                     cmd.Parameters.AddWithValue("@Estatus", 1);
                     cmd.Parameters.AddWithValue("@Fecha_ingreso", DateTime.Now);
@@ -216,7 +219,7 @@ namespace Serfitex.Controllers
 
                     if (!exist)
                     {
-                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Tipo,Marca,Num_placa,Num_serie,Ano,Fecha_factura,Fecha_tenencia,Seguro,Aseguradora,Duplicado_llave,Comentario,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) VALUES (@Modelo,@Tipo,@Marca,@Num_placa,@Num_serie,@Ano,@Fecha_factura,@Fecha_tenencia,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
+                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Tipo,Marca,Num_placa,Num_serie,Ano,Fecha_factura,Fecha_tenencia,Seguro,Aseguradora,Duplicado_llave,Comentario,Precio,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) VALUES (@Modelo,@Tipo,@Marca,@Num_placa,@Num_serie,@Ano,@Fecha_factura,@Fecha_tenencia,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Precio,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
                         cmd.ExecuteNonQuery();
                     }
                     else
@@ -271,6 +274,7 @@ namespace Serfitex.Controllers
                             Aseguradora = Convert.ToString(cursor["Aseguradora"]),
                             Duplicado_llave = Convert.ToString(cursor["Duplicado_llave"]),
                             Comentario = Convert.ToString(cursor["Comentario"]),
+                            Precio = Convert.ToInt32(cursor["Precio"]),
                             Sucursal = Convert.ToString(cursor["Sucursal"]),
                             Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
                             Fech_prox_tenecia = Convert.ToDateTime(cursor["Fech_prox_tenecia"]),
@@ -310,7 +314,7 @@ namespace Serfitex.Controllers
                 {
                     conexion.Open();
 
-                    string query = "UPDATE Unidades SET Modelo = @Modelo, Tipo= @Tipo, Marca = @Marca, Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Fecha_factura = @Fecha_factura, Fecha_tenencia = @Fecha_tenencia, Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, Comentario = @Comentario, Sucursal = @Sucursal, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion WHERE Id_unidad = @Id_unidad";
+                    string query = "UPDATE Unidades SET Modelo = @Modelo, Tipo= @Tipo, Marca = @Marca, Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Fecha_factura = @Fecha_factura, Fecha_tenencia = @Fecha_tenencia, Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, Comentario = @Comentario, Precio = @Precio, Sucursal = @Sucursal, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion WHERE Id_unidad = @Id_unidad";
 
                     using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
                     {
@@ -327,6 +331,7 @@ namespace Serfitex.Controllers
                         updateCmd.Parameters.AddWithValue("@Aseguradora", updatedUnidades.Aseguradora);
                         updateCmd.Parameters.AddWithValue("@Duplicado_llave", updatedUnidades.Duplicado_llave);
                         updateCmd.Parameters.AddWithValue("@Comentario", updatedUnidades.Comentario);
+                        updateCmd.Parameters.AddWithValue("@Precio", updatedUnidades.Precio);
                         updateCmd.Parameters.AddWithValue("@Sucursal", updatedUnidades.Sucursal);
                         updateCmd.Parameters.AddWithValue("@Estatus", 1);
                         updateCmd.Parameters.AddWithValue("@Fecha_ingreso", updatedUnidades.Fecha_ingreso);
