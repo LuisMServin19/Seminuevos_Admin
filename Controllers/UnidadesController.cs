@@ -213,8 +213,8 @@ namespace Serfitex.Controllers
                     cmd.Parameters.AddWithValue("@Sucursal", newUniddes.Sucursal);
                     cmd.Parameters.AddWithValue("@Estatus", 1);
                     cmd.Parameters.AddWithValue("@Fecha_ingreso", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@Fech_prox_tenecia", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@Fech_prox_verificacion", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@Fech_prox_tenecia", newUniddes.Fech_prox_tenecia);
+                    cmd.Parameters.AddWithValue("@Fech_prox_verificacion", newUniddes.Fech_prox_verificacion);
 
 
                     if (!exist)
