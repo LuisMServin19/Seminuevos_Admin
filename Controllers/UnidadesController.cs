@@ -64,7 +64,7 @@ namespace Serfitex.Controllers
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
-                cmd.CommandText = "SELECT * FROM Unidades";
+                cmd.CommandText = "SELECT * FROM Unidades ORDER BY Estatus DESC";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 using (var cursor = cmd.ExecuteReader())
