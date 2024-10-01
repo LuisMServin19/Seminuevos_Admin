@@ -34,98 +34,94 @@ namespace Serfitex.Controllers
 
             return View(new List<ReporteUnidades>());
         }
-        public List<ReporteUnidades> reporte(DateTime fechaInicio, DateTime fechaFin)
-{
-    string connectionString = Configuration["BDs:SemiCC"];
-    List<ReporteUnidades> registros = new List<ReporteUnidades>();
-
-    using (MySqlConnection conexion = new MySqlConnection(connectionString))
-    {
-        conexion.Open();
-
-        MySqlCommand cmd = new MySqlCommand();
-        cmd.Connection = conexion;
-
-        // Remover cualquier filtro por id_emp
-        string sqlText = "SELECT * FROM Unidades WHERE Fecha_ingreso BETWEEN @fechaInicio AND @fechaFin;";
-
-        cmd.CommandText = sqlText;
-
-        cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio.ToString("yyyy-MM-dd"));
-        cmd.Parameters.AddWithValue("@fechaFin", fechaFin.ToString("yyyy-MM-dd"));
-
-        using (var cursor = cmd.ExecuteReader())
+        public List<ReporteUnidades> reporte()
         {
-            ReporteUnidades titulos = new ReporteUnidades()
+            string connectionString = Configuration["BDs:SemiCC"];
+            List<ReporteUnidades> registros = new List<ReporteUnidades>();
+
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
-                Modelo = "Modelo",
-                Marca = "Marca",
-                Num_serie = "Num_serie",
-                Ano = "Ano"
-            };
+                conexion.Open();
 
-            registros.Add(titulos);
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conexion;
 
-            while (cursor.Read())
-            {
-                string Modelo = Convert.ToString(cursor["Modelo"]);
-                string Marca = Convert.ToString(cursor["Marca"]);
-                string Num_serie = Convert.ToString(cursor["Num_serie"]);
-                string Ano = Convert.ToString(cursor["Ano"]);
+                // Remover cualquier filtro por id_emp
+                string sqlText = "SELECT * FROM Unidades WHERE Estatus = 1 ORDER BY Fecha_ingreso;";
 
-                ReporteUnidades registro = new ReporteUnidades()
+                cmd.CommandText = sqlText;
+
+                using (var cursor = cmd.ExecuteReader())
                 {
-                    Modelo = Modelo,
-                    Marca = Marca,
-                    Num_serie = Num_serie,
-                    Ano = Ano
-                };
-                registros.Add(registro);
+                    ReporteUnidades titulos = new ReporteUnidades()
+                    {
+                        Modelo = "Modelo",
+                        Marca = "Marca",
+                        Num_serie = "Num_serie",
+                        Ano = "Ano"
+                    };
+
+                    registros.Add(titulos);
+
+                    while (cursor.Read())
+                    {
+                        string Modelo = Convert.ToString(cursor["Modelo"]);
+                        string Marca = Convert.ToString(cursor["Marca"]);
+                        string Num_serie = Convert.ToString(cursor["Num_serie"]);
+                        string Ano = Convert.ToString(cursor["Ano"]);
+
+                        ReporteUnidades registro = new ReporteUnidades()
+                        {
+                            Modelo = Modelo,
+                            Marca = Marca,
+                            Num_serie = Num_serie,
+                            Ano = Ano
+                        };
+                        registros.Add(registro);
+                    }
+                }
+            }
+
+            return registros;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DescargarReporte()
+        {
+            try
+            {
+                // Obtener todos los registros
+                List<ReporteUnidades> registros = reporte();
+
+                StringBuilder constructor = new StringBuilder();
+
+                foreach (var item in registros)
+                {
+                    constructor.AppendLine
+                    (
+                        item.Modelo + "," +
+                        item.Marca + "," +
+                        item.Num_serie + "," +
+                        item.Ano
+                    );
+                }
+
+                // Ruta del archivo CSV
+                string pathTxt = @".\Reporte_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
+                System.IO.File.WriteAllText(pathTxt, constructor.ToString());
+
+                var fileName = System.IO.Path.GetFileName(pathTxt);
+                var content = await System.IO.File.ReadAllBytesAsync(pathTxt);
+                new FileExtensionContentTypeProvider().TryGetContentType(fileName, out string contentType);
+
+                return File(content, contentType, fileName);
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones, puedes logear el error o mostrar un mensaje al usuario
+                // Log.Error(ex, "Error al descargar el reporte");
+                return RedirectToAction("Index", new List<ReporteUnidades>());
             }
         }
-    }
-
-    return registros;
-}
-
-[HttpPost]
-public async Task<IActionResult> DescargarReporte(DateTime fechaInicio, DateTime fechaFin)
-{
-    try
-    {
-        if (fechaInicio == new DateTime() || fechaFin == new DateTime())
-            return RedirectToAction("Index", new List<ReporteUnidades>());
-
-        List<ReporteUnidades> registros = reporte(fechaInicio, fechaFin);
-
-        StringBuilder constructor = new StringBuilder();
-
-        foreach (var item in registros)
-        {
-            constructor.AppendLine
-            (
-                item.Modelo + "," +
-                item.Marca + "," +
-                item.Num_serie + "," +
-                item.Ano
-            );
-        }
-
-        string pathTxt = @".\Reporte_" + fechaInicio.ToString("yyyy-MM-dd") + "_" + fechaFin.ToString("yyyy-MM-dd") + ".csv";
-        System.IO.File.WriteAllText(pathTxt, constructor.ToString());
-
-        var fileName = System.IO.Path.GetFileName(pathTxt);
-        var content = await System.IO.File.ReadAllBytesAsync(pathTxt);
-        new FileExtensionContentTypeProvider().TryGetContentType(fileName, out string contentType);
-
-        return File(content, contentType, fileName);
-    }
-    catch (Exception)
-    {
-        // Manejo de excepciones
-    }
-
-    return RedirectToAction("Index", new List<ReporteUnidades>());
-}
     }
 }

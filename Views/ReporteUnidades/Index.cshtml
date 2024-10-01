@@ -11,7 +11,7 @@
                     <div class="card-header border-0">
                         <h3 class="card-title align-items-start flex-column">
                             <span class="card-label fw-bold fs-3 mb-1">Reporte Unidades</span>
-                            <span class="text-muted fw-semibold fs-7">Por Fecha</span>
+                            <span class="text-muted fw-semibold fs-7"></span>
                         </h3>
                     </div>
 
@@ -20,10 +20,7 @@
 
                             @using (Html.BeginForm("DescargarReporte", "ReporteUnidades", FormMethod.Post))
                             {
-                                <label class="form-label">Fecha Inicio</label>
-                                <input type="date" class="form-control" name="fechaInicio" />
-                                <label class="form-label">Fecha Fin</label>
-                                <input type="date" class="form-control" name="fechaFin" />
+                                
                                 <br />
                                 <input type="submit" class="btn btn-primary" style="width:100%" value="Descargar" />
                             }
