@@ -44,7 +44,7 @@ namespace Serfitex.Controllers
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
-                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Num_serie, Fech_prox_tenecia FROM Unidades WHERE Fech_prox_tenecia > CURDATE() AND Estatus=1;";
+                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Num_serie, Fech_prox_tenecia FROM Unidades WHERE Fech_prox_tenecia > CURDATE() AND Estatus=1 ORDER BY Fech_prox_tenecia;";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 using (var cursor = cmd.ExecuteReader())
@@ -77,7 +77,7 @@ namespace Serfitex.Controllers
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
-                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Num_serie, Fech_prox_verificacion FROM Unidades WHERE Fech_prox_verificacion > CURDATE() AND Estatus=1;";
+                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Num_serie, Fech_prox_verificacion FROM Unidades WHERE Fech_prox_verificacion > CURDATE() AND Estatus=1 ORDER BY Fech_prox_verificacion;";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 using (var cursor = cmd.ExecuteReader())
