@@ -28,6 +28,7 @@ namespace Serfitex.Models
         
         public string? Seguro { get; set; }
         public string? Comentario { get; set; }
+        public string? Sucursal { get; set; }
         public int? Estatus { get; set; }
         public string? EstatusTexto { get; set; }
         

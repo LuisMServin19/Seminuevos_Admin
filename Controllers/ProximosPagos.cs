@@ -44,7 +44,7 @@ namespace Serfitex.Controllers
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
-                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Num_serie, Fech_prox_tenecia FROM Unidades WHERE Fech_prox_tenecia > CURDATE() AND Estatus=1 ORDER BY Fech_prox_tenecia;";
+                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Sucursal, Fech_prox_tenecia FROM Unidades WHERE Fech_prox_tenecia > CURDATE() AND Estatus=1 ORDER BY Fech_prox_tenecia;";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 using (var cursor = cmd.ExecuteReader())
@@ -54,7 +54,7 @@ namespace Serfitex.Controllers
                         int Id_unidad = Convert.ToInt32(cursor["Id_unidad"]);
                         string Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty;
                         string Marca = Convert.ToString(cursor["Marca"]) ?? string.Empty;
-                        string Num_serie = Convert.ToString(cursor["Num_serie"]) ?? string.Empty;
+                        string Sucursal = Convert.ToString(cursor["Sucursal"]) ?? string.Empty;
                         DateTime? Fech_prox_tenecia = cursor["Fech_prox_tenecia"] != DBNull.Value ? Convert.ToDateTime(cursor["Fech_prox_tenecia"]) : (DateTime?)null;
 
                         Unidades tenencia = new Unidades()
@@ -62,7 +62,7 @@ namespace Serfitex.Controllers
                             Id_unidad = Id_unidad,
                             Modelo = Modelo,
                             Marca = Marca,
-                            Num_serie = Num_serie,
+                            Sucursal = Sucursal,
                             Fech_prox_tenecia = Fech_prox_tenecia ?? DateTime.MinValue // Manejo de DateTime? con valor por defecto
                         };
                         tenencias.Add(tenencia);
@@ -77,7 +77,7 @@ namespace Serfitex.Controllers
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
-                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Num_serie, Fech_prox_verificacion FROM Unidades WHERE Fech_prox_verificacion > CURDATE() AND Estatus=1 ORDER BY Fech_prox_verificacion;";
+                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Sucursal, Fech_prox_verificacion FROM Unidades WHERE Fech_prox_verificacion > CURDATE() AND Estatus=1 ORDER BY Fech_prox_verificacion;";
                 cmd.CommandType = System.Data.CommandType.Text;
 
                 using (var cursor = cmd.ExecuteReader())
@@ -87,7 +87,7 @@ namespace Serfitex.Controllers
                         int Id_unidad = Convert.ToInt32(cursor["Id_unidad"]);
                         string Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty;
                         string Marca = Convert.ToString(cursor["Marca"]) ?? string.Empty;
-                        string Num_serie = Convert.ToString(cursor["Num_serie"]) ?? string.Empty;
+                        string Sucursal = Convert.ToString(cursor["Sucursal"]) ?? string.Empty;
                         DateTime? Fech_prox_verificacion = cursor["Fech_prox_verificacion"] != DBNull.Value ? Convert.ToDateTime(cursor["Fech_prox_verificacion"]) : (DateTime?)null;
 
                         Unidades verificacion = new Unidades()
@@ -95,7 +95,7 @@ namespace Serfitex.Controllers
                             Id_unidad = Id_unidad,
                             Modelo = Modelo,
                             Marca = Marca,
-                            Num_serie = Num_serie,
+                            Sucursal = Sucursal,
                             Fech_prox_verificacion = Fech_prox_verificacion ?? DateTime.MinValue // Manejo de DateTime? con valor por defecto
                         };
                         verificaciones.Add(verificacion);

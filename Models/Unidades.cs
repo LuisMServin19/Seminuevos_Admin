@@ -31,6 +31,7 @@ namespace Serfitex.Models
         public string? Aseguradora { get; set; }
         public string? Duplicado_llave { get; set; }
         public string? Comentario { get; set; }
+        public string? Sucursal { get; set; }
         public int? Estatus { get; set; }
         public string? EstatusTexto { get; set; }
 

@@ -12,7 +12,7 @@
         <tr>
             <th>@Html.DisplayNameFor(model => model.Modelo)</th>
             <th>@Html.DisplayNameFor(model => model.Marca)</th>
-            <th>@Html.DisplayNameFor(model => model.Num_serie)</th>
+            <th>@Html.DisplayNameFor(model => model.Sucursal)</th>
             <th>@Html.DisplayNameFor(model => model.Fech_prox_tenecia)</th>
             <th></th>
         </tr>
@@ -23,7 +23,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Modelo)</td>
                 <td>@Html.DisplayFor(modelItem => item.Marca)</td>
-                <td>@Html.DisplayFor(modelItem => item.Num_serie)</td>
+                <td>@Html.DisplayFor(modelItem => item.Sucursal)</td>
                 <td>@String.Format("{0:dd/MM/yyyy}", item.Fech_prox_tenecia)</td>
                 <td>
                     @* Optionally, you can add Edit or Details buttons *@
@@ -39,7 +39,7 @@
         <tr>
             <th>@Html.DisplayNameFor(model => model.Modelo)</th>
             <th>@Html.DisplayNameFor(model => model.Marca)</th>
-            <th>@Html.DisplayNameFor(model => model.Num_serie)</th>
+            <th>@Html.DisplayNameFor(model => model.Sucursal)</th>
             <th>@Html.DisplayNameFor(model => model.Fech_prox_verificacion)</th>
             <th></th>
         </tr>
@@ -50,7 +50,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Modelo)</td>
                 <td>@Html.DisplayFor(modelItem => item.Marca)</td>
-                <td>@Html.DisplayFor(modelItem => item.Num_serie)</td>
+                <td>@Html.DisplayFor(modelItem => item.Sucursal)</td>
                 <td>@String.Format("{0:dd/MM/yyyy}", item.Fech_prox_verificacion)</td>
                 <td>
                     @* Optionally, you can add Edit or Details buttons *@
