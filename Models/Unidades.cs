@@ -27,6 +27,8 @@ namespace Serfitex.Models
         public DateTime Fecha_tenencia { get; set; }
         
         public string? Seguro { get; set; }
+        public string? Aseguradora { get; set; }
+        public string? Duplicado_llave { get; set; }
         public string? Comentario { get; set; }
         public int? Estatus { get; set; }
         public string? EstatusTexto { get; set; }
@@ -36,6 +38,8 @@ namespace Serfitex.Models
 
         [DisplayName("Fecha venta")]
         public DateTime? Fecha_venta { get; set; }
+
+        public string? Vendedor { get; set; }
 
         [DisplayName("Proximo pago tenencia")]
         public DateTime? Fech_prox_tenecia { get; set; }

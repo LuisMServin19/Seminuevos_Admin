@@ -49,8 +49,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="Seguro" class="control-label"></label>
-                <input asp-for="Seguro" class="form-control" Autocomplete="off" />
+                <select asp-for="Seguro" class="form-control" required>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
                 <span asp-validation-for="Seguro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aseguradora" class="control-label"></label>
+                <input asp-for="Aseguradora" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="Aseguradora" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duplicado_llave" class="control-label"></label>
+                <select asp-for="Duplicado_llave" class="form-control" required>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+                <span asp-validation-for="Duplicado_llave" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Comentario" class="control-label"></label>
