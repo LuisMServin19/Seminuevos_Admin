@@ -27,11 +27,15 @@ namespace Serfitex.Models
         [DisplayName("Fecha factura")]
         public DateTime Fecha_factura { get; set; }
 
-        [DisplayName("Fecha tenencia")]
+        [DisplayName("Fecha pago ultima tenencia")]
         public DateTime Fecha_tenencia { get; set; }
 
+        [DisplayName("Fecha pago ultima verificacion")]
+        public DateTime Fecha_verificacion { get; set; }
         public string? Seguro { get; set; }
         public string? Aseguradora { get; set; }
+
+        [DisplayName("Duplicado de llaves")]
         public string? Duplicado_llave { get; set; }
         public string? Comentario { get; set; }
         
