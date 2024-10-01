@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NuevoBanorte")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3572b6e1c959ea8e1683646b39a1235148013cec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b63ec5bc61f10cb5eb8d6a8f6a2479f170f74b7")]
 [assembly: System.Reflection.AssemblyProductAttribute("NuevoBanorte")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NuevoBanorte")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

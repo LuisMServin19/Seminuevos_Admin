@@ -10,6 +10,7 @@ namespace Serfitex.Models
         public int Id_unidad { get; set; }
 
         public string? Modelo { get; set; }
+        public string? Tipo { get; set; }
 
         public string? Marca { get; set; }
 
@@ -25,14 +26,14 @@ namespace Serfitex.Models
 
         [DisplayName("Fecha tenencia")]
         public DateTime Fecha_tenencia { get; set; }
-        
+
         public string? Seguro { get; set; }
         public string? Aseguradora { get; set; }
         public string? Duplicado_llave { get; set; }
         public string? Comentario { get; set; }
         public int? Estatus { get; set; }
         public string? EstatusTexto { get; set; }
-        
+
         [DisplayName("Fecha ingreso")]
         public DateTime Fecha_ingreso { get; set; }
 
