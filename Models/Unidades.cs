@@ -18,6 +18,7 @@ namespace Serfitex.Models
 
         [DisplayName("Año")]
         public string? Ano { get; set; }
+        public string? Color { get; set; }
 
         [DisplayName("Fecha factura")]
         public DateTime Fecha_factura { get; set; }

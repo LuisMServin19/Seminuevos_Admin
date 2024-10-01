@@ -122,6 +122,7 @@ namespace Serfitex.Controllers
                             Marca = Convert.ToString(cursor["Marca"]),
                             Num_serie = Convert.ToString(cursor["Num_serie"]),
                             Ano = Convert.ToString(cursor["Ano"]),
+                            Color = Convert.ToString(cursor["Color"]),
                             Fecha_factura = Convert.ToDateTime(cursor["Fecha_factura"]),
                             Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
                             Seguro = Convert.ToString(cursor["Seguro"]),
