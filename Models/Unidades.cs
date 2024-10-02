@@ -9,28 +9,45 @@ namespace Serfitex.Models
 
         public int Id_unidad { get; set; }
 
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string? Modelo { get; set; }
+
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string? Tipo { get; set; }
 
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string? Marca { get; set; }
 
         [DisplayName("Número de placa")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string? Num_placa { get; set; }
 
         [DisplayName("Número de serie")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string? Num_serie { get; set; }
 
         [DisplayName("Año")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string? Ano { get; set; }
+
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string? Color { get; set; }
 
         [DisplayName("Fecha factura")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public DateTime Fecha_factura { get; set; }
 
+        [DisplayName("Tipo de factura")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        public string? Tipo_factura { get; set; }
+
+
         [DisplayName("Fecha pago ultima tenencia")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public DateTime Fecha_tenencia { get; set; }
 
         [DisplayName("Fecha pago ultima verificacion")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public DateTime Fecha_verificacion { get; set; }
         public string? Seguro { get; set; }
         public string? Aseguradora { get; set; }
@@ -39,9 +56,11 @@ namespace Serfitex.Models
         public string? Duplicado_llave { get; set; }
         public string? Comentario { get; set; }
         
-        [Required(ErrorMessage = "El precio es obligatorio")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "El campo Precio debe ser un número positivo")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El campo Precio debe ser un número")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public decimal Precio { get; set; }
+        
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string? Sucursal { get; set; }
         public int? Estatus { get; set; }
         public string? EstatusTexto { get; set; }

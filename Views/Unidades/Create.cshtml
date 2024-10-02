@@ -67,6 +67,16 @@
                 <span asp-validation-for="Fecha_factura" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Tipo_factura" class="control-label"></label>
+                <select asp-for="Tipo_factura" class="form-control" required>
+                    <option value="Factura original">Factura original</option>
+                    <option value="Factura Endosada">Factura Endosada</option>
+                    <option value="Refactura">Refactura</option>
+                    <option value="Factura de aseguradora">Factura de aseguradora</option>
+                </select>
+                <span asp-validation-for="Tipo_factura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Fecha_tenencia" class="control-label"></label>
                 <input asp-for="Fecha_tenencia" class="form-control" Autocomplete="off" />
                 <span asp-validation-for="Fecha_tenencia" class="text-danger"></span>
