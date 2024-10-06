@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Serfitex.Models
 {
-    public class ProximosPagos
+    public class ProximosPagosVerificaciones
     {
         [Key]
 

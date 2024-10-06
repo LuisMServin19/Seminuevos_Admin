@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +12,8 @@
     <link rel="stylesheet" href="~/assets/css/bundle.css?v131">
     <link rel="stylesheet" href="~/assets/css/app.css?v131">
     <style>
-        .dropdownmenu ul, .dropdownmenu li {
+        .dropdownmenu ul,
+        .dropdownmenu li {
             margin: 0;
             padding: 0;
         }
@@ -58,7 +60,8 @@
 
         li:hover ul.submenu {
             opacity: 1;
-            top: 40px; /* adjust this as per top nav padding top & bottom comes */
+            top: 40px;
+            /* adjust this as per top nav padding top & bottom comes */
             visibility: visible;
         }
 
@@ -75,54 +78,68 @@
             background-color: #000000;
         }
     </style>
-    
+
 </head>
+
 <body>
     <header>
-        
+
     </header>
     </BR>
     <div class="container">
-        <main role="main" class="pb-3">
-            <nav class="dropdownmenu">
-                <ul>
-                    @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
-                    <li>
-                        <a href="Unidades">Unidades</a>
-                </ul>
-                <ul>
-                    @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
-                    <li>
-                        <a href="ProximosPagos">Proximos pagos</a>
-                </ul>
-                <ul>
-                    @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
-                    <li>
-                        <a href="ReporteUnidades">Reporte Unidades</a>
-                </ul>
-                <ul>
-                    @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
-                    <li>
-                        <a asp-area="" asp-controller="LogOut" asp-action="Index">Salir</a>
-                </ul>
-                
-            </nav>
-            <br />
-            <br />
-            @RenderBody()
-        </main>
-    </div>
+    <main role="main" class="pb-3">
+        <nav class="dropdownmenu">
+            <ul>
+                @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
+                <li>
+                    <a href="Unidades">Unidades</a>
+                </li>
+            </ul>
+            
+            <ul>
+                @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
+                <li class="dropdown">
+                    <!-- Menú principal -->
+                    <a href="#">Próximos pagos</a>
+                    <!-- Submenú -->
+                    <ul class="submenu">
+                        <li><a href="ProximosPagosTenencias">Próximos Pagos Tenencias</a></li>
+                        <li><a href="ProximosPagosVerificaciones">Próximos Pagos Verificaciones</a></li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <ul>
+                @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
+                <li>
+                    <a href="ReporteUnidades">Reporte Unidades</a>
+                </li>
+            </ul>
+            
+            <ul>
+                @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
+                <li>
+                    <a asp-area="" asp-controller="LogOut" asp-action="Index">Salir</a>
+                </li>
+            </ul>
+        </nav>
+        
+        <br />
+        <br />
+        @RenderBody()
+    </main>
+</div>
+
 
     <footer class="border-top footer text-muted">
-        <d@* iv class="container">
-             &copy; 2023 - Serfitex - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
-             </div> *@
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <d@* iv class="container"> &copy; 2023 - Serfitex - <a asp-area="" asp-controller="Home"
+            asp-action="Privacy">Privacidad</a> </div> *@ </footer>
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
 
 <script>
