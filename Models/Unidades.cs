@@ -17,6 +17,7 @@ namespace Serfitex.Models
 
         [Required(ErrorMessage = "Campo obligatorio")]
         public string? Marca { get; set; }
+        public string? Transmision { get; set; }
 
         [DisplayName("Número de placa")]
         [Required(ErrorMessage = "Campo obligatorio")]

@@ -122,6 +122,7 @@ namespace Serfitex.Controllers
                             Modelo = Convert.ToString(cursor["Modelo"]),
                             Tipo = Convert.ToString(cursor["Tipo"]),
                             Marca = Convert.ToString(cursor["Marca"]),
+                            Transmision = Convert.ToString(cursor["Transmision"]),
                             Num_placa = Convert.ToString(cursor["Num_placa"]),
                             Num_serie = Convert.ToString(cursor["Num_serie"]),
                             Ano = Convert.ToString(cursor["Ano"]),
@@ -202,6 +203,7 @@ namespace Serfitex.Controllers
                     cmd.Parameters.AddWithValue("@Modelo", newUniddes.Modelo);
                     cmd.Parameters.AddWithValue("@Tipo", newUniddes.Tipo);
                     cmd.Parameters.AddWithValue("@Marca", newUniddes.Marca);
+                    cmd.Parameters.AddWithValue("@Transmision", newUniddes.Transmision);
                     cmd.Parameters.AddWithValue("@Num_placa", newUniddes.Num_placa);
                     cmd.Parameters.AddWithValue("@Num_serie", newUniddes.Num_serie);
                     cmd.Parameters.AddWithValue("@Ano", newUniddes.Ano);
@@ -224,7 +226,7 @@ namespace Serfitex.Controllers
                     if (!exist)
                     {
                         // Insert into Unidades
-                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Tipo,Marca,Num_placa,Num_serie,Ano,Color,Fecha_factura,Tipo_factura,Fecha_tenencia,Fecha_verificacion,Seguro,Aseguradora,Duplicado_llave,Comentario,Precio,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) VALUES (@Modelo,@Tipo,@Marca,@Num_placa,@Num_serie,@Ano,@Color,@Fecha_factura,@Tipo_factura,@Fecha_tenencia,@Fecha_verificacion,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Precio,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
+                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Tipo,Marca,Transmision,Num_placa,Num_serie,Ano,Color,Fecha_factura,Tipo_factura,Fecha_tenencia,Fecha_verificacion,Seguro,Aseguradora,Duplicado_llave,Comentario,Precio,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) VALUES (@Modelo,@Tipo,@Marca,@Transmision,@Num_placa,@Num_serie,@Ano,@Color,@Fecha_factura,@Tipo_factura,@Fecha_tenencia,@Fecha_verificacion,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Precio,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
                         cmd.ExecuteNonQuery();
 
                         // Insert into Ta_venta (assuming it has only Modelo for now)
@@ -276,14 +278,13 @@ namespace Serfitex.Controllers
                             Modelo = Convert.ToString(cursor["Modelo"]),
                             Tipo = Convert.ToString(cursor["Tipo"]),
                             Marca = Convert.ToString(cursor["Marca"]),
+                            Transmision = Convert.ToString(cursor["Transmision"]),
                             Num_placa = Convert.ToString(cursor["Num_placa"]),
                             Num_serie = Convert.ToString(cursor["Num_serie"]),
                             Ano = Convert.ToString(cursor["Ano"]),
                             Color = Convert.ToString(cursor["Color"]),
-
                             Fecha_factura = Convert.ToDateTime(cursor["Fecha_factura"]),
                             Tipo_factura = Convert.ToString(cursor["Tipo_factura"]),
-
                             Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
                             Fecha_verificacion = Convert.ToDateTime(cursor["Fecha_verificacion"]),
                             Seguro = Convert.ToString(cursor["Seguro"]),
@@ -330,7 +331,7 @@ namespace Serfitex.Controllers
                 {
                     conexion.Open();
 
-                    string query = "UPDATE Unidades SET Modelo = @Modelo, Tipo= @Tipo, Marca = @Marca, Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Color = @Color,Fecha_factura = @Fecha_factura, Tipo_factura = @Tipo_factura, Fecha_tenencia = @Fecha_tenencia, Fecha_verificacion = @Fecha_verificacion, Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, Comentario = @Comentario, Precio = @Precio, Sucursal = @Sucursal, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion WHERE Id_unidad = @Id_unidad";
+                    string query = "UPDATE Unidades SET Modelo = @Modelo, Tipo= @Tipo, Marca = @Marca, Transmision = @Transmision, Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Color = @Color,Fecha_factura = @Fecha_factura, Tipo_factura = @Tipo_factura, Fecha_tenencia = @Fecha_tenencia, Fecha_verificacion = @Fecha_verificacion, Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, Comentario = @Comentario, Precio = @Precio, Sucursal = @Sucursal, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion WHERE Id_unidad = @Id_unidad";
 
                     using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
                     {
@@ -338,14 +339,13 @@ namespace Serfitex.Controllers
                         updateCmd.Parameters.AddWithValue("@Modelo", updatedUnidades.Modelo);
                         updateCmd.Parameters.AddWithValue("@Tipo", updatedUnidades.Tipo);
                         updateCmd.Parameters.AddWithValue("@Marca", updatedUnidades.Marca);
+                        updateCmd.Parameters.AddWithValue("@Transmision", updatedUnidades.Transmision);
                         updateCmd.Parameters.AddWithValue("@Num_placa", updatedUnidades.Num_placa);
                         updateCmd.Parameters.AddWithValue("@Num_serie", updatedUnidades.Num_serie);
                         updateCmd.Parameters.AddWithValue("@Ano", updatedUnidades.Ano);
                         updateCmd.Parameters.AddWithValue("@Color", updatedUnidades.Color);
-
                         updateCmd.Parameters.AddWithValue("@Fecha_factura", updatedUnidades.Fecha_factura);
                         updateCmd.Parameters.AddWithValue("@Tipo_factura", updatedUnidades.Tipo_factura);
-
                         updateCmd.Parameters.AddWithValue("@Fecha_tenencia", updatedUnidades.Fecha_tenencia);
                         updateCmd.Parameters.AddWithValue("@Fecha_verificacion", updatedUnidades.Fecha_verificacion);
                         updateCmd.Parameters.AddWithValue("@Seguro", updatedUnidades.Seguro);
