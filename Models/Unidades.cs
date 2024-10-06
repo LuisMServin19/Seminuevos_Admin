@@ -33,7 +33,6 @@ namespace Serfitex.Models
 
         [Required(ErrorMessage = "Campo obligatorio")]
         public string? Color { get; set; }
-        public IFormFile Imagen1 { get; set; }
 
         [DisplayName("Fecha factura")]
         [Required(ErrorMessage = "Campo obligatorio")]
