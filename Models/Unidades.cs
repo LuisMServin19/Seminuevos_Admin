@@ -38,7 +38,6 @@ namespace Serfitex.Models
         public DateTime Fecha_factura { get; set; }
 
         [DisplayName("Tipo de factura")]
-        [Required(ErrorMessage = "Campo obligatorio")]
         public string? Tipo_factura { get; set; }
 
 
@@ -68,16 +67,16 @@ namespace Serfitex.Models
         [DisplayName("Fecha ingreso")]
         public DateTime Fecha_ingreso { get; set; }
 
-        [DisplayName("Fecha venta")]
-        public DateTime? Fecha_venta { get; set; }
-
-        public string? Vendedor { get; set; }
-
         [DisplayName("Proximo pago tenencia")]
         public DateTime? Fech_prox_tenecia { get; set; }
 
         [DisplayName("Proximo pago verificacion")]
         public DateTime? Fech_prox_verificacion { get; set; }
+
+        [DisplayName("Fecha venta")]
+        public DateTime? Fecha_venta { get; set; }
+        public string? Vendedor { get; set; }
+        public string? Comprador { get; set; }
 
     }
 }

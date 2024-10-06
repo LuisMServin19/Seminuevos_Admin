@@ -206,10 +206,8 @@ namespace Serfitex.Controllers
                     cmd.Parameters.AddWithValue("@Num_serie", newUniddes.Num_serie);
                     cmd.Parameters.AddWithValue("@Ano", newUniddes.Ano);
                     cmd.Parameters.AddWithValue("@Color", newUniddes.Color);
-
                     cmd.Parameters.AddWithValue("@Fecha_factura", newUniddes.Fecha_factura);
                     cmd.Parameters.AddWithValue("@Tipo_factura", newUniddes.Tipo_factura);
-
                     cmd.Parameters.AddWithValue("@Fecha_tenencia", newUniddes.Fecha_tenencia);
                     cmd.Parameters.AddWithValue("@Fecha_verificacion", newUniddes.Fecha_verificacion);
                     cmd.Parameters.AddWithValue("@Seguro", newUniddes.Seguro);
@@ -223,11 +221,16 @@ namespace Serfitex.Controllers
                     cmd.Parameters.AddWithValue("@Fech_prox_tenecia", newUniddes.Fech_prox_tenecia);
                     cmd.Parameters.AddWithValue("@Fech_prox_verificacion", newUniddes.Fech_prox_verificacion);
 
-
                     if (!exist)
                     {
+                        // Insert into Unidades
                         cmd.CommandText = "INSERT INTO Unidades (Modelo,Tipo,Marca,Num_placa,Num_serie,Ano,Color,Fecha_factura,Tipo_factura,Fecha_tenencia,Fecha_verificacion,Seguro,Aseguradora,Duplicado_llave,Comentario,Precio,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) VALUES (@Modelo,@Tipo,@Marca,@Num_placa,@Num_serie,@Ano,@Color,@Fecha_factura,@Tipo_factura,@Fecha_tenencia,@Fecha_verificacion,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Precio,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
                         cmd.ExecuteNonQuery();
+
+                        // Insert into Ta_venta (assuming it has only Modelo for now)
+                        MySqlCommand ventaCmd = new MySqlCommand("INSERT INTO Ta_venta (Modelo) VALUES (@Modelo)", conexion);
+                        ventaCmd.Parameters.AddWithValue("@Modelo", newUniddes.Modelo);
+                        ventaCmd.ExecuteNonQuery();
                     }
                     else
                     {
@@ -239,6 +242,7 @@ namespace Serfitex.Controllers
 
             return View(newUniddes);
         }
+
 
         // GET: Unidades/Edit/5
         public IActionResult Edit(string id)
@@ -379,18 +383,20 @@ namespace Serfitex.Controllers
             string connectionString = Configuration["BDs:SemiCC"];
 
             Unidades? unidades = null;
+            Ta_venta? venta = null;
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
                 conexion.Open();
 
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conexion;
-                cmd.CommandText = "SELECT * FROM Unidades WHERE Id_unidad = @Id_unidad";
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Id_unidad", id);
+                // Consulta para obtener la unidad
+                MySqlCommand cmdUnidad = new MySqlCommand();
+                cmdUnidad.Connection = conexion;
+                cmdUnidad.CommandText = "SELECT * FROM Unidades WHERE Id_unidad = @Id_unidad";
+                cmdUnidad.CommandType = System.Data.CommandType.Text;
+                cmdUnidad.Parameters.AddWithValue("@Id_unidad", id);
 
-                using (var cursor = cmd.ExecuteReader())
+                using (var cursor = cmdUnidad.ExecuteReader())
                 {
                     if (cursor.Read())
                     {
@@ -398,27 +404,53 @@ namespace Serfitex.Controllers
                         {
                             Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
                             Estatus = Convert.ToInt32(cursor["Estatus"]),
-                            Vendedor = Convert.ToString(cursor["Vendedor"]),
-                            Fecha_venta = cursor["Fecha_venta"] != DBNull.Value ? Convert.ToDateTime(cursor["Fecha_venta"]) : (DateTime?)null
+                            Modelo = Convert.ToString(cursor["Modelo"]),
+                        };
+                    }
+                }
+                // Si no se encuentra la unidad, retornar 404
+                if (unidades == null)
+                {
+                    return NotFound();
+                }
+                // Consulta para obtener la información de venta de ta_venta
+                MySqlCommand cmdVenta = new MySqlCommand();
+                cmdVenta.Connection = conexion;
+                cmdVenta.CommandText = "SELECT * FROM ta_venta WHERE Id_unidad = @Id_unidad";
+                cmdVenta.CommandType = System.Data.CommandType.Text;
+                cmdVenta.Parameters.AddWithValue("@Id_unidad", id);
 
+                using (var cursorVenta = cmdVenta.ExecuteReader())
+                {
+                    if (cursorVenta.Read())
+                    {
+                        venta = new Ta_venta()
+                        {
+                            Id_unidad = Convert.ToInt32(cursorVenta["Id_unidad"]),
+                            Fecha_venta = cursorVenta["Fecha_venta"] != DBNull.Value ? Convert.ToDateTime(cursorVenta["Fecha_venta"]) : (DateTime?)null,
+                            Vendedor = cursorVenta["Vendedor"] != DBNull.Value ? Convert.ToString(cursorVenta["Vendedor"]) : string.Empty,
+                            Comprador = cursorVenta["Comprador"] != DBNull.Value ? Convert.ToString(cursorVenta["Comprador"]) : string.Empty,
                         };
                     }
                 }
             }
 
-            if (unidades == null)
+            // Asignar los datos de venta a ViewBag para ser usados en la vista
+            if (venta != null)
             {
-                return NotFound();
+                ViewBag.FechaVenta = venta.Fecha_venta;
+                ViewBag.Vendedor = venta.Vendedor;
+                ViewBag.Comprador = venta.Comprador;
             }
 
-            LoadViewBagEstatus();
             return View(unidades);
         }
 
         // POST: Unidades/Venta/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Venta(string id, Unidades updatedUnidades)
+        public IActionResult Venta(string id, Ta_venta nuevaVenta)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
 
@@ -426,7 +458,9 @@ namespace Serfitex.Controllers
                 return RedirectToAction("Index", "LogIn");
 
             if (!ModelState.IsValid)
-                return View(updatedUnidades);
+            {
+                return View(nuevaVenta);
+            }
 
             string connectionString = Configuration["BDs:SemiCC"];
 
@@ -436,28 +470,48 @@ namespace Serfitex.Controllers
                 {
                     conexion.Open();
 
-                    int nuevoEstatus = 0;
-
-                    string query = "UPDATE Unidades SET Estatus = @Estatus, Fecha_venta = @Fecha_venta, Vendedor = @Vendedor WHERE Id_unidad = @Id_unidad";
-
-                    using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
+                    Unidades unidad = null;
+                    string selectUnidadQuery = "SELECT Modelo FROM Unidades WHERE Id_unidad = @Id_unidad";
+                    using (MySqlCommand selectCmd = new MySqlCommand(selectUnidadQuery, conexion))
                     {
-                        updateCmd.Parameters.AddWithValue("@Id_unidad", updatedUnidades.Id_unidad);
-                        updateCmd.Parameters.AddWithValue("@Estatus", nuevoEstatus);
-                        updateCmd.Parameters.AddWithValue("@Fecha_venta", updatedUnidades.Fecha_venta);
-                        updateCmd.Parameters.AddWithValue("@Vendedor", updatedUnidades.Vendedor);
-                        
-
+                        selectCmd.Parameters.AddWithValue("@Id_unidad", id);
+                        using (var cursorUnidad = selectCmd.ExecuteReader())
+                        {
+                            if (cursorUnidad.Read())
+                            {
+                                unidad = new Unidades()
+                                {
+                                    Modelo = Convert.ToString(cursorUnidad["Modelo"])
+                                };
+                            }
+                        }
+                    }
+                    string updateUnidadesQuery = "UPDATE Unidades SET Estatus = @Estatus WHERE Id_unidad = @Id_unidad";
+                    using (MySqlCommand updateCmd = new MySqlCommand(updateUnidadesQuery, conexion))
+                    {
+                        updateCmd.Parameters.AddWithValue("@Id_unidad", id);
+                        updateCmd.Parameters.AddWithValue("@Estatus", 0);
                         updateCmd.ExecuteNonQuery();
+                    }
+                    string insertVentaQuery = "INSERT INTO ta_venta (Id_unidad, Fecha_venta, Vendedor, Comprador, Modelo) VALUES (@Id_unidad, @Fecha_venta, @Vendedor, @Comprador, @Modelo)";
+                    using (MySqlCommand insertCmd = new MySqlCommand(insertVentaQuery, conexion))
+                    {
+                        insertCmd.Parameters.AddWithValue("@Id_unidad", id);
+                        insertCmd.Parameters.AddWithValue("@Fecha_venta", nuevaVenta.Fecha_venta);
+                        insertCmd.Parameters.AddWithValue("@Vendedor", nuevaVenta.Vendedor);
+                        insertCmd.Parameters.AddWithValue("@Comprador", nuevaVenta.Comprador);
+                        insertCmd.Parameters.AddWithValue("@Modelo", unidad?.Modelo);
+                        insertCmd.ExecuteNonQuery();
                     }
                 }
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "An error occurred while updating the contract.");
-                return View(updatedUnidades);
+                ModelState.AddModelError(string.Empty, "An error occurred while processing the sale.");
+
+                return View(nuevaVenta);
             }
         }
     }
