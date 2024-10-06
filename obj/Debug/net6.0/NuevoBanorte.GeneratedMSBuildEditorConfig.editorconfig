@@ -18,10 +18,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -30,12 +26,40 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/ProximosPagos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJveGltb3NQYWdvcy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/ReporteUnidades/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZVVuaWRhZGVzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Venta.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvVmVudGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/_ViewImports.cshtml]

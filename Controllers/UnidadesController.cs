@@ -313,7 +313,7 @@ namespace Serfitex.Controllers
         // POST: Unidades/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(string id, Unidades updatedUnidades)
+        public async Task<IActionResult> Edit(string id, Unidades updatedUnidades)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
 
@@ -329,12 +329,26 @@ namespace Serfitex.Controllers
             {
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
                 {
-                    conexion.Open();
+                    await conexion.OpenAsync();
 
-                    string query = "UPDATE Unidades SET Modelo = @Modelo, Tipo= @Tipo, Marca = @Marca, Transmision = @Transmision, Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Color = @Color,Fecha_factura = @Fecha_factura, Tipo_factura = @Tipo_factura, Fecha_tenencia = @Fecha_tenencia, Fecha_verificacion = @Fecha_verificacion, Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, Comentario = @Comentario, Precio = @Precio, Sucursal = @Sucursal, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion WHERE Id_unidad = @Id_unidad";
+                    string query = "UPDATE Unidades SET Modelo = @Modelo, Tipo= @Tipo, Marca = @Marca, Transmision = @Transmision, Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Color = @Color, Imagen1 = @Imagen1, Fecha_factura = @Fecha_factura, Tipo_factura = @Tipo_factura, Fecha_tenencia = @Fecha_tenencia, Fecha_verificacion = @Fecha_verificacion, Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, Comentario = @Comentario, Precio = @Precio, Sucursal = @Sucursal, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion WHERE Id_unidad = @Id_unidad";
 
                     using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
                     {
+                        string base64 = string.Empty;
+
+
+                        if (updatedUnidades.Imagen1 != null && updatedUnidades.Imagen1.Length > 0)
+                        {
+                            using (var ms = new MemoryStream())
+                            {
+                                // Se agrega el CancellationToken aquí
+                                await updatedUnidades.Imagen1.CopyToAsync(ms, CancellationToken.None);
+                                var fileBytes = ms.ToArray();
+                                base64 = Convert.ToBase64String(fileBytes);
+                            }
+                        }
+
                         updateCmd.Parameters.AddWithValue("@Id_unidad", updatedUnidades.Id_unidad);
                         updateCmd.Parameters.AddWithValue("@Modelo", updatedUnidades.Modelo);
                         updateCmd.Parameters.AddWithValue("@Tipo", updatedUnidades.Tipo);
@@ -344,6 +358,7 @@ namespace Serfitex.Controllers
                         updateCmd.Parameters.AddWithValue("@Num_serie", updatedUnidades.Num_serie);
                         updateCmd.Parameters.AddWithValue("@Ano", updatedUnidades.Ano);
                         updateCmd.Parameters.AddWithValue("@Color", updatedUnidades.Color);
+                        updateCmd.Parameters.AddWithValue("@Imagen1", base64); // Usar la cadena base64
                         updateCmd.Parameters.AddWithValue("@Fecha_factura", updatedUnidades.Fecha_factura);
                         updateCmd.Parameters.AddWithValue("@Tipo_factura", updatedUnidades.Tipo_factura);
                         updateCmd.Parameters.AddWithValue("@Fecha_tenencia", updatedUnidades.Fecha_tenencia);
@@ -359,18 +374,20 @@ namespace Serfitex.Controllers
                         updateCmd.Parameters.AddWithValue("@Fech_prox_tenecia", updatedUnidades.Fech_prox_tenecia);
                         updateCmd.Parameters.AddWithValue("@Fech_prox_verificacion", updatedUnidades.Fech_prox_verificacion);
 
-                        updateCmd.ExecuteNonQuery();
+                        await updateCmd.ExecuteNonQueryAsync();
                     }
                 }
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "An error occurred while updating the contract.");
+                // Manejo de errores, puedes loguear el error si es necesario
+                ModelState.AddModelError(string.Empty, "An error occurred while updating the contract: " + ex.Message);
                 return View(updatedUnidades);
             }
         }
+
 
         // GET: Unidades/Venta/5
         public IActionResult Venta(string id)

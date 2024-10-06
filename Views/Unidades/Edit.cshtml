@@ -68,6 +68,11 @@
                 <input asp-for="Color" class="form-control" Autocomplete="off" />
                 <span asp-validation-for="Color" class="text-danger"></span>
             </div>
+             <div class="form-group">
+                <label asp-for="Imagen1" class="control-label"></label>
+                <input asp-for="Imagen1" type="file" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="Imagen1" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Fecha_factura" class="control-label"></label>
                 <input asp-for="Fecha_factura" class="form-control" Autocomplete="off" />
@@ -106,8 +111,8 @@
                 <input asp-for="Aseguradora" class="form-control" Autocomplete="off" />
                 <span asp-validation-for="Aseguradora" class="text-danger"></span>
             </div>
-            
-             <div class="form-group">
+
+            <div class="form-group">
                 <label asp-for="Duplicado_llave" class="control-label"></label>
                 <select asp-for="Duplicado_llave" class="form-control" required>
                     <option value="Si">Si</option>
@@ -155,7 +160,7 @@
         </form>
     </div>
 </div>
-<br/>
+<br />
 <div>
     <a asp-action="Index">Regresar a la lista</a>
 </div>
