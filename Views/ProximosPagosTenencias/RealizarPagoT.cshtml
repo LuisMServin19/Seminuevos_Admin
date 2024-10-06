@@ -1,0 +1,43 @@
+﻿@model Serfitex.Models.RealizarPagoViewModel
+
+@{
+    ViewData["Title"] = "Pago Realizado User";
+}
+
+<h1>Pago Realizado</h1>
+
+<h4>Unidad</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RealizarPagoT">
+            <input type="hidden" asp-for="PagoTenencia.Id_unidad" />
+            <input type="hidden" name="Modelo" value="@Model.Unidad.Modelo" />
+            <div class="form-group">
+                <label asp-for="PagoTenencia.Fecha_pago" class="control-label"></label>
+                <input asp-for="PagoTenencia.Fecha_pago" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="PagoTenencia.Fecha_pago" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Unidad.Fech_prox_tenecia" class="control-label"></label>
+                <input asp-for="Unidad.Fech_prox_tenecia" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="Unidad.Fech_prox_tenecia" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

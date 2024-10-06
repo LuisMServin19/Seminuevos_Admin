@@ -1,24 +1,22 @@
-﻿@model IEnumerable<Serfitex.Models.ProximosPagosTenencias>
+﻿@model List<Serfitex.Models.ProximosPagosTenencias>
 
 @{
     ViewData["Title"] = "Index";
-    var tenencias = ViewData["Tenencias"] as List<Serfitex.Models.Unidades>;
-    var verificaciones = ViewData["Verificaciones"] as List<Serfitex.Models.Unidades>;
 }
 
 <h1>Próximas Tenencias</h1>
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Modelo)</th>
-            <th>@Html.DisplayNameFor(model => model.Marca)</th>
-            <th>@Html.DisplayNameFor(model => model.Sucursal)</th>
-            <th>@Html.DisplayNameFor(model => model.Fech_prox_tenecia)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Modelo)</th> <!-- Accediendo a la primera propiedad de la lista -->
+            <th>@Html.DisplayNameFor(model => model[0].Marca)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Sucursal)</th>
+            <th>@Html.DisplayNameFor(model => model[0].Fech_prox_tenecia)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in tenencias)
+        @foreach (var item in Model) // Cambia tenencias a Model
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Modelo)</td>
@@ -26,7 +24,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Sucursal)</td>
                 <td>@String.Format("{0:dd/MM/yyyy}", item.Fech_prox_tenecia)</td>
                 <td>
-                    @* Optionally, you can add Edit or Details buttons *@
+                    <a asp-action="RealizarPagoT" asp-route-id="@item.Id_unidad" class="btn btn-primary">Pago realizado</a>
                 </td>
             </tr>
         }

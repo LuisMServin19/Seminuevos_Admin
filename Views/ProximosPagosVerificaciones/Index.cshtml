@@ -26,7 +26,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Sucursal)</td>
                 <td>@String.Format("{0:dd/MM/yyyy}", item.Fech_prox_verificacion)</td>
                 <td>
-                    @* Optionally, you can add Edit or Details buttons *@
+                    <a asp-action="Edit" asp-route-id="@item.Id_unidad" class="btn btn-primary">Pago realizado</a>
                 </td>
             </tr>
         }
