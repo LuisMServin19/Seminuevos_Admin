@@ -90,7 +90,7 @@ namespace Serfitex.Controllers
                     }
                 }
             }
-
+            tenencia.Fecha_pago = DateTime.Now;
             return View(tenencia); // Enviar el modelo a la vista
         }
 
