@@ -34,27 +34,36 @@ namespace Serfitex.Controllers
             string connectionString = Configuration["BDs:SemiCC"];
             List<ProximosPagosTenencias> tenencias = new List<ProximosPagosTenencias>();
 
-            // Retrieve upcoming tenencias
+            // Obtener la fecha actual y calcular el rango de 3 meses
+            DateTime fechaActual = DateTime.Today;
+            DateTime fechaLimite = fechaActual.AddMonths(4);
+
+            // Recuperar próximas tenencias
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
                 conexion.Open();
 
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conexion;
-                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Sucursal, Fech_prox_tenecia FROM Unidades WHERE Fech_prox_tenecia > CURDATE() AND Estatus=1 ORDER BY Fech_prox_tenecia;";
-                cmd.CommandType = System.Data.CommandType.Text;
+                MySqlCommand cmd = new MySqlCommand
+                {
+                    Connection = conexion,
+                    CommandText = "SELECT Id_unidad, Modelo, Marca, Sucursal, Fech_prox_tenecia FROM Unidades WHERE Fech_prox_tenecia > CURDATE() AND Estatus=1 ORDER BY Fech_prox_tenecia;",
+                    CommandType = System.Data.CommandType.Text
+                };
 
                 using (var cursor = cmd.ExecuteReader())
                 {
                     while (cursor.Read())
                     {
+                        DateTime fechaProxTenencia = cursor["Fech_prox_tenecia"] != DBNull.Value ? Convert.ToDateTime(cursor["Fech_prox_tenecia"]) : DateTime.MinValue;
+
                         ProximosPagosTenencias tenencia = new ProximosPagosTenencias()
                         {
                             Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
                             Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty,
                             Marca = Convert.ToString(cursor["Marca"]) ?? string.Empty,
                             Sucursal = Convert.ToString(cursor["Sucursal"]) ?? string.Empty,
-                            Fech_prox_tenecia = cursor["Fech_prox_tenecia"] != DBNull.Value ? Convert.ToDateTime(cursor["Fech_prox_tenecia"]) : DateTime.MinValue
+                            Fech_prox_tenecia = fechaProxTenencia,
+                            MostrarBoton = fechaProxTenencia <= fechaLimite // Determina si mostrar el botón
                         };
                         tenencias.Add(tenencia);
                     }
@@ -63,6 +72,7 @@ namespace Serfitex.Controllers
 
             return View(tenencias);
         }
+
 
         public IActionResult RealizarPagoT(int id)
         {

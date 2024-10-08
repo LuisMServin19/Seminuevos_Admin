@@ -8,7 +8,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model[0].Modelo)</th> <!-- Accediendo a la primera propiedad de la lista -->
+            <th>@Html.DisplayNameFor(model => model[0].Modelo)</th>
             <th>@Html.DisplayNameFor(model => model[0].Marca)</th>
             <th>@Html.DisplayNameFor(model => model[0].Sucursal)</th>
             <th>@Html.DisplayNameFor(model => model[0].Fech_prox_tenecia)</th>
@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) // Cambia tenencias a Model
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.Modelo)</td>
@@ -24,7 +24,10 @@
                 <td>@Html.DisplayFor(modelItem => item.Sucursal)</td>
                 <td>@String.Format("{0:dd/MM/yyyy}", item.Fech_prox_tenecia)</td>
                 <td>
-                    <a asp-action="RealizarPagoT" asp-route-id="@item.Id_unidad" class="btn btn-primary">Pago realizado</a>
+                    @if (item.MostrarBoton) // Verifica si se debe mostrar el botón
+                    {
+                        <a asp-action="RealizarPagoT" asp-route-id="@item.Id_unidad" class="btn btn-primary">Realizar Pago</a>
+                    }
                 </td>
             </tr>
         }

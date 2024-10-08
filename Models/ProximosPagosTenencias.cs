@@ -17,6 +17,7 @@ namespace Serfitex.Models
 
         [DisplayName("Fecha pago tenencia")]
         public DateTime Fecha_pago { get; set; }
+        public bool MostrarBoton { get; set; } 
 
     }
 }
