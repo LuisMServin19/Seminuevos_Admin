@@ -12,10 +12,14 @@
         <input type="date" class="form-control" id="FechaPago" name="Fecha_pago" required />
     </div>
 
-    <!-- Ocultos para enviar el Id_unidad, Modelo, y Fech_prox_tenencia -->
+    <div class="form-group">
+        <label for="Fech_prox_tenecia">Fecha Próxima Tenencia</label>
+        <input type="date" class="form-control" id="Fech_prox_tenecia" name="Fech_prox_tenecia" value="@Model.Fech_prox_tenecia.ToString("yyyy-MM-dd")" required />
+    </div>
+
+    <!-- Ocultos para enviar el Id_unidad y Modelo -->
     <input type="hidden" name="Id_unidad" value="@Model.Id_unidad" />
     <input type="hidden" name="Modelo" value="@Model.Modelo" />
-    <input type="hidden" name="Fech_prox_tenecia" value="@Model.Fech_prox_tenecia.ToString("yyyy-MM-dd")" />
 
     <button type="submit" class="btn btn-primary">Guardar Pago</button>
 </form>

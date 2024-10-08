@@ -103,6 +103,7 @@ namespace Serfitex.Controllers
             {
                 conexion.Open();
 
+                // Primer INSERT en Ta_pago_tenencia
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
                 cmd.CommandText = @"INSERT INTO Ta_pago_tenencia (Id_unidad, Fecha_tenencia, Fecha_pago, Modelo)
@@ -111,12 +112,22 @@ namespace Serfitex.Controllers
                 cmd.Parameters.AddWithValue("@Fecha_tenencia", model.Fech_prox_tenecia);
                 cmd.Parameters.AddWithValue("@Fecha_pago", model.Fecha_pago); // Este campo se recibe del formulario
                 cmd.Parameters.AddWithValue("@Modelo", model.Modelo);
-
                 cmd.ExecuteNonQuery();
+
+                // Segundo UPDATE para actualizar Fech_prox_tenencia en Unidades
+                MySqlCommand updateCmd = new MySqlCommand();
+                updateCmd.Connection = conexion;
+                updateCmd.CommandText = @"UPDATE Unidades 
+                                  SET Fech_prox_tenecia = @NuevaFech_prox_tenencia 
+                                  WHERE Id_unidad = @Id_unidad";
+                updateCmd.Parameters.AddWithValue("@NuevaFech_prox_tenencia", model.Fech_prox_tenecia);
+                updateCmd.Parameters.AddWithValue("@Id_unidad", model.Id_unidad);
+                updateCmd.ExecuteNonQuery();
             }
 
             return RedirectToAction("Index"); // Redirigir a la vista de lista después de guardar el pago
         }
+
 
     }
 }
