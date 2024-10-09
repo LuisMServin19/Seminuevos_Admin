@@ -38,7 +38,6 @@ namespace Serfitex.Controllers
                 }
             }
 
-            ViewBag.Estatus = registros.Select(r => r.Estatus == 1 ? "Disponible" : "Vendido").ToList();
         }
 
         public IActionResult Index()
@@ -185,7 +184,7 @@ namespace Serfitex.Controllers
                     conexion.Open();
 
                     bool exist = false;
-                    MySqlCommand checkColumnCmd = new MySqlCommand(string.Format("SELECT * FROM Unidades WHERE Id_unidad='{0}'", newUniddes.Id_unidad), conexion);
+                    MySqlCommand checkColumnCmd = new MySqlCommand(string.Format("SELECT * FROM Unidades WHERE Num_serie='{0}'", newUniddes.Num_serie), conexion);
                     using (MySqlDataReader reader = checkColumnCmd.ExecuteReader())
                     {
                         if (reader.HasRows)
@@ -194,48 +193,52 @@ namespace Serfitex.Controllers
                         }
                     }
 
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = conexion;
-
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Id_unidad", newUniddes.Id_unidad);
-                    cmd.Parameters.AddWithValue("@Modelo", newUniddes.Modelo);
-                    cmd.Parameters.AddWithValue("@Tipo", newUniddes.Tipo);
-                    cmd.Parameters.AddWithValue("@Marca", newUniddes.Marca);
-                    cmd.Parameters.AddWithValue("@Transmision", newUniddes.Transmision);
-                    cmd.Parameters.AddWithValue("@Num_placa", newUniddes.Num_placa);
-                    cmd.Parameters.AddWithValue("@Num_serie", newUniddes.Num_serie);
-                    cmd.Parameters.AddWithValue("@Ano", newUniddes.Ano);
-                    cmd.Parameters.AddWithValue("@Color", newUniddes.Color);
-                    cmd.Parameters.AddWithValue("@Fecha_factura", newUniddes.Fecha_factura);
-                    cmd.Parameters.AddWithValue("@Tipo_factura", newUniddes.Tipo_factura);
-                    cmd.Parameters.AddWithValue("@Fecha_tenencia", newUniddes.Fecha_tenencia);
-                    cmd.Parameters.AddWithValue("@Fecha_verificacion", newUniddes.Fecha_verificacion);
-                    cmd.Parameters.AddWithValue("@Seguro", newUniddes.Seguro);
-                    cmd.Parameters.AddWithValue("@Aseguradora", newUniddes.Aseguradora);
-                    cmd.Parameters.AddWithValue("@Duplicado_llave", newUniddes.Duplicado_llave);
-                    cmd.Parameters.AddWithValue("@Comentario", newUniddes.Comentario);
-                    cmd.Parameters.AddWithValue("@Precio", newUniddes.Precio);
-                    cmd.Parameters.AddWithValue("@Sucursal", newUniddes.Sucursal);
-                    cmd.Parameters.AddWithValue("@Estatus", 1);
-                    cmd.Parameters.AddWithValue("@Fecha_ingreso", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@Fech_prox_tenecia", newUniddes.Fech_prox_tenecia);
-                    cmd.Parameters.AddWithValue("@Fech_prox_verificacion", newUniddes.Fech_prox_verificacion);
-
                     if (!exist)
                     {
-                        // Insert into Unidades
-                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Tipo,Marca,Transmision,Num_placa,Num_serie,Ano,Color,Fecha_factura,Tipo_factura,Fecha_tenencia,Fecha_verificacion,Seguro,Aseguradora,Duplicado_llave,Comentario,Precio,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) VALUES (@Modelo,@Tipo,@Marca,@Transmision,@Num_placa,@Num_serie,@Ano,@Color,@Fecha_factura,@Tipo_factura,@Fecha_tenencia,@Fecha_verificacion,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Precio,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.Connection = conexion;
+                        cmd.CommandType = System.Data.CommandType.Text;
+
+                        // Ingresar datos de la unidad sin especificar el Id_unidad
+                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Tipo,Marca,Transmision,Num_placa,Num_serie,Ano,Color,Fecha_factura,Tipo_factura,Fecha_tenencia,Fecha_verificacion,Seguro,Aseguradora,Duplicado_llave,Comentario,Precio,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) " +
+                                          "VALUES (@Modelo,@Tipo,@Marca,@Transmision,@Num_placa,@Num_serie,@Ano,@Color,@Fecha_factura,@Tipo_factura,@Fecha_tenencia,@Fecha_verificacion,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Precio,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
+
+                        cmd.Parameters.AddWithValue("@Modelo", newUniddes.Modelo);
+                        cmd.Parameters.AddWithValue("@Tipo", newUniddes.Tipo);
+                        cmd.Parameters.AddWithValue("@Marca", newUniddes.Marca);
+                        cmd.Parameters.AddWithValue("@Transmision", newUniddes.Transmision);
+                        cmd.Parameters.AddWithValue("@Num_placa", newUniddes.Num_placa);
+                        cmd.Parameters.AddWithValue("@Num_serie", newUniddes.Num_serie);
+                        cmd.Parameters.AddWithValue("@Ano", newUniddes.Ano);
+                        cmd.Parameters.AddWithValue("@Color", newUniddes.Color);
+                        cmd.Parameters.AddWithValue("@Fecha_factura", newUniddes.Fecha_factura);
+                        cmd.Parameters.AddWithValue("@Tipo_factura", newUniddes.Tipo_factura);
+                        cmd.Parameters.AddWithValue("@Fecha_tenencia", newUniddes.Fecha_tenencia);
+                        cmd.Parameters.AddWithValue("@Fecha_verificacion", newUniddes.Fecha_verificacion);
+                        cmd.Parameters.AddWithValue("@Seguro", newUniddes.Seguro);
+                        cmd.Parameters.AddWithValue("@Aseguradora", newUniddes.Aseguradora);
+                        cmd.Parameters.AddWithValue("@Duplicado_llave", newUniddes.Duplicado_llave);
+                        cmd.Parameters.AddWithValue("@Comentario", newUniddes.Comentario);
+                        cmd.Parameters.AddWithValue("@Precio", newUniddes.Precio);
+                        cmd.Parameters.AddWithValue("@Sucursal", newUniddes.Sucursal);
+                        cmd.Parameters.AddWithValue("@Estatus", 1);
+                        cmd.Parameters.AddWithValue("@Fecha_ingreso", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@Fech_prox_tenecia", newUniddes.Fech_prox_tenecia);
+                        cmd.Parameters.AddWithValue("@Fech_prox_verificacion", newUniddes.Fech_prox_verificacion);
+
                         cmd.ExecuteNonQuery();
 
-                        // Crear la carpeta después de guardar la unidad
-                        string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "seminuevos_admin", "images", "unidades", newUniddes.Id_unidad.ToString());
+                        // Obtener el id_unidad generado automáticamente
+                        MySqlCommand getLastIdCmd = new MySqlCommand("SELECT LAST_INSERT_ID();", conexion);
+                        int newIdUnidad = Convert.ToInt32(getLastIdCmd.ExecuteScalar());
+
+                        // Crear la carpeta con el nombre del nuevo id_unidad generado
+                        string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "Unidades", newIdUnidad.ToString());
 
                         if (!Directory.Exists(folderPath))
                         {
                             Directory.CreateDirectory(folderPath);
                         }
-
                     }
                     else
                     {
@@ -247,6 +250,7 @@ namespace Serfitex.Controllers
 
             return View(newUniddes);
         }
+
 
 
         // GET: Unidades/Edit/5
