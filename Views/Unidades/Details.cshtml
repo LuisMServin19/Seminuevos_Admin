@@ -10,8 +10,12 @@
 <div class="col-sm-5">
     <h4></h4>
     <hr />
-    <table class="table table-bordered">        
+    <table class="table table-bordered">
         <tbody>
+            <div>
+                <h4>Imagen de la Unidad</h4>
+                <img src="@Url.Content(ViewBag.ImagePath)" style="max-width:400px;" />
+            </div>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.Modelo)</td>
                 <td>@Html.DisplayFor(model => model.Modelo)</td>
@@ -77,7 +81,7 @@
                 <td>@Html.DisplayFor(model => model.Comentario)</td>
             </tr>
             <td><strong>@Html.DisplayNameFor(model => model.Precio) </strong></td>
-                <td>$ @Html.DisplayFor(model => model.Precio, "{0:C}")</td>
+            <td>$ @Html.DisplayFor(model => model.Precio, "{0:C}")</td>
             <tr>
                 <td><strong>@Html.DisplayNameFor(model => model.Sucursal)</td>
                 <td>@Html.DisplayFor(model => model.Sucursal)</td>

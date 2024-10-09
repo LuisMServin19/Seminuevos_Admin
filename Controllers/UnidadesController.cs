@@ -1,15 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.Win32;
 using MySql.Data.MySqlClient;
-using NuGet.Protocol;
 using System.Data;
 using System.Text;
-using Serfitex.Data;
 using Serfitex.Models;
-using WebApp.Models;
-using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace Serfitex.Controllers
 {
@@ -143,6 +137,11 @@ namespace Serfitex.Controllers
                             Fech_prox_verificacion = Convert.ToDateTime(cursor["Fech_prox_verificacion"]),
                         };
                         unidad.EstatusTexto = unidad.Estatus == 1 ? "Disponible" : "Vendido";
+
+                        // Construir la ruta a la imagen "~/images/LogoCMG.png"
+                        string imagePath = $"~/images/Unidades/{unidad.Id_unidad}/Imagen_1.jpg";
+                        ViewBag.ImagePath = imagePath;
+
                     }
                 }
             }
@@ -229,10 +228,14 @@ namespace Serfitex.Controllers
                         cmd.CommandText = "INSERT INTO Unidades (Modelo,Tipo,Marca,Transmision,Num_placa,Num_serie,Ano,Color,Fecha_factura,Tipo_factura,Fecha_tenencia,Fecha_verificacion,Seguro,Aseguradora,Duplicado_llave,Comentario,Precio,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) VALUES (@Modelo,@Tipo,@Marca,@Transmision,@Num_placa,@Num_serie,@Ano,@Color,@Fecha_factura,@Tipo_factura,@Fecha_tenencia,@Fecha_verificacion,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Precio,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
                         cmd.ExecuteNonQuery();
 
-                        // Insert into Ta_venta (assuming it has only Modelo for now)
-                        MySqlCommand ventaCmd = new MySqlCommand("INSERT INTO Ta_venta (Modelo) VALUES (@Modelo)", conexion);
-                        ventaCmd.Parameters.AddWithValue("@Modelo", newUniddes.Modelo);
-                        ventaCmd.ExecuteNonQuery();
+                        // Crear la carpeta después de guardar la unidad
+                        string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "seminuevos_admin", "images", "unidades", newUniddes.Id_unidad.ToString());
+
+                        if (!Directory.Exists(folderPath))
+                        {
+                            Directory.CreateDirectory(folderPath);
+                        }
+
                     }
                     else
                     {
