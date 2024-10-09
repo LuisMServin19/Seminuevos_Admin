@@ -419,9 +419,9 @@ namespace Serfitex.Controllers
                     }
                 }
                 // Si no se encuentra la unidad, retornar 404
-                if (unidades == null)
+                if (unidades != null)
                 {
-                    return NotFound();
+                    ViewBag.Modelo = unidades.Modelo; // Asegúrate de esto
                 }
                 // Consulta para obtener la información de venta de ta_venta
                 MySqlCommand cmdVenta = new MySqlCommand();
@@ -480,7 +480,7 @@ namespace Serfitex.Controllers
                 {
                     conexion.Open();
 
-                    Unidades unidad = null;
+                    Unidades? unidad = null;
                     string selectUnidadQuery = "SELECT Modelo FROM Unidades WHERE Id_unidad = @Id_unidad";
                     using (MySqlCommand selectCmd = new MySqlCommand(selectUnidadQuery, conexion))
                     {
@@ -517,7 +517,7 @@ namespace Serfitex.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ModelState.AddModelError(string.Empty, "An error occurred while processing the sale.");
 
