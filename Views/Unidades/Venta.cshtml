@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Venta">
             <input type="hidden" asp-for="Id_unidad" />
-            <input type="hidden" name="Modelo" value="@ViewBag.Modelo" />
+            <input type="hidden" asp-for="Modelo" value="@ViewBag.Modelo" />
             <div class="form-group">
                 <label asp-for="Fecha_venta" class="control-label"></label>
                 <input asp-for="Fecha_venta" class="form-control" Autocomplete="off" />
@@ -35,7 +35,7 @@
         </form>
     </div>
 </div>
-<br/>
+<br />
 <div>
     <a asp-action="Index">Regresar a la lista</a>
 </div>

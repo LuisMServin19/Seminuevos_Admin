@@ -320,12 +320,12 @@ namespace Serfitex.Controllers
         // POST: Unidades/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, Unidades updatedUnidades)
+        public async Task<IActionResult> Edit(int id, Unidades updatedUnidades, IFormFile? ImageFile)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
 
             if (string.IsNullOrEmpty(username))
-                return RedirectToAction("Index", "LogIn");
+                return RedirectToAction("Index", "Login");
 
             if (!ModelState.IsValid)
                 return View(updatedUnidades);
@@ -338,11 +338,20 @@ namespace Serfitex.Controllers
                 {
                     await conexion.OpenAsync();
 
-                    string query = "UPDATE Unidades SET Modelo = @Modelo, Tipo= @Tipo, Marca = @Marca, Transmision = @Transmision, Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Color = @Color, Fecha_factura = @Fecha_factura, Tipo_factura = @Tipo_factura, Fecha_tenencia = @Fecha_tenencia, Fecha_verificacion = @Fecha_verificacion, Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, Comentario = @Comentario, Precio = @Precio, Sucursal = @Sucursal, Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion WHERE Id_unidad = @Id_unidad";
+                    // Actualizar los datos de la unidad
+                    string query = @"UPDATE Unidades 
+                             SET Modelo = @Modelo, Tipo = @Tipo, Marca = @Marca, Transmision = @Transmision, 
+                                 Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Color = @Color, 
+                                 Fecha_factura = @Fecha_factura, Tipo_factura = @Tipo_factura, 
+                                 Fecha_tenencia = @Fecha_tenencia, Fecha_verificacion = @Fecha_verificacion, 
+                                 Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, 
+                                 Comentario = @Comentario, Precio = @Precio, Sucursal = @Sucursal, 
+                                 Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, 
+                                 Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion 
+                             WHERE Id_unidad = @Id_unidad";
 
                     using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
                     {
-
                         updateCmd.Parameters.AddWithValue("@Id_unidad", updatedUnidades.Id_unidad);
                         updateCmd.Parameters.AddWithValue("@Modelo", updatedUnidades.Modelo);
                         updateCmd.Parameters.AddWithValue("@Tipo", updatedUnidades.Tipo);
@@ -369,14 +378,32 @@ namespace Serfitex.Controllers
 
                         await updateCmd.ExecuteNonQueryAsync();
                     }
+
+                    // Si se cargó una imagen, guardarla en la ruta correspondiente
+                    if (ImageFile != null && ImageFile.Length > 0)
+                    {
+                        string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "Unidades", updatedUnidades.Id_unidad.ToString());
+                        string filePath = Path.Combine(folderPath, "Imagen_1.jpg");
+
+                        // Crear la carpeta si no existe
+                        if (!Directory.Exists(folderPath))
+                        {
+                            Directory.CreateDirectory(folderPath);
+                        }
+
+                        // Guardar la imagen como Imagen_1.jpg
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await ImageFile.CopyToAsync(stream);
+                        }
+                    }
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                // Manejo de errores, puedes loguear el error si es necesario
-                ModelState.AddModelError(string.Empty, "An error occurred while updating the contract: " + ex.Message);
+                ModelState.AddModelError("", "Ocurrió un error al actualizar la unidad: " + ex.Message);
                 return View(updatedUnidades);
             }
         }
@@ -480,6 +507,7 @@ namespace Serfitex.Controllers
                 {
                     conexion.Open();
 
+                    // Fetch the Modelo again in the POST action
                     Unidades? unidad = null;
                     string selectUnidadQuery = "SELECT Modelo FROM Unidades WHERE Id_unidad = @Id_unidad";
                     using (MySqlCommand selectCmd = new MySqlCommand(selectUnidadQuery, conexion))
@@ -496,6 +524,8 @@ namespace Serfitex.Controllers
                             }
                         }
                     }
+
+                    // Continue with updating Unidades and inserting Ta_venta
                     string updateUnidadesQuery = "UPDATE Unidades SET Estatus = @Estatus WHERE Id_unidad = @Id_unidad";
                     using (MySqlCommand updateCmd = new MySqlCommand(updateUnidadesQuery, conexion))
                     {
@@ -503,6 +533,7 @@ namespace Serfitex.Controllers
                         updateCmd.Parameters.AddWithValue("@Estatus", 0);
                         updateCmd.ExecuteNonQuery();
                     }
+
                     string insertVentaQuery = "INSERT INTO ta_venta (Id_unidad, Fecha_venta, Vendedor, Comprador, Modelo) VALUES (@Id_unidad, @Fecha_venta, @Vendedor, @Comprador, @Modelo)";
                     using (MySqlCommand insertCmd = new MySqlCommand(insertVentaQuery, conexion))
                     {
@@ -510,7 +541,7 @@ namespace Serfitex.Controllers
                         insertCmd.Parameters.AddWithValue("@Fecha_venta", nuevaVenta.Fecha_venta);
                         insertCmd.Parameters.AddWithValue("@Vendedor", nuevaVenta.Vendedor);
                         insertCmd.Parameters.AddWithValue("@Comprador", nuevaVenta.Comprador);
-                        insertCmd.Parameters.AddWithValue("@Modelo", unidad?.Modelo);
+                        insertCmd.Parameters.AddWithValue("@Modelo", unidad?.Modelo); // Here we use the retrieved Modelo
                         insertCmd.ExecuteNonQuery();
                     }
                 }
@@ -524,5 +555,6 @@ namespace Serfitex.Controllers
                 return View(nuevaVenta);
             }
         }
+
     }
 }
