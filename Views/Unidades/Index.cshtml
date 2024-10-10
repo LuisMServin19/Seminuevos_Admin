@@ -15,15 +15,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Modelo)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.Tipo)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Marca)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.Num_placa)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.Precio)
             </th>
@@ -44,15 +44,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Modelo)
                 </td>
-                <td>
+                @* <td>
                     @Html.DisplayFor(modelItem => item.Tipo)
-                </td>
+                </td> *@
                 <td>
                     @Html.DisplayFor(modelItem => item.Marca)
                 </td>
-                <td>
+                @* <td>
                     @Html.DisplayFor(modelItem => item.Num_placa)
-                </td>
+                </td> *@
                 <td>
                     @($"${item.Precio:N2}")
                 </td>
