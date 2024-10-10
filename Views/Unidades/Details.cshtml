@@ -4,102 +4,134 @@
     ViewData["Title"] = "Detalles";
 }
 
-<h1>Detalles Unidad</h1>
+<h1>Detalle de @Model.Modelo</h1>
 
-<h4>Unidades</h4>
 <div class="col-sm-5">
     <h4></h4>
     <hr />
     <table class="table table-bordered">
         <tbody>
-            <div>
-                <h4>Imagen de la Unidad</h4>
-                <img src="@Url.Content(ViewBag.ImagePath)" style="max-width:400px;" />
-            </div>
             <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Modelo)</td>
-                <td>@Html.DisplayFor(model => model.Modelo)</td>
+                <td>
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Modelo)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Modelo)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Tipo)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Tipo)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Marca)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Marca)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Transmision)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Transmision)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Num_placa)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Num_placa)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Num_serie)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Num_serie)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Ano)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Ano)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Color)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Color)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Duplicado_llave)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Duplicado_llave)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Fecha_factura)</strong></td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fecha_factura)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Tipo_factura)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Tipo_factura)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Fecha_tenencia)</strong></td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fecha_tenencia)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Fecha_verificacion)</strong></td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fecha_verificacion)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Seguro)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Seguro)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Aseguradora)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Aseguradora)</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Comentario)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Comentario)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Precio)</strong></td>
+                                <td>$ @Html.DisplayFor(model => model.Precio, "{0:C}")</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Sucursal)</strong></td>
+                                <td>@Html.DisplayFor(model => model.Sucursal)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Fecha_ingreso)</strong></td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fecha_ingreso)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Fech_prox_tenecia)</strong></td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fech_prox_tenecia)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>@Html.DisplayNameFor(model => model.Fech_prox_verificacion)</strong></td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fech_prox_verificacion)</td>
+                            </tr>
             </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Tipo)</td>
-                <td>@Html.DisplayFor(model => model.Tipo)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Marca)</td>
-                <td>@Html.DisplayFor(model => model.Marca)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Transmision)</td>
-                <td>@Html.DisplayFor(model => model.Transmision)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Num_placa)</td>
-                <td>@Html.DisplayFor(model => model.Num_placa)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Num_serie)</td>
-                <td>@Html.DisplayFor(model => model.Num_serie)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Ano)</td>
-                <td>@Html.DisplayFor(model => model.Ano)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Color)</td>
-                <td>@Html.DisplayFor(model => model.Color)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Fecha_factura)</td>
-                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fecha_factura)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Tipo_factura)</td>
-                <td>@Html.DisplayFor(model => model.Tipo_factura)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Fecha_tenencia)</td>
-                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fecha_tenencia)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Fecha_verificacion)</td>
-                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fecha_verificacion)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Seguro)</td>
-                <td>@Html.DisplayFor(model => model.Seguro)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Aseguradora)</td>
-                <td>@Html.DisplayFor(model => model.Aseguradora)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Duplicado_llave)</td>
-                <td>@Html.DisplayFor(model => model.Duplicado_llave)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Comentario)</td>
-                <td>@Html.DisplayFor(model => model.Comentario)</td>
-            </tr>
-            <td><strong>@Html.DisplayNameFor(model => model.Precio) </strong></td>
-            <td>$ @Html.DisplayFor(model => model.Precio, "{0:C}")</td>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Sucursal)</td>
-                <td>@Html.DisplayFor(model => model.Sucursal)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Fecha_ingreso)</td>
-                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fecha_ingreso)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Fech_prox_tenecia)</td>
-                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fech_prox_tenecia)</td>
-            </tr>
-            <tr>
-                <td><strong>@Html.DisplayNameFor(model => model.Fech_prox_verificacion)</td>
-                <td>@String.Format("{0:dd/MM/yyyy}", Model.Fech_prox_verificacion)</td>
-            </tr>
+
         </tbody>
     </table>
+    </td>
+    <td>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <div>
+                    @* <h4>Unidades @Model.Modelo</h4> *@
+                    <img src="@Url.Content(ViewBag.ImagePath)" style="max-width:700px;" />
+                </div>
+            </tbody>
+        </table>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+
 </div>
 <br />
 <div>
