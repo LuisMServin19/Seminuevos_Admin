@@ -46,7 +46,6 @@ namespace Serfitex.Controllers
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
 
-                // Remover cualquier filtro por id_emp
                 string sqlText = "SELECT * FROM Unidades WHERE Estatus = 1 ORDER BY Fecha_ingreso;";
 
                 cmd.CommandText = sqlText;
@@ -56,9 +55,16 @@ namespace Serfitex.Controllers
                     ReporteUnidades titulos = new ReporteUnidades()
                     {
                         Modelo = "Modelo",
+                        Tipo = "Tipo",
                         Marca = "Marca",
+                        Transmision = "Transmision",
+                        Num_placa = "Num_placa",
                         Num_serie = "Num_serie",
-                        Ano = "Ano"
+                        Ano = "Ano",
+                        Color = "Color",
+                        Seguro = "Seguro",
+                        Aseguradora = "Aseguradora",
+                        Duplicado_llave = "Duplicado_llave"
                     };
 
                     registros.Add(titulos);
@@ -66,16 +72,30 @@ namespace Serfitex.Controllers
                     while (cursor.Read())
                     {
                         string Modelo = Convert.ToString(cursor["Modelo"]);
+                        string Tipo = Convert.ToString(cursor["Tipo"]);
                         string Marca = Convert.ToString(cursor["Marca"]);
+                        string Transmision = Convert.ToString(cursor["Transmision"]);
+                        string Num_placa = Convert.ToString(cursor["Num_placa"]);
                         string Num_serie = Convert.ToString(cursor["Num_serie"]);
                         string Ano = Convert.ToString(cursor["Ano"]);
+                        string Color = Convert.ToString(cursor["Color"]);
+                        string Seguro = Convert.ToString(cursor["Seguro"]);
+                        string Aseguradora = Convert.ToString(cursor["Aseguradora"]);
+                        string Duplicado_llave = Convert.ToString(cursor["Duplicado_llave"]);
 
                         ReporteUnidades registro = new ReporteUnidades()
                         {
                             Modelo = Modelo,
+                            Tipo = Tipo,
                             Marca = Marca,
+                            Transmision = Transmision,
+                            Num_placa = Num_placa,
                             Num_serie = Num_serie,
-                            Ano = Ano
+                            Ano = Ano,
+                            Color = Color,
+                            Seguro = Seguro,
+                            Aseguradora = Aseguradora,
+                            Duplicado_llave = Duplicado_llave
                         };
                         registros.Add(registro);
                     }
@@ -100,9 +120,16 @@ namespace Serfitex.Controllers
                     constructor.AppendLine
                     (
                         item.Modelo + "," +
+                        item.Tipo + "," +
                         item.Marca + "," +
+                        item.Transmision + "," +
+                        item.Num_placa + "," +
                         item.Num_serie + "," +
-                        item.Ano
+                        item.Ano + "," +
+                        item.Color + "," +
+                        item.Seguro + "," +
+                        item.Aseguradora + "," +
+                        item.Duplicado_llave
                     );
                 }
 
@@ -118,8 +145,6 @@ namespace Serfitex.Controllers
             }
             catch (Exception ex)
             {
-                // Manejo de excepciones, puedes logear el error o mostrar un mensaje al usuario
-                // Log.Error(ex, "Error al descargar el reporte");
                 return RedirectToAction("Index", new List<ReporteUnidades>());
             }
         }
