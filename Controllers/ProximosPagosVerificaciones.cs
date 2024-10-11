@@ -33,46 +33,110 @@ namespace Serfitex.Controllers
                 return RedirectToAction("Index", "LogIn");
 
             string connectionString = Configuration["BDs:SemiCC"];
+            List<ProximosPagosVerificaciones> verificaciones = new List<ProximosPagosVerificaciones>();
 
-            List<Unidades> verificaciones = new List<Unidades>();
+            // Obtener la fecha actual y calcular el rango de 3 meses
+            DateTime fechaActual = DateTime.Today;
+            DateTime fechaLimite = fechaActual.AddMonths(4);
 
-            // Retrieve upcoming verificaciones
+            // Recuperar próximas verificaciones
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            {
+                conexion.Open();
+
+                MySqlCommand cmd = new MySqlCommand
+                {
+                    Connection = conexion,
+                    CommandText = "SELECT Id_unidad, Modelo, Marca, Sucursal, Fech_prox_verificacion FROM Unidades WHERE Fech_prox_verificacion > CURDATE() AND Estatus=1 ORDER BY Fech_prox_verificacion;",
+                    CommandType = System.Data.CommandType.Text
+                };
+
+                using (var cursor = cmd.ExecuteReader())
+                {
+                    while (cursor.Read())
+                    {
+                        DateTime fechaProxVerificacion = cursor["Fech_prox_verificacion"] != DBNull.Value ? Convert.ToDateTime(cursor["Fech_prox_verificacion"]) : DateTime.MinValue;
+
+                        ProximosPagosVerificaciones verificacionItem = new ProximosPagosVerificaciones()
+                        {
+                            Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
+                            Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty,
+                            Marca = Convert.ToString(cursor["Marca"]) ?? string.Empty,
+                            Sucursal = Convert.ToString(cursor["Sucursal"]) ?? string.Empty,
+                            Fech_prox_verificacion = fechaProxVerificacion,
+                            MostrarBoton = fechaProxVerificacion <= fechaLimite // Determina si mostrar el botón
+                        };
+                        verificaciones.Add(verificacionItem);
+                    }
+                }
+            }
+
+            return View(verificaciones);
+        }
+
+
+        public IActionResult RealizarPagoT(int id)
+        {
+            string connectionString = Configuration["BDs:SemiCC"];
+            ProximosPagosVerificaciones verificaciones = new ProximosPagosVerificaciones();
+
+            // Obtener los datos de la unidad por Id_unidad
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
                 conexion.Open();
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
-                cmd.CommandText = "SELECT Id_unidad, Modelo, Marca, Sucursal, Fech_prox_verificacion FROM Unidades WHERE Fech_prox_verificacion > CURDATE() AND Estatus=1 ORDER BY Fech_prox_verificacion;";
-                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = "SELECT Id_unidad, Modelo, Fech_prox_verificacion FROM Unidades WHERE Id_unidad = @Id_unidad";
+                cmd.Parameters.AddWithValue("@Id_unidad", id);
+                cmd.CommandType = CommandType.Text;
 
-                using (var cursor = cmd.ExecuteReader())
+                using (var reader = cmd.ExecuteReader())
                 {
-                    while (cursor.Read())
+                    if (reader.Read())
                     {
-                        int Id_unidad = Convert.ToInt32(cursor["Id_unidad"]);
-                        string Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty;
-                        string Marca = Convert.ToString(cursor["Marca"]) ?? string.Empty;
-                        string Sucursal = Convert.ToString(cursor["Sucursal"]) ?? string.Empty;
-                        DateTime? Fech_prox_verificacion = cursor["Fech_prox_verificacion"] != DBNull.Value ? Convert.ToDateTime(cursor["Fech_prox_verificacion"]) : (DateTime?)null;
-
-                        Unidades verificacion = new Unidades()
-                        {
-                            Id_unidad = Id_unidad,
-                            Modelo = Modelo,
-                            Marca = Marca,
-                            Sucursal = Sucursal,
-                            Fech_prox_verificacion = Fech_prox_verificacion ?? DateTime.MinValue // Manejo de DateTime? con valor por defecto
-                        };
-                        verificaciones.Add(verificacion);
+                        verificaciones.Id_unidad = Convert.ToInt32(reader["Id_unidad"]);
+                        verificaciones.Modelo = Convert.ToString(reader["Modelo"]);
+                        verificaciones.Fech_prox_verificacion = reader["Fech_prox_verificacion"] != DBNull.Value ? Convert.ToDateTime(reader["Fech_prox_verificacion"]) : DateTime.MinValue;
                     }
                 }
             }
+            verificaciones.Fecha_pago = DateTime.Now;
+            return View(verificaciones); // Enviar el modelo a la vista
+        }
 
-            // Pass both lists to the view using ViewData or ViewModel
-            ViewData["Verificaciones"] = verificaciones;
+        [HttpPost]
+        public IActionResult GuardarPago(ProximosPagosVerificaciones model)
+        {
+            string connectionString = Configuration["BDs:SemiCC"];
 
-            return View();
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            {
+                conexion.Open();
+
+                // Primer INSERT en Ta_pago_verificaciones
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conexion;
+                cmd.CommandText = @"INSERT INTO Ta_pago_verificaciones (Id_unidad, Fecha_verificaciones, Fecha_pago, Modelo)
+                            VALUES (@Id_unidad, @Fecha_verificaciones, @Fecha_pago, @Modelo)";
+                cmd.Parameters.AddWithValue("@Id_unidad", model.Id_unidad);
+                cmd.Parameters.AddWithValue("@Fecha_verificaciones", model.Fech_prox_verificacion);
+                cmd.Parameters.AddWithValue("@Fecha_pago", model.Fecha_pago); // Este campo se recibe del formulario
+                cmd.Parameters.AddWithValue("@Modelo", model.Modelo);
+                cmd.ExecuteNonQuery();
+
+                // Segundo UPDATE para actualizar Fech_prox_verificacion en Unidades
+                MySqlCommand updateCmd = new MySqlCommand();
+                updateCmd.Connection = conexion;
+                updateCmd.CommandText = @"UPDATE Unidades 
+                                  SET Fech_prox_verificacion = @NuevaFech_prox_verificacion 
+                                  WHERE Id_unidad = @Id_unidad";
+                updateCmd.Parameters.AddWithValue("@NuevaFech_prox_verificacion", model.Fech_prox_verificacion);
+                updateCmd.Parameters.AddWithValue("@Id_unidad", model.Id_unidad);
+                updateCmd.ExecuteNonQuery();
+            }
+
+            return RedirectToAction("Index"); // Redirigir a la vista de lista después de guardar el pago
         }
 
     }

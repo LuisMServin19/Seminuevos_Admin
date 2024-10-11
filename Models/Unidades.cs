@@ -65,7 +65,7 @@ namespace Serfitex.Models
         public int? Estatus { get; set; }
         public string? EstatusTexto { get; set; }
 
-        [DisplayName("Fecha ingreso")]
+        [DisplayName("Fecha de ingreso al lote")]
         public DateTime Fecha_ingreso { get; set; }
 
         [DisplayName("Proximo pago tenencia")]
