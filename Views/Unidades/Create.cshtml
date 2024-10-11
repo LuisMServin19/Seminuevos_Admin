@@ -34,7 +34,7 @@
                 </select>
                 <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <label asp-for="Marca" class="control-label"></label>
                 <input asp-for="Marca" class="form-control" Autocomplete="off" />
@@ -54,7 +54,7 @@
                 <input asp-for="Num_placa" class="form-control" Autocomplete="off" />
                 <span asp-validation-for="Num_placa" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <label asp-for="Num_serie" class="control-label"></label>
                 <input asp-for="Num_serie" class="form-control" Autocomplete="off" />
@@ -62,7 +62,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Ano" class="control-label"></label>
-                <input asp-for="Ano" class="form-control" Autocomplete="off" />
+                <input asp-for="Ano" class="form-control" Autocomplete="off" type="number" min="1900" max="2100"
+                    maxlength="4" oninput="this.value=this.value.slice(0,4);" />
                 <span asp-validation-for="Ano" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -157,5 +158,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

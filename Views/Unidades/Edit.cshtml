@@ -62,7 +62,8 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Ano" class="control-label"></label>
-                        <input asp-for="Ano" class="form-control" Autocomplete="off" />
+                        <input asp-for="Ano" class="form-control" Autocomplete="off" type="number" min="1900" max="2100"
+                            maxlength="4" oninput="this.value=this.value.slice(0,4);" />
                         <span asp-validation-for="Ano" class="text-danger"></span>
                     </div>
                     <div class="form-group">
