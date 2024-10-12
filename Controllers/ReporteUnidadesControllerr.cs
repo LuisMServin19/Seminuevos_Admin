@@ -28,7 +28,7 @@ namespace Serfitex.Controllers
         public IActionResult Index()
         {
             string username = HttpContext.Session.GetString("username") ?? "";
-            string fiperfil = "1";
+            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
 
 
             if (string.IsNullOrEmpty(username))

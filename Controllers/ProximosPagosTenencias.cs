@@ -28,7 +28,7 @@ namespace Serfitex.Controllers
 
         public IActionResult Index()
         {
-            string fiperfil = "1";
+            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
             string username = HttpContext.Session.GetString("username") ?? "";
 
             if (string.IsNullOrEmpty(username))
@@ -82,7 +82,7 @@ namespace Serfitex.Controllers
 
         public IActionResult RealizarPagoT(int id)
         {
-            string fiperfil = "1";
+            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
             string username = HttpContext.Session.GetString("username") ?? "";
 
             if (string.IsNullOrEmpty(username))
