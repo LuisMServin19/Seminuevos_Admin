@@ -28,6 +28,8 @@ namespace Serfitex.Models
         public string? Num_serie { get; set; }
 
         [Required(ErrorMessage = "El campo Año es obligatorio.")]
+
+        [DisplayName("Año")]
         public int Ano { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
