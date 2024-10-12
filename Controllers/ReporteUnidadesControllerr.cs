@@ -139,7 +139,7 @@ namespace Serfitex.Controllers
                 }
 
                 // Ruta del archivo CSV
-                string pathTxt = @".\Reporte_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv";
+                string pathTxt = @".\Reporte_unidades_" + DateTime.Now.ToString("yyyyMMdd") + ".csv";
                 System.IO.File.WriteAllText(pathTxt, constructor.ToString());
 
                 var fileName = System.IO.Path.GetFileName(pathTxt);

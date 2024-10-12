@@ -9,13 +9,13 @@ namespace Serfitex.Models
 
         public int Id_unidad { get; set; }
 
-        public string? Modelo { get; set; }
+        public string Modelo { get; set; }
 
         [DisplayName("Fecha tenencia")]
-        public DateTime? Fecha_tenencia { get; set; }
+        public DateTime Fecha_tenencia { get; set; }
 
         [DisplayName("Fecha pago")]
-        public DateTime? Fecha_pago { get; set; }
+        public DateTime Fecha_pago { get; set; }
 
         [DisplayName("Fecha pago")]
         public DateTime? Fech_prox_tenecia { get; set; }
