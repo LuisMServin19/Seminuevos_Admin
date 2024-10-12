@@ -1,0 +1,43 @@
+﻿@model WebApp.Models.login_user
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h1>Editar @Model.usr_name</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <!-- Un solo formulario que engloba todos los campos -->
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ID_USR" />
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="usr_name" class="control-label"></label>
+                        <input asp-for="usr_name" class="form-control" Autocomplete="off" />
+                        <span asp-validation-for="usr_name" class="text-danger"></span>
+                    </div>
+                    
+                </div>
+            </div>
+            </br>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+</br>
+
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
