@@ -156,10 +156,13 @@ namespace Serfitex.Controllers
         public IActionResult Create()
         {
             string username = HttpContext.Session.GetString("username") ?? "";
+            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
-              
+            if (fiperfil != "1")
+                return Redirect("/Unidades/");
+
 
             LoadViewBagEstatus();
 
@@ -258,9 +261,14 @@ namespace Serfitex.Controllers
         public IActionResult Edit(string id)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
+            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
+
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
+
+            if (fiperfil != "1")
+                return Redirect("/Unidades/");
 
             string connectionString = Configuration["BDs:SemiCC"];
 
@@ -414,9 +422,13 @@ namespace Serfitex.Controllers
         public IActionResult Venta(string id)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
+            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
+
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
+            if (fiperfil != "1")
+                return Redirect("/Unidades/");
 
             string connectionString = Configuration["BDs:SemiCC"];
 
