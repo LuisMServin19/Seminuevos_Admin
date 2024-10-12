@@ -20,7 +20,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.usr_name)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.tipo_perfil)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -31,6 +33,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.usr_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipo_perfil)
                 </td>
                 <td>
                     @if (fiperfil == "1")

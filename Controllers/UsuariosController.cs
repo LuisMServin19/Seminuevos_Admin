@@ -39,7 +39,7 @@ namespace Serfitex.Controllers
             {
                 conexion.Open();
 
-                using (var cmd = new MySqlCommand("SELECT * FROM login_user", conexion))
+                using (var cmd = new MySqlCommand("SELECT *,CASE WHEN fiperfil = 1 THEN 'Administrativo' WHEN fiperfil = 2 THEN 'Vendedor' END AS tipo_perfil FROM login_user;", conexion))
                 {
                     using (var cursor = cmd.ExecuteReader())
                     {
@@ -47,7 +47,8 @@ namespace Serfitex.Controllers
                         {
                             var registro = new login_user
                             {
-                                usr_name = cursor["usr_name"].ToString() ?? string.Empty
+                                usr_name = cursor["usr_name"].ToString() ?? string.Empty,
+                                tipo_perfil = cursor["tipo_perfil"].ToString() ?? string.Empty
                             };
 
                             registros.Add(registro);
@@ -58,7 +59,7 @@ namespace Serfitex.Controllers
             return View(registros);
         }
 
-        // GET: Unidades/Create
+        // GET: Usuarios/Create
         public IActionResult Create()
         {
             string username = HttpContext.Session.GetString("username") ?? "";
@@ -74,15 +75,22 @@ namespace Serfitex.Controllers
             return View();
         }
 
-        // POST: Unidades/Create
+        // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(login_user newUniddes)
+        public IActionResult Create(login_user newUsuario)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
+            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
+
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
+
+            if (fiperfil != "1")
+                return Redirect("/Unidades/");
+
+
 
             string connectionString = Configuration["BDs:SemiCC"];
 
@@ -92,22 +100,44 @@ namespace Serfitex.Controllers
                 {
                     conexion.Open();
 
-                        MySqlCommand cmd = new MySqlCommand();
-                        cmd.Connection = conexion;
-                        cmd.CommandType = System.Data.CommandType.Text;
+                    bool exist = false;
+                    MySqlCommand checkColumnCmd = new MySqlCommand("SELECT * FROM login_user WHERE usr_nick = @usr_nick", conexion);
+                    checkColumnCmd.Parameters.AddWithValue("@usr_nick", newUsuario.usr_nick);
 
-                        cmd.CommandText = "INSERT INTO login_user (usr_name) " +
-                                          "VALUES (@usr_name)";
+                    using (MySqlDataReader reader = checkColumnCmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            exist = true;
+                        }
+                    }
 
-                        cmd.Parameters.AddWithValue("@usr_name", newUniddes.usr_name);
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = conexion;
 
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Parameters.AddWithValue("@usr_name", newUsuario.usr_name);
+                    cmd.Parameters.AddWithValue("@usr_nick", newUsuario.usr_nick);
+                    cmd.Parameters.AddWithValue("@usr_pass", newUsuario.usr_pass);
+                    cmd.Parameters.AddWithValue("@fiperfil", newUsuario.fiperfil);
+                    cmd.Parameters.AddWithValue("@usr_active", 1);
+                    cmd.Parameters.AddWithValue("@fecha_alta", DateTime.Now);
+
+                    if (!exist)
+                    {
+                        cmd.CommandText = "INSERT INTO login_user (usr_name,usr_nick,usr_pass,fiperfil,usr_active,fecha_alta) " +
+                                          "VALUES (@usr_name,@usr_nick,@usr_pass,@fiperfil,@usr_active,@fecha_alta)";
                         cmd.ExecuteNonQuery();
-
+                    }
+                    else
+                    {
+                        return View(newUsuario);
+                    }
                 }
                 return RedirectToAction("Index");
             }
 
-            return View(newUniddes);
+            return View(newUsuario);
         }
 
 
