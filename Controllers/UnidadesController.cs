@@ -159,6 +159,7 @@ namespace Serfitex.Controllers
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
+              
 
             LoadViewBagEstatus();
 
