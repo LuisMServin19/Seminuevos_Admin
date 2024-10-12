@@ -39,7 +39,7 @@ namespace Serfitex.Controllers
 
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.Connection = conexion;
-                    cmd.CommandText = "SELECT ID_USR,USR_NAME,USR_NICK,USR_PASS,USR_ACTIVE FROM login_user where USR_NICK = @pfclave and USR_PASS = @pfcpassword AND (ID_USR = 1 OR ID_USR = 20 OR ID_USR = 153);";
+                    cmd.CommandText = "SELECT * FROM login_user where USR_NICK = @pfclave and USR_PASS = @pfcpassword;";
 
                     cmd.Parameters.AddWithValue("@pfclave", login.username);
                     cmd.Parameters["@pfclave"].Direction = ParameterDirection.Input;
@@ -54,10 +54,12 @@ namespace Serfitex.Controllers
                         while (cursor.Read())
                         {
                             string usr_nick = Convert.ToString(cursor["usr_nick"]);
+                            string fiperfil = Convert.ToString(cursor["fiperfil"]);
 
                             usuario = new login_user()
                             {
                                 usr_nick = usr_nick,
+                                fiperfil = fiperfil,
                             };
                         }
                     }
@@ -72,8 +74,9 @@ namespace Serfitex.Controllers
             {
                 HttpContext.Session.SetString("username", login.username);
                 HttpContext.Session.SetString("fiusr", usuario.usr_nick.ToString());
+                HttpContext.Session.SetString("fiperfil", usuario.fiperfil.ToString());
 
-                HttpContext.Session.SetString("conexion", "cetelem");
+                HttpContext.Session.SetString("conexion", "SemiCC");
 
                 return RedirectToAction("Index", "Unidades");
             }
