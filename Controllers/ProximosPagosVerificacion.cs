@@ -13,12 +13,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Serfitex.Controllers
 {
-    public class ProximosPagosVerificacionesController : Controller
+    public class ProximosPagosVerificacionController : Controller
     {
-        private readonly ILogger<ProximosPagosVerificacionesController> _logger;
+        private readonly ILogger<ProximosPagosVerificacionController> _logger;
         private readonly IConfiguration Configuration;
 
-        public ProximosPagosVerificacionesController(ILogger<ProximosPagosVerificacionesController> logger, IConfiguration configuration)
+        public ProximosPagosVerificacionController(ILogger<ProximosPagosVerificacionController> logger, IConfiguration configuration)
         {
             _logger = logger;
             Configuration = configuration;
@@ -36,13 +36,13 @@ namespace Serfitex.Controllers
                 return Redirect("/Unidades/");
 
             string connectionString = Configuration["BDs:SemiCC"];
-            List<ProximosPagosVerificaciones> verificaciones = new List<ProximosPagosVerificaciones>();
+            List<ProximosPagosVerificacion> verificacion = new List<ProximosPagosVerificacion>();
 
             // Obtener la fecha actual y calcular el rango de 3 meses
             DateTime fechaActual = DateTime.Today;
             DateTime fechaLimite = fechaActual.AddMonths(4);
 
-            // Recuperar próximas verificaciones
+            // Recuperar próximas verificacion
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
                 conexion.Open();
@@ -60,7 +60,7 @@ namespace Serfitex.Controllers
                     {
                         DateTime fechaProxVerificacion = cursor["Fech_prox_verificacion"] != DBNull.Value ? Convert.ToDateTime(cursor["Fech_prox_verificacion"]) : DateTime.MinValue;
 
-                        ProximosPagosVerificaciones verificacionItem = new ProximosPagosVerificaciones()
+                        ProximosPagosVerificacion verificacionItem = new ProximosPagosVerificacion()
                         {
                             Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
                             Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty,
@@ -69,12 +69,12 @@ namespace Serfitex.Controllers
                             Fech_prox_verificacion = fechaProxVerificacion,
                             MostrarBoton = fechaProxVerificacion <= fechaLimite // Determina si mostrar el botón
                         };
-                        verificaciones.Add(verificacionItem);
+                        verificacion.Add(verificacionItem);
                     }
                 }
             }
 
-            return View(verificaciones);
+            return View(verificacion);
         }
 
 
@@ -90,7 +90,7 @@ namespace Serfitex.Controllers
                 return Redirect("/Unidades/");
 
             string connectionString = Configuration["BDs:SemiCC"];
-            ProximosPagosVerificaciones verificaciones = new ProximosPagosVerificaciones();
+            ProximosPagosVerificacion verificacion = new ProximosPagosVerificacion();
 
             // Obtener los datos de la unidad por Id_unidad
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
@@ -107,18 +107,18 @@ namespace Serfitex.Controllers
                 {
                     if (reader.Read())
                     {
-                        verificaciones.Id_unidad = Convert.ToInt32(reader["Id_unidad"]);
-                        verificaciones.Modelo = Convert.ToString(reader["Modelo"]);
-                        verificaciones.Fech_prox_verificacion = reader["Fech_prox_verificacion"] != DBNull.Value ? Convert.ToDateTime(reader["Fech_prox_verificacion"]) : DateTime.MinValue;
+                        verificacion.Id_unidad = Convert.ToInt32(reader["Id_unidad"]);
+                        verificacion.Modelo = Convert.ToString(reader["Modelo"]);
+                        verificacion.Fech_prox_verificacion = reader["Fech_prox_verificacion"] != DBNull.Value ? Convert.ToDateTime(reader["Fech_prox_verificacion"]) : DateTime.MinValue;
                     }
                 }
             }
-            verificaciones.Fecha_pago = DateTime.Now;
-            return View(verificaciones); // Enviar el modelo a la vista
+            verificacion.Fecha_pago = DateTime.Now;
+            return View(verificacion); // Enviar el modelo a la vista
         }
 
         [HttpPost]
-        public IActionResult GuardarPago(ProximosPagosVerificaciones model)
+        public IActionResult GuardarPago(ProximosPagosVerificacion model)
         {
             string connectionString = Configuration["BDs:SemiCC"];
 
@@ -126,13 +126,13 @@ namespace Serfitex.Controllers
             {
                 conexion.Open();
 
-                // Primer INSERT en Ta_pago_verificaciones
+                // Primer INSERT en Ta_pago_verificacion
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conexion;
-                cmd.CommandText = @"INSERT INTO Ta_pago_verificaciones (Id_unidad, Fecha_verificaciones, Fecha_pago, Modelo)
-                            VALUES (@Id_unidad, @Fecha_verificaciones, @Fecha_pago, @Modelo)";
+                cmd.CommandText = @"INSERT INTO Ta_pago_verificacion (Id_unidad, Fecha_verificacion, Fecha_pago, Modelo)
+                            VALUES (@Id_unidad, @Fecha_verificacion, @Fecha_pago, @Modelo)";
                 cmd.Parameters.AddWithValue("@Id_unidad", model.Id_unidad);
-                cmd.Parameters.AddWithValue("@Fecha_verificaciones", model.Fech_prox_verificacion);
+                cmd.Parameters.AddWithValue("@Fecha_verificacion", model.Fech_prox_verificacion);
                 cmd.Parameters.AddWithValue("@Fecha_pago", model.Fecha_pago); // Este campo se recibe del formulario
                 cmd.Parameters.AddWithValue("@Modelo", model.Modelo);
                 cmd.ExecuteNonQuery();
@@ -141,7 +141,7 @@ namespace Serfitex.Controllers
                 MySqlCommand updateCmd = new MySqlCommand();
                 updateCmd.Connection = conexion;
                 updateCmd.CommandText = @"UPDATE Unidades 
-                                  SET Fech_prox_verificacion = @NuevaFech_prox_verificacion, Fecha_verificaciones = @Fecha_pago
+                                  SET Fech_prox_verificacion = @NuevaFech_prox_verificacion, Fecha_verificacion = @Fecha_pago
                                   WHERE Id_unidad = @Id_unidad";
                 updateCmd.Parameters.AddWithValue("@NuevaFech_prox_verificacion", model.Fech_prox_verificacion);
                 updateCmd.Parameters.AddWithValue("@Fecha_pago", model.Fecha_pago);
