@@ -78,7 +78,7 @@ namespace Serfitex.Controllers
         }
 
 
-        public IActionResult RealizarPagoT(int id)
+        public IActionResult RealizarPagoV(int id)
         {
             string fiperfil = "1";
             string username = HttpContext.Session.GetString("username") ?? "";

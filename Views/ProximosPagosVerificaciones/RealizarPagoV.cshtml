@@ -1,0 +1,37 @@
+﻿@model Serfitex.Models.ProximosPagosVerificaciones
+
+@{
+    ViewData["Title"] = "Registrar Pago";
+}
+
+<h1>Registrar Pago Verificacion para @Model.Modelo</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="GuardarPago" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Fecha_pago" class="control-label"></label>
+                <input asp-for="Fecha_pago" class="form-control" type="date" required />
+                <span asp-validation-for="Fecha_pago" class="text-danger"></span>
+            </div>
+            </br>
+            <div class="form-group">
+                <label asp-for="Fech_prox_verificacion" class="control-label"></label>
+                <input asp-for="Fech_prox_verificacion" class="form-control" type="date" required />
+                <span asp-validation-for="Fech_prox_verificacion" class="text-danger"></span>
+            </div>
+
+            <!-- Ocultos para enviar el Id_unidad y Modelo -->
+            <input asp-for="Id_unidad" type="hidden" />
+            <input asp-for="Modelo" type="hidden" />
+            </br>
+            <button type="submit" class="btn btn-primary">Guardar Pago</button>
+        </form>
+    </div>
+</div>
+</br>
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
