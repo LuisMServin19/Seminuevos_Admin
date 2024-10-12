@@ -28,15 +28,13 @@ namespace Serfitex.Controllers
         public IActionResult Index()
         {
             string username = HttpContext.Session.GetString("username") ?? "";
-            string usr_active = HttpContext.Session.GetString("1") ?? "";
+            string fiperfil = "1";
 
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
-            else if (usr_active != "1")
-            {
+            if (fiperfil != "1")
                 return Redirect("/Unidades/");
-            }
 
 
             return View(new List<ReporteUnidades>());

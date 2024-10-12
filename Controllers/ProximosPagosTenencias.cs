@@ -24,20 +24,18 @@ namespace Serfitex.Controllers
             Configuration = configuration;
         }
 
-        
+
 
         public IActionResult Index()
         {
-            string usr_active = HttpContext.Session.GetString("1") ?? "";
+            string fiperfil = "1";
             string username = HttpContext.Session.GetString("username") ?? "";
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
 
-            else if (usr_active != "1" )
-        {
-            return Redirect("/Unidades/");
-        }
+            if (fiperfil != "1")
+                return Redirect("/Unidades/");
 
             string connectionString = Configuration["BDs:SemiCC"];
             List<ProximosPagosTenencias> tenencias = new List<ProximosPagosTenencias>();
