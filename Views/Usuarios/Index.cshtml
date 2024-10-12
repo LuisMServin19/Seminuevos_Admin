@@ -10,37 +10,36 @@
 @if (fiperfil == "1")
 {
     <p>
-    <a asp-action="Create" class="btn btn-primary">Agregar Usuario</a>
-</p>
+        <a asp-action="Create" class="btn btn-primary">Agregar Usuario</a>
+    </p>
 }
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.usr_name)
+                @Html.DisplayNameFor(model => model.First().usr_name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.tipo_perfil)
+                @Html.DisplayNameFor(model => model.First().tipo_perfil) <!-- Asegúrate de que esta propiedad exista -->
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < Model.Count(); i++) // Cambiado a Count() para el índice
+        @foreach (var item in Model)
         {
-            var item = Model.ElementAt(i); // Obtiene el item actual del modelo
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.usr_name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.tipo_perfil)
+                    @Html.DisplayFor(modelItem => item.tipo_perfil) <!-- Asegúrate de que esta propiedad exista -->
                 </td>
                 <td>
                     @if (fiperfil == "1")
                     {
-                        <a asp-action="Edit" asp-route-id="@item.ID_USR" class="btn btn-primary">Editar</a>
+                        <a asp-action="Edit" asp-route-ID_USR="@item.ID_USR" class="btn btn-primary">Editar</a>
                     }
                 </td>
             </tr>

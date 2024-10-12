@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
+using Serfitex.Models;
 using System.Data;
 using System.Text;
-using Serfitex.Models;
-using System.IO;
 using WebApp.Models;
 
 namespace Serfitex.Controllers
@@ -19,27 +18,26 @@ namespace Serfitex.Controllers
             Configuration = configuration;
         }
 
+        // Validar sesión
+        private bool IsUserAuthenticated(out string username, out string fiperfil)
+        {
+            username = HttpContext.Session.GetString("username") ?? "";
+            fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
+            return !string.IsNullOrEmpty(username) && fiperfil == "1";
+        }
+
         public IActionResult Index()
         {
-            string username = HttpContext.Session.GetString("username") ?? "";
-            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
-
-
-            if (string.IsNullOrEmpty(username))
+            if (!IsUserAuthenticated(out string username, out string fiperfil))
                 return RedirectToAction("Index", "LogIn");
 
-            if (fiperfil != "1")
-                return Redirect("/Unidades/");
-
             string connectionString = Configuration["BDs:SemiCC"];
-
             var registros = new List<login_user>();
 
             using (var conexion = new MySqlConnection(connectionString))
             {
                 conexion.Open();
-
-                using (var cmd = new MySqlCommand("SELECT *,CASE WHEN fiperfil = 1 THEN 'Administrativo' WHEN fiperfil = 2 THEN 'Vendedor' END AS tipo_perfil FROM login_user;", conexion))
+                using (var cmd = new MySqlCommand("SELECT *, CASE WHEN fiperfil = 1 THEN 'Administrativo' WHEN fiperfil = 2 THEN 'Vendedor' END AS tipo_perfil FROM login_user;", conexion))
                 {
                     using (var cursor = cmd.ExecuteReader())
                     {
@@ -47,8 +45,9 @@ namespace Serfitex.Controllers
                         {
                             var registro = new login_user
                             {
-                                usr_name = cursor["usr_name"].ToString() ?? string.Empty,
-                                tipo_perfil = cursor["tipo_perfil"].ToString() ?? string.Empty
+                                ID_USR = Convert.ToInt32(cursor["ID_USR"]),
+                                usr_name = cursor["usr_name"].ToString(),
+                                tipo_perfil = cursor["tipo_perfil"].ToString()
                             };
 
                             registros.Add(registro);
@@ -62,15 +61,8 @@ namespace Serfitex.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
-            string username = HttpContext.Session.GetString("username") ?? "";
-            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
-
-            if (string.IsNullOrEmpty(username))
+            if (!IsUserAuthenticated(out _, out _))
                 return RedirectToAction("Index", "LogIn");
-            if (fiperfil != "1")
-                return Redirect("/Unidades/");
-
-
 
             return View();
         }
@@ -80,93 +72,54 @@ namespace Serfitex.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(login_user newUsuario)
         {
-            string username = HttpContext.Session.GetString("username") ?? "";
-            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
-
-
-            if (string.IsNullOrEmpty(username))
+            if (!IsUserAuthenticated(out string username, out string fiperfil))
                 return RedirectToAction("Index", "LogIn");
-
-            if (fiperfil != "1")
-                return Redirect("/Unidades/");
-
-
-
-            string connectionString = Configuration["BDs:SemiCC"];
 
             if (ModelState.IsValid)
             {
+                string connectionString = Configuration["BDs:SemiCC"];
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
                 {
                     conexion.Open();
 
-                    bool exist = false;
-                    MySqlCommand checkColumnCmd = new MySqlCommand("SELECT * FROM login_user WHERE usr_nick = @usr_nick", conexion);
+                    MySqlCommand checkColumnCmd = new MySqlCommand("SELECT COUNT(*) FROM login_user WHERE usr_nick = @usr_nick", conexion);
                     checkColumnCmd.Parameters.AddWithValue("@usr_nick", newUsuario.usr_nick);
 
-                    using (MySqlDataReader reader = checkColumnCmd.ExecuteReader())
+                    int userCount = Convert.ToInt32(checkColumnCmd.ExecuteScalar());
+                    if (userCount == 0)
                     {
-                        if (reader.HasRows)
-                        {
-                            exist = true;
-                        }
-                    }
-
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = conexion;
-
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.Parameters.AddWithValue("@usr_name", newUsuario.usr_name);
-                    cmd.Parameters.AddWithValue("@usr_nick", newUsuario.usr_nick);
-                    cmd.Parameters.AddWithValue("@usr_pass", newUsuario.usr_pass);
-                    cmd.Parameters.AddWithValue("@fiperfil", newUsuario.fiperfil);
-                    cmd.Parameters.AddWithValue("@usr_active", 1);
-                    cmd.Parameters.AddWithValue("@fecha_alta", DateTime.Now);
-
-                    if (!exist)
-                    {
-                        cmd.CommandText = "INSERT INTO login_user (usr_name,usr_nick,usr_pass,fiperfil,usr_active,fecha_alta) " +
-                                          "VALUES (@usr_name,@usr_nick,@usr_pass,@fiperfil,@usr_active,@fecha_alta)";
+                        MySqlCommand cmd = new MySqlCommand("INSERT INTO login_user (usr_name, usr_nick, usr_pass, fiperfil, usr_active, fecha_alta) VALUES (@usr_name, @usr_nick, @usr_pass, @fiperfil, 1, @fecha_alta)", conexion);
+                        cmd.Parameters.AddWithValue("@usr_name", newUsuario.usr_name);
+                        cmd.Parameters.AddWithValue("@usr_nick", newUsuario.usr_nick);
+                        cmd.Parameters.AddWithValue("@usr_pass", newUsuario.usr_pass);
+                        cmd.Parameters.AddWithValue("@fiperfil", newUsuario.fiperfil);
+                        cmd.Parameters.AddWithValue("@fecha_alta", DateTime.Now);
                         cmd.ExecuteNonQuery();
+
+                        return RedirectToAction("Index");
                     }
                     else
                     {
-                        return View(newUsuario);
+                        ModelState.AddModelError("", "El nombre de usuario ya existe.");
                     }
                 }
-                return RedirectToAction("Index");
             }
-
             return View(newUsuario);
         }
 
-
-
-        // GET: Unidades/Edit/5
-        public IActionResult Edit(string ID_USR)
+        // GET: Usuarios/Edit/5
+        public IActionResult Edit(int ID_USR)
         {
-            string username = HttpContext.Session.GetString("username") ?? "";
-            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
-
-
-            if (string.IsNullOrEmpty(username))
+            if (!IsUserAuthenticated(out _, out _))
                 return RedirectToAction("Index", "LogIn");
 
-            if (fiperfil != "1")
-                return Redirect("/Unidades/");
-
             string connectionString = Configuration["BDs:SemiCC"];
-
-            login_user? Login_user = null;
+            login_user Login_user = null;
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
                 conexion.Open();
-
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conexion;
-                cmd.CommandText = "SELECT * FROM login_user WHERE ID_USR = @ID_USR";
-                cmd.CommandType = System.Data.CommandType.Text;
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM login_user WHERE ID_USR = @ID_USR", conexion);
                 cmd.Parameters.AddWithValue("@ID_USR", ID_USR);
 
                 using (var cursor = cmd.ExecuteReader())
@@ -175,8 +128,12 @@ namespace Serfitex.Controllers
                     {
                         Login_user = new login_user()
                         {
-                            usr_name = Convert.ToString(cursor["usr_name"]),
-
+                            ID_USR = Convert.ToInt32(cursor["ID_USR"]),
+                            usr_name = cursor["usr_name"].ToString(),
+                            usr_nick = cursor["usr_nick"].ToString(),
+                            usr_pass = cursor["usr_pass"].ToString(),
+                            fiperfil = cursor["fiperfil"].ToString(),
+                            usr_active = cursor["usr_active"] != DBNull.Value ? (bool?)Convert.ToBoolean(cursor["usr_active"]) : null
                         };
                     }
                 }
@@ -190,15 +147,16 @@ namespace Serfitex.Controllers
             return View(Login_user);
         }
 
-        // POST: Unidades/Edit/5
+        // POST: Usuarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int ID_USR, login_user updatedlogin_user)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
+            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
 
             if (string.IsNullOrEmpty(username))
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index", "LogIn");
 
             if (!ModelState.IsValid)
                 return View(updatedlogin_user);
@@ -211,16 +169,79 @@ namespace Serfitex.Controllers
                 {
                     await conexion.OpenAsync();
 
-                    // Actualizar los datos de la unidad
-                    string query = @"UPDATE login_user 
-                             SET usr_name = @usr_name, Tipo
-                             WHERE ID_USR = @ID_USR";
-
-                    using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
+                    // Obtener el usuario actual de la base de datos
+                    login_user existingUser = null;
+                    string selectQuery = "SELECT * FROM login_user WHERE ID_USR = @ID_USR";
+                    using (MySqlCommand selectCmd = new MySqlCommand(selectQuery, conexion))
                     {
-                        updateCmd.Parameters.AddWithValue("@usr_name", updatedlogin_user.usr_name);
-                        updateCmd.Parameters.AddWithValue("@ID_USR", updatedlogin_user.ID_USR);
+                        selectCmd.Parameters.AddWithValue("@ID_USR", ID_USR);
+                        using (var reader = await selectCmd.ExecuteReaderAsync())
+                        {
+                            if (reader.Read())
+                            {
+                                existingUser = new login_user()
+                                {
+                                    ID_USR = Convert.ToInt32(reader["ID_USR"]),
+                                    usr_name = reader["usr_name"].ToString(),
+                                    usr_nick = reader["usr_nick"].ToString(),
+                                    usr_pass = reader["usr_pass"].ToString(),
+                                    fiperfil = reader["fiperfil"].ToString(),
+                                    usr_active = reader["usr_active"] != DBNull.Value ? (bool?)Convert.ToBoolean(reader["usr_active"]) : null
+                                };
+                            }
+                        }
+                    }
 
+                    // Verificar si se encontró el usuario
+                    if (existingUser == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Crear una lista de cambios
+                    var updates = new List<string>();
+                    var parameters = new List<MySqlParameter>();
+
+                    // Comparar los valores y construir la consulta de actualización
+                    if (updatedlogin_user.usr_name != existingUser.usr_name)
+                    {
+                        updates.Add("usr_name = @usr_name");
+                        parameters.Add(new MySqlParameter("@usr_name", updatedlogin_user.usr_name));
+                    }
+                    if (updatedlogin_user.usr_nick != existingUser.usr_nick)
+                    {
+                        updates.Add("usr_nick = @usr_nick");
+                        parameters.Add(new MySqlParameter("@usr_nick", updatedlogin_user.usr_nick));
+                    }
+                    if (updatedlogin_user.usr_pass != existingUser.usr_pass)
+                    {
+                        updates.Add("usr_pass = @usr_pass");
+                        parameters.Add(new MySqlParameter("@usr_pass", updatedlogin_user.usr_pass));
+                    }
+                    if (updatedlogin_user.fiperfil != existingUser.fiperfil)
+                    {
+                        updates.Add("fiperfil = @fiperfil");
+                        parameters.Add(new MySqlParameter("@fiperfil", updatedlogin_user.fiperfil));
+                    }
+                    if (updatedlogin_user.usr_active != existingUser.usr_active)
+                    {
+                        updates.Add("usr_active = @usr_active");
+                        parameters.Add(new MySqlParameter("@usr_active", updatedlogin_user.usr_active));
+                    }
+
+                    // Si no hay cambios, redirigir a la vista de índice
+                    if (updates.Count == 0)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    // Construir la consulta de actualización
+                    string updateQuery = $"UPDATE login_user SET {string.Join(", ", updates)} WHERE ID_USR = @ID_USR";
+                    parameters.Add(new MySqlParameter("@ID_USR", ID_USR));
+
+                    using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, conexion))
+                    {
+                        updateCmd.Parameters.AddRange(parameters.ToArray());
                         await updateCmd.ExecuteNonQueryAsync();
                     }
                 }
@@ -229,9 +250,14 @@ namespace Serfitex.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "Ocurrió un error al actualizar la unidad: " + ex.Message);
-                return View(updatedlogin_user);
+                ModelState.AddModelError("", "Ocurrió un error al actualizar el usuario: " + ex.Message);
+                return View(updatedlogin_user); // Este retorno ya está cubierto, pero aquí se mantiene para mostrar el error
             }
+
+            // Si llegamos aquí, significa que algo falló en el bloque try-catch
+            // Asegúrate de devolver una acción en caso de error no manejado
+            return View(updatedlogin_user);
         }
+
     }
 }
