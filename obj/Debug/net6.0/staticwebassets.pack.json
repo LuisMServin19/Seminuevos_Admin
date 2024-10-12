@@ -89,6 +89,38 @@
       "PackagePath": "staticwebassets/images/SEMINUEVOS.png"
     },
     {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/1/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/1/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/2/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/2/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/3/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/3/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/4/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/4/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/5/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/5/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/6/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/6/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/7/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/7/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/8/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/8/Imagen_1.jpg"
+    },
+    {
       "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/1.jpg",
       "PackagePath": "staticwebassets/images/avatar/1.jpg"
     },

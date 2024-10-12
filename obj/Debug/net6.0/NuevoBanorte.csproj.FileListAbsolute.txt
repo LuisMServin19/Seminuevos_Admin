@@ -903,7 +903,6 @@
 /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/NuevoBanorte.MvcApplicationPartsAssemblyInfo.cache
 /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/NuevoBanorte.RazorAssemblyInfo.cache
 /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/NuevoBanorte.RazorAssemblyInfo.cs
-/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/NuevoBanorte.sourcelink.json
 /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/staticwebassets.build.json
 /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/staticwebassets.development.json
 /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/staticwebassets/msbuild.NuevoBanorte.Microsoft.AspNetCore.StaticWebAssets.props
@@ -921,3 +920,4 @@
 /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/NuevoBanorte.pdb
 /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/NuevoBanorte.genruntimeconfig.cache
 /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/ref/NuevoBanorte.dll
+/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/NuevoBanorte.sourcelink.json
