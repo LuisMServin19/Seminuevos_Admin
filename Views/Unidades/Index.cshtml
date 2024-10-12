@@ -23,7 +23,7 @@
             @* <th>
             @Html.DisplayNameFor(model => model.Tipo)
             </th> *@
-            <th>
+            <th class="d-none d-md-table-cell">
                 @Html.DisplayNameFor(model => model.Marca)
             </th>
             @* <th>
@@ -52,7 +52,7 @@
                 @* <td>
             @Html.DisplayFor(modelItem => item.Tipo)
             </td> *@
-                <td>
+                <td class="d-none d-md-table-cell">
                     @Html.DisplayFor(modelItem => item.Marca)
                 </td>
                 @* <td>
@@ -72,7 +72,6 @@
                     @if (fiperfil == "1")
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id_unidad" class="btn btn-primary">Editar</a>
-
                         <a asp-action="Venta" asp-route-id="@item.Id_unidad" class="btn btn-primary">Venta</a>
                     }
                 </td>
