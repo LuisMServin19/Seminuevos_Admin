@@ -141,9 +141,10 @@ namespace Serfitex.Controllers
                 MySqlCommand updateCmd = new MySqlCommand();
                 updateCmd.Connection = conexion;
                 updateCmd.CommandText = @"UPDATE Unidades 
-                                  SET Fech_prox_verificacion = @NuevaFech_prox_verificacion 
+                                  SET Fech_prox_verificacion = @NuevaFech_prox_verificacion, Fecha_verificaciones = @Fecha_pago
                                   WHERE Id_unidad = @Id_unidad";
                 updateCmd.Parameters.AddWithValue("@NuevaFech_prox_verificacion", model.Fech_prox_verificacion);
+                updateCmd.Parameters.AddWithValue("@Fecha_pago", model.Fecha_pago);
                 updateCmd.Parameters.AddWithValue("@Id_unidad", model.Id_unidad);
                 updateCmd.ExecuteNonQuery();
             }
