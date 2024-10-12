@@ -80,6 +80,15 @@ namespace Serfitex.Controllers
 
         public IActionResult RealizarPagoT(int id)
         {
+            string fiperfil = "1";
+            string username = HttpContext.Session.GetString("username") ?? "";
+
+            if (string.IsNullOrEmpty(username))
+                return RedirectToAction("Index", "LogIn");
+
+            if (fiperfil != "1")
+                return Redirect("/Unidades/");
+
             string connectionString = Configuration["BDs:SemiCC"];
             ProximosPagosVerificaciones verificaciones = new ProximosPagosVerificaciones();
 
