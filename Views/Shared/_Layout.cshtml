@@ -95,7 +95,17 @@
                         <a href="Unidades">Unidades</a>
                     </li>
                 </ul>
-
+                <ul>
+                    @if (Context.Request.HttpContext.Session.GetString("fiperfil") == "1")
+                    {
+                        <li class="dropdown">
+                            <a href="#">Precio Unidades</a>
+                            <ul class="submenu">
+                                <li><a href="PrecioUnidades">Unidades</a></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
                 <ul>
                     @if (Context.Request.HttpContext.Session.GetString("fiperfil") == "1")
                     {
@@ -126,7 +136,7 @@
                         </li>
                     }
                 </ul>
-                <ul>
+                @* <ul>
                     @if (Context.Request.HttpContext.Session.GetString("fiperfil") == "1")
                     {
                         <li class="dropdown">
@@ -136,7 +146,7 @@
                             </ul>
                         </li>
                     }
-                </ul>
+                </ul> *@
                 <ul>
                     @Html.Raw(Context.Request.HttpContext.Session.GetString("menu") ?? "")
                     <li>

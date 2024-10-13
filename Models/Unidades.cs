@@ -59,6 +59,11 @@ namespace Serfitex.Models
         
         [Range(0.01, double.MaxValue, ErrorMessage = "El campo Precio debe ser un número")]
         [Required(ErrorMessage = "Campo obligatorio")]
+        public decimal Precio_compra { get; set; }
+        public decimal Gastos { get; set; }
+        public decimal Total_compra_gastos { get; set; }
+
+        [DisplayName("Precio venta")]
         public decimal Precio { get; set; }
         
         [Required(ErrorMessage = "Campo obligatorio")]
