@@ -101,6 +101,7 @@ namespace Serfitex.Models
         public string? Correo { get; set; }
         public decimal Gasto { get; set; }
         public string? Concepto { get; set; }
+        [DisplayName("Fecha Gasto")]
         public DateTime Fecha_gasto { get; set; }
 
     }

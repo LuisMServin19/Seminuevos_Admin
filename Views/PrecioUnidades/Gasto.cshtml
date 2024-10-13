@@ -1,0 +1,40 @@
+﻿@model Serfitex.Models.GastoViewModel
+
+@{
+    ViewData["Title"] = "Gasto User";
+}
+
+<h1>Gasto de @Model.Unidad.Modelo</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Gasto">
+            <input type="hidden" asp-for="Unidad.Id_unidad" />
+            <div class="form-group">
+                <label asp-for="Gasto.Gastos" class="control-label"></label>
+                <input asp-for="Gasto.Gastos" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Gasto.Gastos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gasto.Concepto" class="control-label"></label>
+                <input asp-for="Gasto.Concepto" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="Gasto.Concepto" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
