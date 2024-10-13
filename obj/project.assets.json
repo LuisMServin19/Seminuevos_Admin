@@ -12087,11 +12087,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/NuevoBanorte.csproj",
+      "projectUniqueName": "/Users/luisservin/Downloads/Seminuevos_Admin/NuevoBanorte.csproj",
       "projectName": "NuevoBanorte",
-      "projectPath": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/NuevoBanorte.csproj",
+      "projectPath": "/Users/luisservin/Downloads/Seminuevos_Admin/NuevoBanorte.csproj",
       "packagesPath": "/Users/luisservin/.nuget/packages/",
-      "outputPath": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/",
+      "outputPath": "/Users/luisservin/Downloads/Seminuevos_Admin/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/luisservin/.nuget/NuGet/NuGet.Config"

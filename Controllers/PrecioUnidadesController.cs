@@ -12,10 +12,13 @@ namespace Serfitex.Controllers
         private readonly ILogger<PrecioUnidadesController> _logger;
         private readonly IConfiguration Configuration;
 
-        public PrecioUnidadesController(ILogger<PrecioUnidadesController> logger, IConfiguration configuration)
+        private readonly NuevoBanorteContext _context;
+
+        public PrecioUnidadesController(ILogger<PrecioUnidadesController> logger, IConfiguration configuration, NuevoBanorteContext context)
         {
             _logger = logger;
             Configuration = configuration;
+            _context = context; // Asigna el contexto inyectado a la variable de instancia
         }
 
         public IActionResult Index()
@@ -113,8 +116,10 @@ namespace Serfitex.Controllers
 
 
         // GET: Unidades/Gasto
-        public IActionResult Gasto(int? id)
+        public IActionResult Gasto(int id)
         {
+            var unidad = _context.Unidades.FirstOrDefault(u => u.Id_unidad == id);
+
             string username = HttpContext.Session.GetString("username") ?? "";
             string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
 
@@ -123,9 +128,14 @@ namespace Serfitex.Controllers
             if (fiperfil != "1")
                 return Redirect("/Unidades/");
 
+            if (unidad == null) // Manejar el caso donde no se encuentra la unidad
+            {
+                return NotFound(); // o redirigir a otra acción
+            }
 
-            return View();
+            return View(unidad); // Pasar el objeto unidad a la vista
         }
+
 
         // POST: Unidades/Gasto
         [HttpPost]
@@ -153,7 +163,7 @@ namespace Serfitex.Controllers
                     cmd.CommandText = "INSERT INTO Ta_gasto (Id_unidad, Gastos, Concepto, Fecha_gasto) " +
                                       "VALUES (@Id_unidad, @Gastos, @Concepto, @Fecha_gasto)";
 
-                    cmd.Parameters.AddWithValue("@Id_unidad", id);
+                    cmd.Parameters.AddWithValue("@Id_unidad", id); // Asegúrate de que id tiene un valor
                     cmd.Parameters.AddWithValue("@Gastos", newGasto.Gastos);
                     cmd.Parameters.AddWithValue("@Concepto", newGasto.Concepto);
                     cmd.Parameters.AddWithValue("@Fecha_gasto", DateTime.Now); // Asegúrate de que este es el nombre correcto en la base de datos
@@ -164,8 +174,11 @@ namespace Serfitex.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(newGasto);
+            // Si ModelState no es válido, busca la unidad de nuevo para pasarla a la vista
+            var unidad = _context.Unidades.FirstOrDefault(u => u.Id_unidad == id);
+            return View(unidad); // Pasar el modelo de unidad a la vista para mostrar el error
         }
+
 
     }
 }
