@@ -79,6 +79,10 @@ namespace Serfitex.Models
         public DateTime? Fecha_venta { get; set; }
         public string? Vendedor { get; set; }
         public string? Comprador { get; set; }
+        public int? Celular { get; set; }
+        public int? Tel_casa { get; set; }
+        public int? Tel_oficina { get; set; }
+        public string? Correo { get; set; }
 
     }
 }
