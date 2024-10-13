@@ -1,29 +1,31 @@
-﻿@model Serfitex.Models.GastoViewModel
+﻿@model Serfitex.Models.Unidades
 
 @{
-    ViewData["Title"] = "Gasto User";
+    ViewData["Title"] = "Agregar Gasto";
 }
 
-<h1>Gasto de @Model.Unidad.Modelo</h1>
+<h1>Agregar Gasto</h1>
 
+<h4>Unidades</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Gasto">
-            <input type="hidden" asp-for="Unidad.Id_unidad" />
+        <form asp-action="Gasto" method="post">
+            <input type="hidden" asp-for="Id_unidad" value="@Model.Id_unidad" /> <!-- Asegúrate de que esto está definido en tu modelo -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Gasto.Gastos" class="control-label"></label>
-                <input asp-for="Gasto.Gastos" class="form-control" type="number" step="0.01" />
-                <span asp-validation-for="Gasto.Gastos" class="text-danger"></span>
+                <label asp-for="Concepto" class="control-label"></label>
+                <input asp-for="Concepto" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="Concepto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Gasto.Concepto" class="control-label"></label>
-                <input asp-for="Gasto.Concepto" class="form-control" Autocomplete="off" />
-                <span asp-validation-for="Gasto.Concepto" class="text-danger"></span>
+                <label asp-for="Gastos" class="control-label"></label>
+                <input asp-for="Gastos" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Gastos" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <input type="submit" value="Agregar" class="btn btn-primary" />
             </div>
         </form>
     </div>

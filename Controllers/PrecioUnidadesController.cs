@@ -112,8 +112,8 @@ namespace Serfitex.Controllers
         }
 
 
-        // GET: Unidades/Gasto/5
-        public IActionResult Gasto(string id)
+        // GET: Unidades/Gasto
+        public IActionResult Gasto(int? id)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
             string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
@@ -123,80 +123,49 @@ namespace Serfitex.Controllers
             if (fiperfil != "1")
                 return Redirect("/Unidades/");
 
-            string connectionString = Configuration["BDs:SemiCC"];
 
-            var Ta_gastos = new GastoViewModel();
-
-            using (MySqlConnection conexion = new MySqlConnection(connectionString))
-            {
-                conexion.Open();
-
-                // Consulta para obtener la unidad
-                MySqlCommand cmdUnidad = new MySqlCommand();
-                cmdUnidad.Connection = conexion;
-                cmdUnidad.CommandText = "SELECT * FROM Unidades WHERE Id_unidad = @Id_unidad";
-                cmdUnidad.CommandType = System.Data.CommandType.Text;
-                cmdUnidad.Parameters.AddWithValue("@Id_unidad", id);
-
-                using (var cursor = cmdUnidad.ExecuteReader())
-                {
-                    if (cursor.Read())
-                    {
-                        Ta_gastos.Unidad = new Unidades()
-                        {
-                            Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
-                            Modelo = Convert.ToString(cursor["Modelo"]),
-                        };
-                    }
-                }
-            }
-
-            return View(Ta_gastos);
+            return View();
         }
 
-        // POST: Unidades/Gasto/5
+        // POST: Unidades/Gasto
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Gasto(string id, GastoViewModel Ta_gastos)
+        public IActionResult Gasto(int? id, Unidades newGasto)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
 
-            if (!ModelState.IsValid)
-            {
-                return View(Ta_gastos);
-            }
-
             string connectionString = Configuration["BDs:SemiCC"];
 
-            try
+            if (ModelState.IsValid)
             {
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
                 {
                     conexion.Open();
 
-                    string insertGastoQuery = "INSERT INTO Ta_gastos (Id_unidad, Fecha_gasto, Gastos, Concepto) VALUES (@Id_unidad, @Fecha_gasto, @Gastos, @Concepto)";
-                    using (MySqlCommand insertCmd = new MySqlCommand(insertGastoQuery, conexion))
-                    {
-                        insertCmd.Parameters.AddWithValue("@Id_unidad", id);
-                        insertCmd.Parameters.AddWithValue("@Fecha_gasto", DateTime.Now);
-                        insertCmd.Parameters.AddWithValue("@Gastos", Ta_gastos.Gasto.Gastos);
-                        insertCmd.Parameters.AddWithValue("@Concepto", Ta_gastos.Gasto.Concepto);
-                        insertCmd.ExecuteNonQuery();
-                    }
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = conexion;
+                    cmd.CommandType = System.Data.CommandType.Text;
+
+                    // Ingresar datos de la unidad sin especificar el Id_unidad
+                    cmd.CommandText = "INSERT INTO Ta_gasto (Id_unidad, Gastos, Concepto, Fecha_gasto) " +
+                                      "VALUES (@Id_unidad, @Gastos, @Concepto, @Fecha_gasto)";
+
+                    cmd.Parameters.AddWithValue("@Id_unidad", id);
+                    cmd.Parameters.AddWithValue("@Gastos", newGasto.Gastos);
+                    cmd.Parameters.AddWithValue("@Concepto", newGasto.Concepto);
+                    cmd.Parameters.AddWithValue("@Fecha_gasto", DateTime.Now); // Asegúrate de que este es el nombre correcto en la base de datos
+
+                    cmd.ExecuteNonQuery();
                 }
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
-            {
-                ModelState.AddModelError(string.Empty, "An error occurred while saving the expense.");
-                return View(Ta_gastos);
-            }
-        }
 
+            return View(newGasto);
+        }
 
     }
 }
