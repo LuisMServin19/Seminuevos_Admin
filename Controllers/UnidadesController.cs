@@ -480,6 +480,12 @@ namespace Serfitex.Controllers
                             Fecha_venta = cursorVenta["Fecha_venta"] != DBNull.Value ? Convert.ToDateTime(cursorVenta["Fecha_venta"]) : (DateTime?)null,
                             Vendedor = cursorVenta["Vendedor"] != DBNull.Value ? Convert.ToString(cursorVenta["Vendedor"]) : string.Empty,
                             Comprador = cursorVenta["Comprador"] != DBNull.Value ? Convert.ToString(cursorVenta["Comprador"]) : string.Empty,
+                            Celular = Convert.ToInt32(cursorVenta["Celular"]),
+                            Tel_casa = Convert.ToInt32(cursorVenta["Tel_casa"]),
+                            Tel_oficina = Convert.ToInt32(cursorVenta["Tel_oficina"]),
+                            Correo = cursorVenta["Correo"] != DBNull.Value ? Convert.ToString(cursorVenta["Correo"]) : string.Empty,
+
+
                         };
                     }
                 }
@@ -491,6 +497,10 @@ namespace Serfitex.Controllers
                 ViewBag.FechaVenta = venta.Fecha_venta;
                 ViewBag.Vendedor = venta.Vendedor;
                 ViewBag.Comprador = venta.Comprador;
+                ViewBag.Celular = venta.Celular;
+                ViewBag.Tel_casa = venta.Tel_casa;
+                ViewBag.Tel_oficina = venta.Tel_oficina;
+                ViewBag.Correo = venta.Correo;
             }
 
             return View(unidades);
@@ -547,14 +557,18 @@ namespace Serfitex.Controllers
                         updateCmd.ExecuteNonQuery();
                     }
 
-                    string insertVentaQuery = "INSERT INTO ta_venta (Id_unidad, Fecha_venta, Vendedor, Comprador, Modelo) VALUES (@Id_unidad, @Fecha_venta, @Vendedor, @Comprador, @Modelo)";
+                    string insertVentaQuery = "INSERT INTO ta_venta (Id_unidad, Fecha_venta, Vendedor, Comprador, Modelo,Celular,Tel_casa,Tel_oficina,Correo) VALUES (@Id_unidad, @Fecha_venta, @Vendedor, @Comprador, @Modelo,@Celular,@Tel_casa,@Tel_oficina,@Correo)";
                     using (MySqlCommand insertCmd = new MySqlCommand(insertVentaQuery, conexion))
                     {
                         insertCmd.Parameters.AddWithValue("@Id_unidad", id);
                         insertCmd.Parameters.AddWithValue("@Fecha_venta", nuevaVenta.Fecha_venta);
                         insertCmd.Parameters.AddWithValue("@Vendedor", nuevaVenta.Vendedor);
                         insertCmd.Parameters.AddWithValue("@Comprador", nuevaVenta.Comprador);
-                        insertCmd.Parameters.AddWithValue("@Modelo", unidad?.Modelo); // Here we use the retrieved Modelo
+                        insertCmd.Parameters.AddWithValue("@Modelo", unidad?.Modelo);
+                        insertCmd.Parameters.AddWithValue("@Celular", nuevaVenta.Celular);
+                        insertCmd.Parameters.AddWithValue("@Tel_casa", nuevaVenta.Tel_casa);
+                        insertCmd.Parameters.AddWithValue("@Tel_oficina", nuevaVenta.Tel_oficina);
+                        insertCmd.Parameters.AddWithValue("@Correo", nuevaVenta.Correo);
                         insertCmd.ExecuteNonQuery();
                     }
                 }

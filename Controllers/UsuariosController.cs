@@ -58,206 +58,238 @@ namespace Serfitex.Controllers
             return View(registros);
         }
 
-        // GET: Usuarios/Create
+        // GET: Unidades/Create
         public IActionResult Create()
-        {
-            if (!IsUserAuthenticated(out _, out _))
-                return RedirectToAction("Index", "LogIn");
-
-            return View();
-        }
-
-        // POST: Usuarios/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(login_user newUsuario)
-        {
-            if (!IsUserAuthenticated(out string username, out string fiperfil))
-                return RedirectToAction("Index", "LogIn");
-
-            if (ModelState.IsValid)
-            {
-                string connectionString = Configuration["BDs:SemiCC"];
-                using (MySqlConnection conexion = new MySqlConnection(connectionString))
-                {
-                    conexion.Open();
-
-                    MySqlCommand checkColumnCmd = new MySqlCommand("SELECT COUNT(*) FROM login_user WHERE usr_nick = @usr_nick", conexion);
-                    checkColumnCmd.Parameters.AddWithValue("@usr_nick", newUsuario.usr_nick);
-
-                    int userCount = Convert.ToInt32(checkColumnCmd.ExecuteScalar());
-                    if (userCount == 0)
-                    {
-                        MySqlCommand cmd = new MySqlCommand("INSERT INTO login_user (usr_name, usr_nick, usr_pass, fiperfil, usr_active, fecha_alta) VALUES (@usr_name, @usr_nick, @usr_pass, @fiperfil, 1, @fecha_alta)", conexion);
-                        cmd.Parameters.AddWithValue("@usr_name", newUsuario.usr_name);
-                        cmd.Parameters.AddWithValue("@usr_nick", newUsuario.usr_nick);
-                        cmd.Parameters.AddWithValue("@usr_pass", newUsuario.usr_pass);
-                        cmd.Parameters.AddWithValue("@fiperfil", newUsuario.fiperfil);
-                        cmd.Parameters.AddWithValue("@fecha_alta", DateTime.Now);
-                        cmd.ExecuteNonQuery();
-
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "El nombre de usuario ya existe.");
-                    }
-                }
-            }
-            return View(newUsuario);
-        }
-
-        // GET: Usuarios/Edit/5
-        public IActionResult Edit(int ID_USR)
-        {
-            if (!IsUserAuthenticated(out _, out _))
-                return RedirectToAction("Index", "LogIn");
-
-            string connectionString = Configuration["BDs:SemiCC"];
-            login_user Login_user = null;
-
-            using (MySqlConnection conexion = new MySqlConnection(connectionString))
-            {
-                conexion.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM login_user WHERE ID_USR = @ID_USR", conexion);
-                cmd.Parameters.AddWithValue("@ID_USR", ID_USR);
-
-                using (var cursor = cmd.ExecuteReader())
-                {
-                    if (cursor.Read())
-                    {
-                        Login_user = new login_user()
-                        {
-                            ID_USR = Convert.ToInt32(cursor["ID_USR"]),
-                            usr_name = cursor["usr_name"].ToString(),
-                            usr_nick = cursor["usr_nick"].ToString(),
-                            usr_pass = cursor["usr_pass"].ToString(),
-                            fiperfil = cursor["fiperfil"].ToString(),
-                            usr_active = cursor["usr_active"] != DBNull.Value ? (bool?)Convert.ToBoolean(cursor["usr_active"]) : null
-                        };
-                    }
-                }
-            }
-
-            if (Login_user == null)
-            {
-                return NotFound();
-            }
-
-            return View(Login_user);
-        }
-
-        // POST: Usuarios/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int ID_USR, login_user updatedlogin_user)
         {
             string username = HttpContext.Session.GetString("username") ?? "";
             string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
 
             if (string.IsNullOrEmpty(username))
                 return RedirectToAction("Index", "LogIn");
+            if (fiperfil != "1")
+                return Redirect("/Unidades/");
 
-            if (!ModelState.IsValid)
-                return View(updatedlogin_user);
+
+
+            return View();
+        }
+
+        // POST: Unidades/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(login_user newUniddes)
+        {
+            string username = HttpContext.Session.GetString("username") ?? "";
+
+            if (string.IsNullOrEmpty(username))
+                return RedirectToAction("Index", "LogIn");
 
             string connectionString = Configuration["BDs:SemiCC"];
 
-            try
+            if (ModelState.IsValid)
             {
                 using (MySqlConnection conexion = new MySqlConnection(connectionString))
                 {
-                    await conexion.OpenAsync();
+                    conexion.Open();
 
-                    // Obtener el usuario actual de la base de datos
-                    login_user existingUser = null;
-                    string selectQuery = "SELECT * FROM login_user WHERE ID_USR = @ID_USR";
-                    using (MySqlCommand selectCmd = new MySqlCommand(selectQuery, conexion))
+                    bool exist = false;
+                    MySqlCommand checkColumnCmd = new MySqlCommand(string.Format("SELECT * FROM login_user WHERE usr_nick='{0}'", newUniddes.usr_nick), conexion);
+                    using (MySqlDataReader reader = checkColumnCmd.ExecuteReader())
                     {
-                        selectCmd.Parameters.AddWithValue("@ID_USR", ID_USR);
-                        using (var reader = await selectCmd.ExecuteReaderAsync())
+                        if (reader.HasRows)
                         {
-                            if (reader.Read())
-                            {
-                                existingUser = new login_user()
-                                {
-                                    ID_USR = Convert.ToInt32(reader["ID_USR"]),
-                                    usr_name = reader["usr_name"].ToString(),
-                                    usr_nick = reader["usr_nick"].ToString(),
-                                    usr_pass = reader["usr_pass"].ToString(),
-                                    fiperfil = reader["fiperfil"].ToString(),
-                                    usr_active = reader["usr_active"] != DBNull.Value ? (bool?)Convert.ToBoolean(reader["usr_active"]) : null
-                                };
-                            }
+                            exist = true;
                         }
                     }
 
-                    // Verificar si se encontró el usuario
-                    if (existingUser == null)
+                    if (!exist)
                     {
-                        return NotFound();
-                    }
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.Connection = conexion;
+                        cmd.CommandType = System.Data.CommandType.Text;
 
-                    // Crear una lista de cambios
-                    var updates = new List<string>();
-                    var parameters = new List<MySqlParameter>();
+                        // Ingresar datos de la unidad sin especificar el Id_unidad
+                        cmd.CommandText = "INSERT INTO login_user (usr_name, usr_nick, usr_pass, fiperfil, usr_active, fecha_alta) VALUES (@usr_name, @usr_nick, @usr_pass, 1, 1, @fecha_alta)";
 
-                    // Comparar los valores y construir la consulta de actualización
-                    if (updatedlogin_user.usr_name != existingUser.usr_name)
-                    {
-                        updates.Add("usr_name = @usr_name");
-                        parameters.Add(new MySqlParameter("@usr_name", updatedlogin_user.usr_name));
-                    }
-                    if (updatedlogin_user.usr_nick != existingUser.usr_nick)
-                    {
-                        updates.Add("usr_nick = @usr_nick");
-                        parameters.Add(new MySqlParameter("@usr_nick", updatedlogin_user.usr_nick));
-                    }
-                    if (updatedlogin_user.usr_pass != existingUser.usr_pass)
-                    {
-                        updates.Add("usr_pass = @usr_pass");
-                        parameters.Add(new MySqlParameter("@usr_pass", updatedlogin_user.usr_pass));
-                    }
-                    if (updatedlogin_user.fiperfil != existingUser.fiperfil)
-                    {
-                        updates.Add("fiperfil = @fiperfil");
-                        parameters.Add(new MySqlParameter("@fiperfil", updatedlogin_user.fiperfil));
-                    }
-                    if (updatedlogin_user.usr_active != existingUser.usr_active)
-                    {
-                        updates.Add("usr_active = @usr_active");
-                        parameters.Add(new MySqlParameter("@usr_active", updatedlogin_user.usr_active));
-                    }
+                        cmd.Parameters.AddWithValue("@usr_name", newUniddes.usr_name);
+                        cmd.Parameters.AddWithValue("@usr_nick", newUniddes.usr_nick);
+                        cmd.Parameters.AddWithValue("@usr_pass", newUniddes.usr_pass);
+                        cmd.Parameters.AddWithValue("@fecha_alta", DateTime.Now);
 
-                    // Si no hay cambios, redirigir a la vista de índice
-                    if (updates.Count == 0)
-                    {
-                        return RedirectToAction(nameof(Index));
+                        cmd.ExecuteNonQuery();
                     }
-
-                    // Construir la consulta de actualización
-                    string updateQuery = $"UPDATE login_user SET {string.Join(", ", updates)} WHERE ID_USR = @ID_USR";
-                    parameters.Add(new MySqlParameter("@ID_USR", ID_USR));
-
-                    using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, conexion))
+                    else
                     {
-                        updateCmd.Parameters.AddRange(parameters.ToArray());
-                        await updateCmd.ExecuteNonQueryAsync();
+                        return View(newUniddes);
                     }
                 }
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "Ocurrió un error al actualizar el usuario: " + ex.Message);
-                return View(updatedlogin_user); // Este retorno ya está cubierto, pero aquí se mantiene para mostrar el error
+                return RedirectToAction("Index");
             }
 
-            // Si llegamos aquí, significa que algo falló en el bloque try-catch
-            // Asegúrate de devolver una acción en caso de error no manejado
-            return View(updatedlogin_user);
+            return View(newUniddes);
         }
+
+
+
+        // // GET: Unidades/Edit/5
+        // public IActionResult Edit(string id)
+        // {
+        //     string username = HttpContext.Session.GetString("username") ?? "";
+        //     string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
+
+
+        //     if (string.IsNullOrEmpty(username))
+        //         return RedirectToAction("Index", "LogIn");
+
+        //     if (fiperfil != "1")
+        //         return Redirect("/Unidades/");
+
+        //     string connectionString = Configuration["BDs:SemiCC"];
+
+        //     Unidades? unidades = null;
+
+        //     using (MySqlConnection conexion = new MySqlConnection(connectionString))
+        //     {
+        //         conexion.Open();
+
+        //         MySqlCommand cmd = new MySqlCommand();
+        //         cmd.Connection = conexion;
+        //         cmd.CommandText = "SELECT * FROM Unidades WHERE Id_unidad = @Id_unidad";
+        //         cmd.CommandType = System.Data.CommandType.Text;
+        //         cmd.Parameters.AddWithValue("@Id_unidad", id);
+
+        //         using (var cursor = cmd.ExecuteReader())
+        //         {
+        //             if (cursor.Read())
+        //             {
+        //                 unidades = new Unidades()
+        //                 {
+        //                     Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
+        //                     Modelo = Convert.ToString(cursor["Modelo"]),
+        //                     Tipo = Convert.ToString(cursor["Tipo"]),
+        //                     Marca = Convert.ToString(cursor["Marca"]),
+        //                     Transmision = Convert.ToString(cursor["Transmision"]),
+        //                     Num_placa = Convert.ToString(cursor["Num_placa"]),
+        //                     Num_serie = Convert.ToString(cursor["Num_serie"]),
+        //                     Ano = Convert.ToInt32(cursor["Ano"]),
+        //                     Color = Convert.ToString(cursor["Color"]),
+        //                     Fecha_factura = Convert.ToDateTime(cursor["Fecha_factura"]),
+        //                     Tipo_factura = Convert.ToString(cursor["Tipo_factura"]),
+        //                     Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
+        //                     Fecha_verificacion = Convert.ToDateTime(cursor["Fecha_verificacion"]),
+        //                     Seguro = Convert.ToString(cursor["Seguro"]),
+        //                     Aseguradora = Convert.ToString(cursor["Aseguradora"]),
+        //                     Duplicado_llave = Convert.ToString(cursor["Duplicado_llave"]),
+        //                     Comentario = Convert.ToString(cursor["Comentario"]),
+        //                     Precio = Convert.ToInt32(cursor["Precio"]),
+        //                     Sucursal = Convert.ToString(cursor["Sucursal"]),
+        //                     Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
+        //                     Fech_prox_tenecia = Convert.ToDateTime(cursor["Fech_prox_tenecia"]),
+        //                     Fech_prox_verificacion = Convert.ToDateTime(cursor["Fech_prox_verificacion"]),
+
+        //                 };
+        //             }
+        //         }
+        //     }
+
+        //     if (unidades == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return View(unidades);
+        // }
+
+        // // POST: Unidades/Edit/5
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> Edit(int id, Unidades updatedUnidades, IFormFile? ImageFile)
+        // {
+        //     string username = HttpContext.Session.GetString("username") ?? "";
+
+        //     if (string.IsNullOrEmpty(username))
+        //         return RedirectToAction("Index", "Login");
+
+        //     if (!ModelState.IsValid)
+        //         return View(updatedUnidades);
+
+        //     string connectionString = Configuration["BDs:SemiCC"];
+
+        //     try
+        //     {
+        //         using (MySqlConnection conexion = new MySqlConnection(connectionString))
+        //         {
+        //             await conexion.OpenAsync();
+
+        //             // Actualizar los datos de la unidad
+        //             string query = @"UPDATE Unidades 
+        //                      SET Modelo = @Modelo, Tipo = @Tipo, Marca = @Marca, Transmision = @Transmision, 
+        //                          Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Color = @Color, 
+        //                          Fecha_factura = @Fecha_factura, Tipo_factura = @Tipo_factura, 
+        //                          Fecha_tenencia = @Fecha_tenencia, Fecha_verificacion = @Fecha_verificacion, 
+        //                          Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, 
+        //                          Comentario = @Comentario, Precio = @Precio, Sucursal = @Sucursal, 
+        //                          Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, 
+        //                          Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion 
+        //                      WHERE Id_unidad = @Id_unidad";
+
+        //             using (MySqlCommand updateCmd = new MySqlCommand(query, conexion))
+        //             {
+        //                 updateCmd.Parameters.AddWithValue("@Id_unidad", updatedUnidades.Id_unidad);
+        //                 updateCmd.Parameters.AddWithValue("@Modelo", updatedUnidades.Modelo);
+        //                 updateCmd.Parameters.AddWithValue("@Tipo", updatedUnidades.Tipo);
+        //                 updateCmd.Parameters.AddWithValue("@Marca", updatedUnidades.Marca);
+        //                 updateCmd.Parameters.AddWithValue("@Transmision", updatedUnidades.Transmision);
+        //                 updateCmd.Parameters.AddWithValue("@Num_placa", updatedUnidades.Num_placa);
+        //                 updateCmd.Parameters.AddWithValue("@Num_serie", updatedUnidades.Num_serie);
+        //                 updateCmd.Parameters.AddWithValue("@Ano", updatedUnidades.Ano);
+        //                 updateCmd.Parameters.AddWithValue("@Color", updatedUnidades.Color);
+        //                 updateCmd.Parameters.AddWithValue("@Fecha_factura", updatedUnidades.Fecha_factura);
+        //                 updateCmd.Parameters.AddWithValue("@Tipo_factura", updatedUnidades.Tipo_factura);
+        //                 updateCmd.Parameters.AddWithValue("@Fecha_tenencia", updatedUnidades.Fecha_tenencia);
+        //                 updateCmd.Parameters.AddWithValue("@Fecha_verificacion", updatedUnidades.Fecha_verificacion);
+        //                 updateCmd.Parameters.AddWithValue("@Seguro", updatedUnidades.Seguro);
+        //                 updateCmd.Parameters.AddWithValue("@Aseguradora", updatedUnidades.Aseguradora);
+        //                 updateCmd.Parameters.AddWithValue("@Duplicado_llave", updatedUnidades.Duplicado_llave);
+        //                 updateCmd.Parameters.AddWithValue("@Comentario", updatedUnidades.Comentario);
+        //                 updateCmd.Parameters.AddWithValue("@Precio", updatedUnidades.Precio);
+        //                 updateCmd.Parameters.AddWithValue("@Sucursal", updatedUnidades.Sucursal);
+        //                 updateCmd.Parameters.AddWithValue("@Estatus", 1);
+        //                 updateCmd.Parameters.AddWithValue("@Fecha_ingreso", updatedUnidades.Fecha_ingreso);
+        //                 updateCmd.Parameters.AddWithValue("@Fech_prox_tenecia", updatedUnidades.Fech_prox_tenecia);
+        //                 updateCmd.Parameters.AddWithValue("@Fech_prox_verificacion", updatedUnidades.Fech_prox_verificacion);
+
+        //                 await updateCmd.ExecuteNonQueryAsync();
+        //             }
+
+        //             // Si se cargó una imagen, guardarla en la ruta correspondiente
+        //             if (ImageFile != null && ImageFile.Length > 0)
+        //             {
+        //                 string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "Unidades", updatedUnidades.Id_unidad.ToString());
+        //                 string filePath = Path.Combine(folderPath, "Imagen_1.jpg");
+
+        //                 // Crear la carpeta si no existe
+        //                 if (!Directory.Exists(folderPath))
+        //                 {
+        //                     Directory.CreateDirectory(folderPath);
+        //                 }
+
+        //                 // Guardar la imagen como Imagen_1.jpg
+        //                 using (var stream = new FileStream(filePath, FileMode.Create))
+        //                 {
+        //                     await ImageFile.CopyToAsync(stream);
+        //                 }
+        //             }
+        //         }
+
+        //         return RedirectToAction(nameof(Index));
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         ModelState.AddModelError("", "Ocurrió un error al actualizar la unidad: " + ex.Message);
+        //         return View(updatedUnidades);
+        //     }
+        // }
 
     }
 }
