@@ -12,13 +12,10 @@ namespace Serfitex.Controllers
         private readonly ILogger<PrecioUnidadesController> _logger;
         private readonly IConfiguration Configuration;
 
-        private readonly NuevoBanorteContext _context;
-
-        public PrecioUnidadesController(ILogger<PrecioUnidadesController> logger, IConfiguration configuration, NuevoBanorteContext context)
+        public PrecioUnidadesController(ILogger<PrecioUnidadesController> logger, IConfiguration configuration)
         {
             _logger = logger;
             Configuration = configuration;
-            _context = context; // Asigna el contexto inyectado a la variable de instancia
         }
 
         public IActionResult Index()
@@ -115,69 +112,66 @@ namespace Serfitex.Controllers
         }
 
 
-        // GET: Unidades/Gasto
-        public IActionResult Gasto(int id)
-        {
-            var unidad = _context.Unidades.FirstOrDefault(u => u.Id_unidad == id);
+        // // GET: Unidades/Gasto
+        // public IActionResult Gasto(int id)
+        // {
 
-            string username = HttpContext.Session.GetString("username") ?? "";
-            string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
+        //     string username = HttpContext.Session.GetString("username") ?? "";
+        //     string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
 
-            if (string.IsNullOrEmpty(username))
-                return RedirectToAction("Index", "LogIn");
-            if (fiperfil != "1")
-                return Redirect("/Unidades/");
+        //     if (string.IsNullOrEmpty(username))
+        //         return RedirectToAction("Index", "LogIn");
+        //     if (fiperfil != "1")
+        //         return Redirect("/Unidades/");
 
-            if (unidad == null) // Manejar el caso donde no se encuentra la unidad
-            {
-                return NotFound(); // o redirigir a otra acción
-            }
+        //     if (unidad == null) // Manejar el caso donde no se encuentra la unidad
+        //     {
+        //         return NotFound(); // o redirigir a otra acción
+        //     }
 
-            return View(unidad); // Pasar el objeto unidad a la vista
-        }
+        //     return View(unidad); // Pasar el objeto unidad a la vista
+        // }
 
 
-        // POST: Unidades/Gasto
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Gasto(int? id, Unidades newGasto)
-        {
-            string username = HttpContext.Session.GetString("username") ?? "";
+        // // POST: Unidades/Gasto
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public IActionResult Gasto(int? id, Unidades newGasto)
+        // {
+        //     string username = HttpContext.Session.GetString("username") ?? "";
 
-            if (string.IsNullOrEmpty(username))
-                return RedirectToAction("Index", "LogIn");
+        //     if (string.IsNullOrEmpty(username))
+        //         return RedirectToAction("Index", "LogIn");
 
-            string connectionString = Configuration["BDs:SemiCC"];
+        //     string connectionString = Configuration["BDs:SemiCC"];
 
-            if (ModelState.IsValid)
-            {
-                using (MySqlConnection conexion = new MySqlConnection(connectionString))
-                {
-                    conexion.Open();
+        //     if (ModelState.IsValid)
+        //     {
+        //         using (MySqlConnection conexion = new MySqlConnection(connectionString))
+        //         {
+        //             conexion.Open();
 
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = conexion;
-                    cmd.CommandType = System.Data.CommandType.Text;
+        //             MySqlCommand cmd = new MySqlCommand();
+        //             cmd.Connection = conexion;
+        //             cmd.CommandType = System.Data.CommandType.Text;
 
-                    // Ingresar datos de la unidad sin especificar el Id_unidad
-                    cmd.CommandText = "INSERT INTO Ta_gasto (Id_unidad, Gastos, Concepto, Fecha_gasto) " +
-                                      "VALUES (@Id_unidad, @Gastos, @Concepto, @Fecha_gasto)";
+        //             // Ingresar datos de la unidad sin especificar el Id_unidad
+        //             cmd.CommandText = "INSERT INTO Ta_gasto (Id_unidad, Gastos, Concepto, Fecha_gasto) " +
+        //                               "VALUES (@Id_unidad, @Gastos, @Concepto, @Fecha_gasto)";
 
-                    cmd.Parameters.AddWithValue("@Id_unidad", id); // Asegúrate de que id tiene un valor
-                    cmd.Parameters.AddWithValue("@Gastos", newGasto.Gastos);
-                    cmd.Parameters.AddWithValue("@Concepto", newGasto.Concepto);
-                    cmd.Parameters.AddWithValue("@Fecha_gasto", DateTime.Now); // Asegúrate de que este es el nombre correcto en la base de datos
+        //             cmd.Parameters.AddWithValue("@Id_unidad", id); // Asegúrate de que id tiene un valor
+        //             cmd.Parameters.AddWithValue("@Gastos", newGasto.Gastos);
+        //             cmd.Parameters.AddWithValue("@Concepto", newGasto.Concepto);
+        //             cmd.Parameters.AddWithValue("@Fecha_gasto", DateTime.Now); // Asegúrate de que este es el nombre correcto en la base de datos
 
-                    cmd.ExecuteNonQuery();
-                }
+        //             cmd.ExecuteNonQuery();
+        //         }
 
-                return RedirectToAction("Index");
-            }
+        //         return RedirectToAction("Index");
+        //     }
 
-            // Si ModelState no es válido, busca la unidad de nuevo para pasarla a la vista
-            var unidad = _context.Unidades.FirstOrDefault(u => u.Id_unidad == id);
-            return View(unidad); // Pasar el modelo de unidad a la vista para mostrar el error
-        }
+        //     return View(unidad); // Pasar el modelo de unidad a la vista para mostrar el error
+        // }
 
 
     }

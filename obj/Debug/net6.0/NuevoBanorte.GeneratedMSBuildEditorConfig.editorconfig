@@ -9,123 +9,123 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = NuevoBanorte
 build_property.RootNamespace = NuevoBanorte
-build_property.ProjectDir = /Users/luisservin/Downloads/Seminuevos_Admin/
+build_property.ProjectDir = /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/luisservin/Downloads/Seminuevos_Admin
+build_property.MSBuildProjectDirectory = /Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Home/Privacy.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Login/Index.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/PrecioUnidades/Create.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/PrecioUnidades/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJlY2lvVW5pZGFkZXMvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/PrecioUnidades/Details.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/PrecioUnidades/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJlY2lvVW5pZGFkZXMvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/PrecioUnidades/Edit.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/PrecioUnidades/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJlY2lvVW5pZGFkZXMvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/PrecioUnidades/Gasto.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/PrecioUnidades/Gasto.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJlY2lvVW5pZGFkZXMvR2FzdG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/PrecioUnidades/Index.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/PrecioUnidades/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJlY2lvVW5pZGFkZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/ProximosPagosTenencias/Index.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/ProximosPagosTenencias/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJveGltb3NQYWdvc1RlbmVuY2lhcy9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/ProximosPagosTenencias/RealizarPagoT.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/ProximosPagosTenencias/RealizarPagoT.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJveGltb3NQYWdvc1RlbmVuY2lhcy9SZWFsaXphclBhZ29ULmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/ProximosPagosVerificacion/Index.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/ProximosPagosVerificacion/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJveGltb3NQYWdvc1ZlcmlmaWNhY2lvbi9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/ProximosPagosVerificacion/RealizarPagoV.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/ProximosPagosVerificacion/RealizarPagoV.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJveGltb3NQYWdvc1ZlcmlmaWNhY2lvbi9SZWFsaXphclBhZ29WLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/ReportePagoTenencia/Index.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/ReportePagoTenencia/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZVBhZ29UZW5lbmNpYS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/ReportePagoVerificacion/Index.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/ReportePagoVerificacion/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZVBhZ29WZXJpZmljYWNpb24vSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/ReporteUnidades/Index.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/ReporteUnidades/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVwb3J0ZVVuaWRhZGVzL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Shared/Error.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Unidades/Create.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Unidades/Details.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Unidades/Edit.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Unidades/Index.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Unidades/Venta.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Unidades/Venta.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVW5pZGFkZXMvVmVudGEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Usuarios/Create.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Usuarios/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpb3MvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Usuarios/Edit.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Usuarios/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpb3MvRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Usuarios/Index.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Usuarios/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXN1YXJpb3MvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/_ViewImports.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/_ViewStart.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Shared/_Layout.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-85nneb78bi
 
-[/Users/luisservin/Downloads/Seminuevos_Admin/Views/Shared/_LayoutLogin.cshtml]
+[/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/Views/Shared/_LayoutLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXRMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-vpx7oacbah

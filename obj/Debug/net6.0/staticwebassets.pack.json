@@ -1,0 +1,865 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/obj/Debug/net6.0/scopedcss/projectbundle/NuevoBanorte.bundle.scp.css",
+      "PackagePath": "staticwebassets/NuevoBanorte.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/css/app.css",
+      "PackagePath": "staticwebassets/assets/css/app.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/css/app.css.map",
+      "PackagePath": "staticwebassets/assets/css/app.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/css/bundle.css",
+      "PackagePath": "staticwebassets/assets/css/bundle.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/css/bundle.css.map",
+      "PackagePath": "staticwebassets/assets/css/bundle.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-Bold.svg",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-Bold.svg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-Bold.ttf",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-Bold.ttf"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-Bold.woff",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-Bold.woff"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-Medium.svg",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-Medium.svg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-Medium.ttf",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-Medium.ttf"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-Medium.woff",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-Medium.woff"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-Regular.svg",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-Regular.svg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-Regular.ttf",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-Regular.ttf"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-Regular.woff",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-Regular.woff"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-SemiBold.svg",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-SemiBold.svg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-SemiBold.ttf",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-SemiBold.ttf"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/fonts/Poppins-SemiBold.woff",
+      "PackagePath": "staticwebassets/assets/fonts/Poppins-SemiBold.woff"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/js/app.js",
+      "PackagePath": "staticwebassets/assets/js/app.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/assets/js/bundle.js",
+      "PackagePath": "staticwebassets/assets/js/bundle.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/css/site.css",
+      "PackagePath": "staticwebassets/css/site.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/SEMINUEVOS.png",
+      "PackagePath": "staticwebassets/images/SEMINUEVOS.png"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/1/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/1/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/2/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/2/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/3/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/3/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/4/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/4/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/5/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/5/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/6/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/6/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/7/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/7/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/Unidades/8/Imagen_1.jpg",
+      "PackagePath": "staticwebassets/images/Unidades/8/Imagen_1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/1.jpg",
+      "PackagePath": "staticwebassets/images/avatar/1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/10.jpg",
+      "PackagePath": "staticwebassets/images/avatar/10.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/11.jpg",
+      "PackagePath": "staticwebassets/images/avatar/11.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/12.jpg",
+      "PackagePath": "staticwebassets/images/avatar/12.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/13.jpg",
+      "PackagePath": "staticwebassets/images/avatar/13.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/14.jpg",
+      "PackagePath": "staticwebassets/images/avatar/14.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/15.jpg",
+      "PackagePath": "staticwebassets/images/avatar/15.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/16.jpg",
+      "PackagePath": "staticwebassets/images/avatar/16.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/17.jpg",
+      "PackagePath": "staticwebassets/images/avatar/17.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/18.jpg",
+      "PackagePath": "staticwebassets/images/avatar/18.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/19.jpg",
+      "PackagePath": "staticwebassets/images/avatar/19.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/2.jpg",
+      "PackagePath": "staticwebassets/images/avatar/2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/20.jpg",
+      "PackagePath": "staticwebassets/images/avatar/20.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/3.jpg",
+      "PackagePath": "staticwebassets/images/avatar/3.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/4.jpg",
+      "PackagePath": "staticwebassets/images/avatar/4.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/5.jpg",
+      "PackagePath": "staticwebassets/images/avatar/5.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/6.jpg",
+      "PackagePath": "staticwebassets/images/avatar/6.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/7.jpg",
+      "PackagePath": "staticwebassets/images/avatar/7.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/8.jpg",
+      "PackagePath": "staticwebassets/images/avatar/8.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/9.jpg",
+      "PackagePath": "staticwebassets/images/avatar/9.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/avatar/bot-1.jpg",
+      "PackagePath": "staticwebassets/images/avatar/bot-1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/cover/1.jpg",
+      "PackagePath": "staticwebassets/images/cover/1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/cover/2.jpg",
+      "PackagePath": "staticwebassets/images/cover/2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/favicon.ico",
+      "PackagePath": "staticwebassets/images/favicon.ico"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/favicon.png",
+      "PackagePath": "staticwebassets/images/favicon.png"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/1.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/2.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/3.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/3.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/4.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/4.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/5.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/5.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/6.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/6.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/7.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/7.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/8.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/8.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/thumb-1.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/thumb-1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/thumb-2.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/thumb-2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/thumb-3.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/thumb-3.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/thumb-4.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/thumb-4.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/thumb-5.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/thumb-5.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/thumb-6.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/thumb-6.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/thumb-7.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/thumb-7.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/chat/thumb-8.jpg",
+      "PackagePath": "staticwebassets/images/gallery/chat/thumb-8.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/1.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/10.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/10.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/11.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/11.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/12.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/12.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/13.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/13.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/14.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/14.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/15.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/15.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/16.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/16.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/2.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/3.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/3.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/4.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/4.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/5.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/5.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/6.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/6.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/7.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/7.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/8.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/8.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/9.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/9.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-1.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-10.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-10.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-11.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-11.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-12.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-12.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-13.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-13.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-14.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-14.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-15.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-15.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-16.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-16.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-2.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-3.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-3.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-4.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-4.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-5.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-5.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-6.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-6.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-7.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-7.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-8.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-8.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/contact/thumb-9.jpg",
+      "PackagePath": "staticwebassets/images/gallery/contact/thumb-9.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/hr-1.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/hr-1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/hr-2.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/hr-2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/hr-3.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/hr-3.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/hr-4.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/hr-4.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/hr-5.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/hr-5.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/hr-6.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/hr-6.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/hr-7.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/hr-7.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/vr-1.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/vr-1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/vr-2.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/vr-2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/vr-3.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/vr-3.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/vr-4.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/vr-4.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/vr-5.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/vr-5.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/vr-6.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/vr-6.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/gallery/video/vr-7.jpg",
+      "PackagePath": "staticwebassets/images/gallery/video/vr-7.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/cover.png",
+      "PackagePath": "staticwebassets/images/landing/cover.png"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/cta-bg.png",
+      "PackagePath": "staticwebassets/images/landing/cta-bg.png"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/icon/bootstrap.png",
+      "PackagePath": "staticwebassets/images/landing/icon/bootstrap.png"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/icon/javascript.png",
+      "PackagePath": "staticwebassets/images/landing/icon/javascript.png"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/icon/sass.png",
+      "PackagePath": "staticwebassets/images/landing/icon/sass.png"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/chat-bot-2.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/chat-bot-2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/chat-bot.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/chat-bot.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/chat-page.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/chat-page.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/chat-replies.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/chat-replies.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/contact-page.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/contact-page.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/faq-page.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/faq-page.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/login-page.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/login-page.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/misc-elements.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/misc-elements.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/pricing-page.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/pricing-page.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/profile-edit.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/profile-edit.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/register-page.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/register-page.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/reset-page.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/reset-page.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/stories-page.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/stories-page.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/usecase-modal.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/usecase-modal.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/landing/screens/welcome-page.jpg",
+      "PackagePath": "staticwebassets/images/landing/screens/welcome-page.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/logo.png",
+      "PackagePath": "staticwebassets/images/logo.png"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/logo.svg",
+      "PackagePath": "staticwebassets/images/logo.svg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/1.jpg",
+      "PackagePath": "staticwebassets/images/stories/1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/2.jpg",
+      "PackagePath": "staticwebassets/images/stories/2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/3.jpg",
+      "PackagePath": "staticwebassets/images/stories/3.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/4.jpg",
+      "PackagePath": "staticwebassets/images/stories/4.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/5.jpg",
+      "PackagePath": "staticwebassets/images/stories/5.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/6.jpg",
+      "PackagePath": "staticwebassets/images/stories/6.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/thumb-1.jpg",
+      "PackagePath": "staticwebassets/images/stories/thumb-1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/thumb-2.jpg",
+      "PackagePath": "staticwebassets/images/stories/thumb-2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/thumb-3.jpg",
+      "PackagePath": "staticwebassets/images/stories/thumb-3.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/thumb-4.jpg",
+      "PackagePath": "staticwebassets/images/stories/thumb-4.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/thumb-5.jpg",
+      "PackagePath": "staticwebassets/images/stories/thumb-5.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/stories/thumb-6.jpg",
+      "PackagePath": "staticwebassets/images/stories/thumb-6.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/v-cover/1.jpg",
+      "PackagePath": "staticwebassets/images/v-cover/1.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/images/v-cover/2.jpg",
+      "PackagePath": "staticwebassets/images/v-cover/2.jpg"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/js/site.js",
+      "PackagePath": "staticwebassets/js/site.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/LICENSE",
+      "PackagePath": "staticwebassets/lib/bootstrap"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery-validation/LICENSE.md",
+      "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery/dist/jquery.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery/dist/jquery.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
+    },
+    {
+      "Id": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/wwwroot/lib/jquery/dist/jquery.min.map",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.NuevoBanorte.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.build.NuevoBanorte.props",
+      "PackagePath": "build\\NuevoBanorte.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.NuevoBanorte.props",
+      "PackagePath": "buildMultiTargeting\\NuevoBanorte.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.NuevoBanorte.props",
+      "PackagePath": "buildTransitive\\NuevoBanorte.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

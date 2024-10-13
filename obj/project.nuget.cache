@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JCW2fJAc26tUWDXfV8rI/XRFpr6CE337oCh+VI9M+zlvIxr3cCaimnw7mQew7Tkw9+Ase4oyDb6SO7gM14eUIg==",
+  "dgSpecHash": "xbInNkznIoEw4wV7150f4hGvLpgkRKhA53aXoZp6bzEDCi6p9stQoV8zLV3AwS03/xWz0KM/EKjyZhmZDVSUJQ==",
   "success": true,
-  "projectFilePath": "/Users/luisservin/Downloads/Seminuevos_Admin/NuevoBanorte.csproj",
+  "projectFilePath": "/Users/luisservin/Documents/REPOSITORIOS/Seminuevos_Admin/NuevoBanorte.csproj",
   "expectedPackageFiles": [
     "/Users/luisservin/.nuget/packages/bouncycastle.cryptography/2.2.1/bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "/Users/luisservin/.nuget/packages/entityframework/6.4.4/entityframework.6.4.4.nupkg.sha512",
