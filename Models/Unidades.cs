@@ -57,13 +57,24 @@ namespace Serfitex.Models
         public string? Duplicado_llave { get; set; }
         public string? Comentario { get; set; }
         
+        [DisplayName("Precio compra")]
         [Range(0.01, double.MaxValue, ErrorMessage = "El campo Precio debe ser un número")]
         [Required(ErrorMessage = "Campo obligatorio")]
         public decimal Precio_compra { get; set; }
+
+        [DisplayName("Gastos")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El campo Precio debe ser un número")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public decimal Gastos { get; set; }
+
+        [DisplayName("Total compra mas gastos")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El campo Precio debe ser un número")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public decimal Total_compra_gastos { get; set; }
 
         [DisplayName("Precio venta")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "El campo Precio debe ser un número")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public decimal Precio { get; set; }
         
         [Required(ErrorMessage = "Campo obligatorio")]
@@ -88,6 +99,9 @@ namespace Serfitex.Models
         public int? Tel_casa { get; set; }
         public int? Tel_oficina { get; set; }
         public string? Correo { get; set; }
+        public decimal Gasto { get; set; }
+        public string? Concepto { get; set; }
+        public DateTime Fecha_gasto { get; set; }
 
     }
 }

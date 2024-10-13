@@ -58,77 +58,56 @@ namespace Serfitex.Controllers
             return View(registros);
         }
 
-        // // GET: Unidades/Details/5
-        // public IActionResult Details(int? id)
-        // {
-        //     string username = HttpContext.Session.GetString("username") ?? "";
-        //     if (string.IsNullOrEmpty(username))
-        //         return RedirectToAction("Index", "Login");
+        // GET: Unidades/Details/5
+        public IActionResult Details(int? id)
+        {
+            string username = HttpContext.Session.GetString("username") ?? "";
+            if (string.IsNullOrEmpty(username))
+                return RedirectToAction("Index", "Login");
 
-        //     if (id == null)
-        //     {
-        //         return NotFound();
-        //     }
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //     string connectionString = Configuration["BDs:SemiCC"];
-        //     Unidades? unidad = null;
+            string connectionString = Configuration["BDs:SemiCC"];
+            Unidades? unidad = null;
 
-        //     using (MySqlConnection conexion = new MySqlConnection(connectionString))
-        //     {
-        //         conexion.Open();
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            {
+                conexion.Open();
 
-        //         MySqlCommand cmd = new MySqlCommand();
-        //         cmd.Connection = conexion;
-        //         cmd.CommandText = "SELECT * FROM Unidades WHERE Id_unidad = @Id_unidad";
-        //         cmd.CommandType = System.Data.CommandType.Text;
-        //         cmd.Parameters.AddWithValue("@Id_unidad", id);
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conexion;
+                cmd.CommandText = "SELECT * FROM Ta_gastos WHERE Id_unidad = @Id_unidad";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Id_unidad", id);
 
-        //         using (var cursor = cmd.ExecuteReader())
-        //         {
-        //             if (cursor.Read())
-        //             {
-        //                 unidad = new Unidades()
-        //                 {
-        //                     Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
-        //                     Modelo = Convert.ToString(cursor["Modelo"]),
-        //                     Tipo = Convert.ToString(cursor["Tipo"]),
-        //                     Marca = Convert.ToString(cursor["Marca"]),
-        //                     Transmision = Convert.ToString(cursor["Transmision"]),
-        //                     Num_placa = Convert.ToString(cursor["Num_placa"]),
-        //                     Num_serie = Convert.ToString(cursor["Num_serie"]),
-        //                     Ano = Convert.ToInt32(cursor["Ano"]),
-        //                     Color = Convert.ToString(cursor["Color"]),
-        //                     Fecha_factura = Convert.ToDateTime(cursor["Fecha_factura"]),
-        //                     Tipo_factura = Convert.ToString(cursor["Tipo_factura"]),
-        //                     Fecha_tenencia = Convert.ToDateTime(cursor["Fecha_tenencia"]),
-        //                     Fecha_verificacion = Convert.ToDateTime(cursor["Fecha_verificacion"]),
-        //                     Seguro = Convert.ToString(cursor["Seguro"]),
-        //                     Aseguradora = Convert.ToString(cursor["Aseguradora"]),
-        //                     Duplicado_llave = Convert.ToString(cursor["Duplicado_llave"]),
-        //                     Comentario = Convert.ToString(cursor["Comentario"]),
-        //                     Precio = Convert.ToDecimal(cursor["Precio"]),
-        //                     Sucursal = Convert.ToString(cursor["Sucursal"]),
-        //                     Estatus = Convert.ToInt32(cursor["Estatus"]),
-        //                     Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
-        //                     Fech_prox_tenecia = Convert.ToDateTime(cursor["Fech_prox_tenecia"]),
-        //                     Fech_prox_verificacion = Convert.ToDateTime(cursor["Fech_prox_verificacion"]),
-        //                 };
-        //                 unidad.EstatusTexto = unidad.Estatus == 1 ? "Disponible" : "Vendido";
+                using (var cursor = cmd.ExecuteReader())
+                {
+                    if (cursor.Read())
+                    {
+                        unidad = new Unidades()
+                        {
+                            Concepto = Convert.ToString(cursor["Concepto"]),
+                            Gasto = Convert.ToDecimal(cursor["Gasto"]),
+                            Fecha_gasto = Convert.ToDateTime(cursor["Fecha_gasto"]),
+                        };
 
-        //                 // Construir la ruta a la imagen "~/images/LogoCMG.png"
-        //                 string imagePath = $"~/images/Unidades/{unidad.Id_unidad}/Imagen_1.jpg";
-        //                 ViewBag.ImagePath = imagePath;
+                        // Construir la ruta a la imagen "~/images/LogoCMG.png"
+                        string imagePath = $"~/images/Unidades/{unidad.Id_unidad}/Imagen_1.jpg";
+                        ViewBag.ImagePath = imagePath;
 
-        //             }
-        //         }
-        //     }
+                    }
+                }
+            }
 
-        //     if (unidad == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return View(unidad);
-        // }
+            if (unidad == null)
+            {
+                return NotFound();
+            }
+            return View(unidad);
+        }
 
         // // GET: Unidades/Create
         // public IActionResult Create()
