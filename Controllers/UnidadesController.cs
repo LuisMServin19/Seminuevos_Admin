@@ -113,6 +113,7 @@ namespace Serfitex.Controllers
                         {
                             Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
                             Modelo = Convert.ToString(cursor["Modelo"]),
+                            Version = Convert.ToString(cursor["Version"]),
                             Tipo = Convert.ToString(cursor["Tipo"]),
                             Marca = Convert.ToString(cursor["Marca"]),
                             Transmision = Convert.ToString(cursor["Transmision"]),
