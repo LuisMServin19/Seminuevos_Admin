@@ -3,6 +3,11 @@
 @{
     ViewData["Title"] = "Index";
     var fiperfil = ViewContext.HttpContext.Session.GetString("fiperfil");
+
+    decimal totalPrecio_compra = Model.Sum(m => m.Precio_compra);
+    decimal totalGastos = Model.Sum(m => m.Gastos); 
+    decimal totalTotal_compra_gastos = Model.Sum(m => m.Total_compra_gastos); 
+    decimal totalPrecio = Model.Sum(m => m.Precio); 
 }
 
 <h1>Precios de unidades</h1>
@@ -18,10 +23,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.First().Modelo) <!-- Asegúrate de que esto corresponda -->
+                @Html.DisplayNameFor(model => model.Modelo) <!-- Ya no se usa First() -->
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.First().Sucursal) <!-- Asegúrate de que esto corresponda -->
+                @Html.DisplayNameFor(model => model.Sucursal) <!-- Ya no se usa First() -->
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Precio_compra)
@@ -39,9 +44,9 @@
         </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < Model.Count(); i++) // Cambiado a Count() para el índice
+        @for (int i = 0; i < Model.Count(); i++) 
         {
-            var item = Model.ElementAt(i); // Obtiene el item actual del modelo
+            var item = Model.ElementAt(i);
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Modelo)
@@ -71,4 +76,13 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2"><strong>Total</strong></td>
+            <td><strong>@($"${totalPrecio_compra:N2}")</strong></td>
+            <td><strong>@($"${totalGastos:N2}")</strong></td>
+            <td><strong>@($"${totalTotal_compra_gastos:N2}")</strong></td>
+            <td><strong>@($"${totalPrecio:N2}")</strong></td>
+        </tr>
+    </tfoot>
 </table>
