@@ -18,6 +18,11 @@
                 <span asp-validation-for="Modelo" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Version" class="control-label"></label>
+                <input asp-for="Version" class="form-control" Autocomplete="off" />
+                <span asp-validation-for="Version" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Tipo" class="control-label"></label>
                 <select asp-for="Tipo" class="form-control" required>
                     <option value="Citycar">Citycar</option>
@@ -121,6 +126,11 @@
                 <label asp-for="Comentario" class="control-label"></label>
                 <input asp-for="Comentario" class="form-control" Autocomplete="off" />
                 <span asp-validation-for="Comentario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio_compra" class="control-label"></label>
+                <input asp-for="Precio_compra" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Precio_compra" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Precio" class="control-label"></label>

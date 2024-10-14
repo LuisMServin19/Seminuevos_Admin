@@ -11,6 +11,7 @@ namespace Serfitex.Models
 
         [Required(ErrorMessage = "Campo obligatorio")]
         public string? Modelo { get; set; }
+        public string? Version { get; set; }
 
         [Required(ErrorMessage = "Campo obligatorio")]
         public string? Tipo { get; set; }

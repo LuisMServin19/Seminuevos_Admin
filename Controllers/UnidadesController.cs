@@ -204,10 +204,11 @@ namespace Serfitex.Controllers
                         cmd.CommandType = System.Data.CommandType.Text;
 
                         // Ingresar datos de la unidad sin especificar el Id_unidad
-                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Tipo,Marca,Transmision,Num_placa,Num_serie,Ano,Color,Fecha_factura,Tipo_factura,Fecha_tenencia,Fecha_verificacion,Seguro,Aseguradora,Duplicado_llave,Comentario,Precio,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) " +
-                                          "VALUES (@Modelo,@Tipo,@Marca,@Transmision,@Num_placa,@Num_serie,@Ano,@Color,@Fecha_factura,@Tipo_factura,@Fecha_tenencia,@Fecha_verificacion,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Precio,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
+                        cmd.CommandText = "INSERT INTO Unidades (Modelo,Version,Tipo,Marca,Transmision,Num_placa,Num_serie,Ano,Color,Fecha_factura,Tipo_factura,Fecha_tenencia,Fecha_verificacion,Seguro,Aseguradora,Duplicado_llave,Comentario,Precio_compra,Precio,Sucursal,Estatus,Fecha_ingreso,Fech_prox_tenecia,Fech_prox_verificacion) " +
+                                          "VALUES (@Modelo,@Version,@Tipo,@Marca,@Transmision,@Num_placa,@Num_serie,@Ano,@Color,@Fecha_factura,@Tipo_factura,@Fecha_tenencia,@Fecha_verificacion,@Seguro,@Aseguradora,@Duplicado_llave,@Comentario,@Precio_compra,@Precio,@Sucursal,@Estatus,@Fecha_ingreso,@Fech_prox_tenecia,@Fech_prox_verificacion)";
 
                         cmd.Parameters.AddWithValue("@Modelo", newUniddes.Modelo);
+                        cmd.Parameters.AddWithValue("@Version", newUniddes.Version);
                         cmd.Parameters.AddWithValue("@Tipo", newUniddes.Tipo);
                         cmd.Parameters.AddWithValue("@Marca", newUniddes.Marca);
                         cmd.Parameters.AddWithValue("@Transmision", newUniddes.Transmision);
@@ -223,6 +224,7 @@ namespace Serfitex.Controllers
                         cmd.Parameters.AddWithValue("@Aseguradora", newUniddes.Aseguradora);
                         cmd.Parameters.AddWithValue("@Duplicado_llave", newUniddes.Duplicado_llave);
                         cmd.Parameters.AddWithValue("@Comentario", newUniddes.Comentario);
+                        cmd.Parameters.AddWithValue("@Precio_compra", newUniddes.Precio_compra);
                         cmd.Parameters.AddWithValue("@Precio", newUniddes.Precio);
                         cmd.Parameters.AddWithValue("@Sucursal", newUniddes.Sucursal);
                         cmd.Parameters.AddWithValue("@Estatus", 1);
@@ -292,6 +294,7 @@ namespace Serfitex.Controllers
                         {
                             Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
                             Modelo = Convert.ToString(cursor["Modelo"]),
+                            Version = Convert.ToString(cursor["Version"]),
                             Tipo = Convert.ToString(cursor["Tipo"]),
                             Marca = Convert.ToString(cursor["Marca"]),
                             Transmision = Convert.ToString(cursor["Transmision"]),
@@ -307,6 +310,7 @@ namespace Serfitex.Controllers
                             Aseguradora = Convert.ToString(cursor["Aseguradora"]),
                             Duplicado_llave = Convert.ToString(cursor["Duplicado_llave"]),
                             Comentario = Convert.ToString(cursor["Comentario"]),
+                            Precio_compra = Convert.ToInt32(cursor["Precio_compra"]),
                             Precio = Convert.ToInt32(cursor["Precio"]),
                             Sucursal = Convert.ToString(cursor["Sucursal"]),
                             Fecha_ingreso = Convert.ToDateTime(cursor["Fecha_ingreso"]),
@@ -349,12 +353,12 @@ namespace Serfitex.Controllers
 
                     // Actualizar los datos de la unidad
                     string query = @"UPDATE Unidades 
-                             SET Modelo = @Modelo, Tipo = @Tipo, Marca = @Marca, Transmision = @Transmision, 
+                             SET Modelo = @Modelo, Version = @Version, Tipo = @Tipo, Marca = @Marca, Transmision = @Transmision, 
                                  Num_placa = @Num_placa, Num_serie = @Num_serie, Ano = @Ano, Color = @Color, 
                                  Fecha_factura = @Fecha_factura, Tipo_factura = @Tipo_factura, 
                                  Fecha_tenencia = @Fecha_tenencia, Fecha_verificacion = @Fecha_verificacion, 
                                  Seguro = @Seguro, Aseguradora = @Aseguradora, Duplicado_llave = @Duplicado_llave, 
-                                 Comentario = @Comentario, Precio = @Precio, Sucursal = @Sucursal, 
+                                 Comentario = @Comentario, Precio_compra = @Precio_compra,Precio = @Precio, Sucursal = @Sucursal, 
                                  Estatus = @Estatus, Fecha_ingreso = @Fecha_ingreso, 
                                  Fech_prox_tenecia = @Fech_prox_tenecia, Fech_prox_verificacion = @Fech_prox_verificacion 
                              WHERE Id_unidad = @Id_unidad";
@@ -363,6 +367,7 @@ namespace Serfitex.Controllers
                     {
                         updateCmd.Parameters.AddWithValue("@Id_unidad", updatedUnidades.Id_unidad);
                         updateCmd.Parameters.AddWithValue("@Modelo", updatedUnidades.Modelo);
+                        updateCmd.Parameters.AddWithValue("@Version", updatedUnidades.Version);
                         updateCmd.Parameters.AddWithValue("@Tipo", updatedUnidades.Tipo);
                         updateCmd.Parameters.AddWithValue("@Marca", updatedUnidades.Marca);
                         updateCmd.Parameters.AddWithValue("@Transmision", updatedUnidades.Transmision);
@@ -378,6 +383,7 @@ namespace Serfitex.Controllers
                         updateCmd.Parameters.AddWithValue("@Aseguradora", updatedUnidades.Aseguradora);
                         updateCmd.Parameters.AddWithValue("@Duplicado_llave", updatedUnidades.Duplicado_llave);
                         updateCmd.Parameters.AddWithValue("@Comentario", updatedUnidades.Comentario);
+                        updateCmd.Parameters.AddWithValue("@Precio_compra", updatedUnidades.Precio_compra);
                         updateCmd.Parameters.AddWithValue("@Precio", updatedUnidades.Precio);
                         updateCmd.Parameters.AddWithValue("@Sucursal", updatedUnidades.Sucursal);
                         updateCmd.Parameters.AddWithValue("@Estatus", 1);
