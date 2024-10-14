@@ -5,7 +5,7 @@
     var fiperfil = ViewContext.HttpContext.Session.GetString("fiperfil");
 }
 
-<h1>Gastos Tenencias</h1>
+<h1>Gastos</h1>
 
 @if (fiperfil == "1")
 {
@@ -18,7 +18,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.First().Concepto) <!-- Asegúrate de que esto corresponda -->
+                @Html.DisplayNameFor(model => model.First().Modelo) <!-- Asegúrate de que esto corresponda -->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Sucursal) <!-- Asegúrate de que esto corresponda -->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio_compra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gastos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total_compra_gastos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
             </th>
             <th></th>
         </tr>
@@ -29,9 +44,23 @@
             var item = Model.ElementAt(i); // Obtiene el item actual del modelo
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Concepto)
+                    @Html.DisplayFor(modelItem => item.Modelo)
                 </td>
-                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sucursal)
+                </td>
+                <td>
+                    @($"${item.Precio_compra:N2}")
+                </td>
+                <td>
+                    @($"${item.Gastos:N2}")
+                </td>
+                <td>
+                    @($"${item.Total_compra_gastos:N2}")
+                </td>
+                <td>
+                    @($"${item.Precio:N2}")
+                </td>
                 <td>
                     @if (fiperfil == "1")
                     {

@@ -48,7 +48,7 @@ namespace Serfitex.Controllers
                 MySqlCommand cmd = new MySqlCommand
                 {
                     Connection = conexion,
-                    CommandText = "SELECT * FROM Ta_gastos;",
+                    CommandText = "SELECT Id_unidad,Modelo,Sucursal,Precio_compra,Gastos,Total_compra_gastos,Precio from unidades where Estatus =1;",
                     CommandType = System.Data.CommandType.Text
                 };
 
@@ -60,7 +60,13 @@ namespace Serfitex.Controllers
                         Ta_gastos gatoss = new Ta_gastos()
                         {
                             Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
-                            Concepto = Convert.ToString(cursor["Concepto"]) ?? string.Empty,
+                            Modelo = Convert.ToString(cursor["Modelo"]) ?? string.Empty,
+                            Sucursal = Convert.ToString(cursor["Sucursal"]) ?? string.Empty,
+                            Precio_compra = cursor["Precio_compra"] != DBNull.Value ? Convert.ToDecimal(cursor["Precio_compra"]) : 0m,
+                            Gastos = cursor["Gastos"] != DBNull.Value ? Convert.ToDecimal(cursor["Gastos"]) : 0m,
+                            Total_compra_gastos = cursor["Total_compra_gastos"] != DBNull.Value ? Convert.ToDecimal(cursor["Total_compra_gastos"]) : 0m,
+                            Precio = cursor["Precio"] != DBNull.Value ? Convert.ToDecimal(cursor["Precio"]) : 0m,
+
                         };
                         gatosss.Add(gatoss);
                     }
@@ -123,7 +129,7 @@ namespace Serfitex.Controllers
                             VALUES (@Id_unidad, @Concepto, @Gasto, @Fecha_gasto)";
                 cmd.Parameters.AddWithValue("@Id_unidad", model.Id_unidad);
                 cmd.Parameters.AddWithValue("@Concepto", model.Concepto);
-                cmd.Parameters.AddWithValue("@Gasto", model.Gasto); // Este campo se recibe del formulario
+                cmd.Parameters.AddWithValue("@Gasto", model.Gastos); // Este campo se recibe del formulario
                 cmd.Parameters.AddWithValue("@Fecha_gasto", DateTime.Now);
                 cmd.ExecuteNonQuery();
 

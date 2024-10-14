@@ -1,33 +1,31 @@
 ﻿@model Serfitex.Models.Ta_gastos
 
 @{
-    ViewData["Title"] = "Registrar Pago";
+    ViewData["Title"] = "Registrar Gasto";
 }
-
-@* <h1>Registrar Pago Tenencia para @Model.Modelo</h1> *@
 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="GuardarGasto" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Gasto" class="control-label"></label>
-                <input asp-for="Gasto" class="form-control" type="number" step="0.01" />
-                <span asp-validation-for="Gasto" class="text-danger"></span>
+                <label asp-for="Gastos" class="control-label"></label>
+                <input asp-for="Gastos" class="form-control" type="number" step="0.01" />
+                <span asp-validation-for="Gastos" class="text-danger"></span>
             </div>
-            </br>
+            <br />
             <div class="form-group">
                 <label asp-for="Concepto" class="control-label"></label>
                 <input asp-for="Concepto" class="form-control" Autocomplete="off" />
                 <span asp-validation-for="Concepto" class="text-danger"></span>
             </div>
             <input asp-for="Id_unidad" type="hidden" />
-            </br>
+            <br />
             <button type="submit" class="btn btn-primary">Guardar Pago</button>
         </form>
     </div>
 </div>
-</br>
+<br />
 <div>
     <a asp-action="Index">Regresar a la lista</a>
 </div>
