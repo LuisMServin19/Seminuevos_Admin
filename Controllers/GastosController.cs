@@ -199,15 +199,18 @@ namespace Serfitex.Controllers
                 }
             }
 
+            // Si no hay gastos, pasa el mensaje de la unidad sin registros
             if (gastos == null || !gastos.Any())
             {
-                return NotFound();
+                ViewBag.Mensaje = $"La unidad {id} no contiene registros de gastos.";
             }
+
+            // Establecemos el modelo y el id de la unidad
+            ViewBag.Modelo = "Nombre del modelo"; // Reemplaza esto con el nombre real del modelo
+            ViewBag.IdUnidad = id; // Pasa el id a ViewBag
 
             return View(gastos);
         }
-
-
 
 
     }
