@@ -29,10 +29,14 @@ namespace Serfitex.Models
         [Required(ErrorMessage = "Campo obligatorio")]
         public decimal Precio { get; set; }
         public string? Concepto { get; set; }
-        public decimal Fecha_gasto { get; set; }
+        public DateTime Fecha_gasto { get; set; }
+        public decimal Gasto { get; set; }
+
 
         public string? Modelo { get; set; }
         public string? Sucursal { get; set; }
+        public string? ImagePath { get; set; }
+
 
     }
 }

@@ -65,6 +65,7 @@
                     @if (fiperfil == "1")
                     {
                         <a asp-action="Gasto" asp-route-id="@item.Id_unidad" class="btn btn-primary">Agregar gasto</a>
+                        <a asp-action="Details" asp-route-id="@item.Id_unidad" class="btn btn-primary">Detalle Gastos</a>
                     }
                 </td>
             </tr>

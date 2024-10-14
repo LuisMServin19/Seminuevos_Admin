@@ -76,7 +76,7 @@ namespace Serfitex.Controllers
             return View(gatosss);
         }
 
-
+        // GET: Gastos/Agregar Gasto
         public IActionResult Gasto(int id)
         {
             string fiperfil = HttpContext.Session.GetString("fiperfil") ?? "";
@@ -110,10 +110,10 @@ namespace Serfitex.Controllers
                 }
             }
             gatosss.Id_unidad = id;
-            return View(gatosss); 
+            return View(gatosss);
         }
 
-
+        // POST: Gastos/Agregar Gasto
         [HttpPost]
         public IActionResult GuardarGasto(Ta_gastos model)
         {
@@ -145,6 +145,69 @@ namespace Serfitex.Controllers
 
             return RedirectToAction("Index");
         }
+
+        // GET: Gastos/Details/
+        public IActionResult Details(int? id)
+        {
+            string username = HttpContext.Session.GetString("username") ?? "";
+            if (string.IsNullOrEmpty(username))
+                return RedirectToAction("Index", "Login");
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            string connectionString = Configuration["BDs:SemiCC"];
+            List<Ta_gastos> gastos = new List<Ta_gastos>();
+
+            using (MySqlConnection conexion = new MySqlConnection(connectionString))
+            {
+                conexion.Open();
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conexion;
+                cmd.CommandText = "SELECT * FROM Ta_gastos WHERE Id_unidad = @Id_unidad";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@Id_unidad", id);
+
+                using (var cursor = cmd.ExecuteReader())
+                {
+                    while (cursor.Read())
+                    {
+                        var gasto = new Ta_gastos()
+                        {
+                            Id_unidad = Convert.ToInt32(cursor["Id_unidad"]),
+                            Concepto = Convert.ToString(cursor["Concepto"]),
+                            Gasto = Convert.ToDecimal(cursor["Gasto"]),
+                            Fecha_gasto = Convert.ToDateTime(cursor["Fecha_gasto"]),
+                        };
+
+                        // Genera la ruta de la imagen por cada gasto
+                        string imagePath = $"~/images/Unidades/{gasto.Id_unidad}/Imagen_1.jpg";
+                        if (System.IO.File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", imagePath.Substring(2))))
+                        {
+                            gasto.ImagePath = imagePath;
+                        }
+                        else
+                        {
+                            gasto.ImagePath = null; // Sin imagen disponible
+                        }
+
+                        gastos.Add(gasto);
+                    }
+                }
+            }
+
+            if (gastos == null || !gastos.Any())
+            {
+                return NotFound();
+            }
+
+            return View(gastos);
+        }
+
+
 
 
     }
