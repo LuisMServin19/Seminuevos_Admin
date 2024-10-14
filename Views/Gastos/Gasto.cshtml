@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="GuardarGasto" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id_unidad" value="@Model.Id_unidad" />
             <div class="form-group">
                 <label asp-for="Gastos" class="control-label"></label>
                 <input asp-for="Gastos" class="form-control" type="number" step="0.01" />
@@ -16,10 +16,9 @@
             <br />
             <div class="form-group">
                 <label asp-for="Concepto" class="control-label"></label>
-                <input asp-for="Concepto" class="form-control" Autocomplete="off" />
+                <input asp-for="Concepto" class="form-control" autocomplete="off" />
                 <span asp-validation-for="Concepto" class="text-danger"></span>
             </div>
-            <input asp-for="Id_unidad" type="hidden" />
             <br />
             <button type="submit" class="btn btn-primary">Guardar Pago</button>
         </form>

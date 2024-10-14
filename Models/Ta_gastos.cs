@@ -7,7 +7,7 @@ namespace Serfitex.Models
     {
         [Key]
 
-        public int? Id_unidad { get; set; }
+        public int Id_unidad { get; set; }
 
         [DisplayName("Precio compra")]
         [Range(0.01, double.MaxValue, ErrorMessage = "El campo Precio debe ser un número")]

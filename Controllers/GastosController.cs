@@ -91,7 +91,6 @@ namespace Serfitex.Controllers
             string connectionString = Configuration["BDs:SemiCC"];
             Ta_gastos gatosss = new Ta_gastos();
 
-            // Obtener los datos de la unidad por Id_unidad
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
                 conexion.Open();
@@ -110,13 +109,22 @@ namespace Serfitex.Controllers
                     }
                 }
             }
-            return View(gatosss); // Enviar el modelo a la vista
+            gatosss.Id_unidad = id;
+            return View(gatosss); 
         }
+
 
         [HttpPost]
         public IActionResult GuardarGasto(Ta_gastos model)
         {
             string connectionString = Configuration["BDs:SemiCC"];
+            Console.WriteLine("Id_unidad recibido: " + model.Id_unidad);
+
+            if (model.Id_unidad == 0)
+            {
+                ModelState.AddModelError("", "El Id_unidad no es válido.");
+                return View(model);
+            }
 
             using (MySqlConnection conexion = new MySqlConnection(connectionString))
             {
@@ -129,13 +137,13 @@ namespace Serfitex.Controllers
                             VALUES (@Id_unidad, @Concepto, @Gasto, @Fecha_gasto)";
                 cmd.Parameters.AddWithValue("@Id_unidad", model.Id_unidad);
                 cmd.Parameters.AddWithValue("@Concepto", model.Concepto);
-                cmd.Parameters.AddWithValue("@Gasto", model.Gastos); // Este campo se recibe del formulario
+                cmd.Parameters.AddWithValue("@Gasto", model.Gastos);
                 cmd.Parameters.AddWithValue("@Fecha_gasto", DateTime.Now);
                 cmd.ExecuteNonQuery();
 
             }
 
-            return RedirectToAction("Index"); // Redirigir a la vista de lista después de guardar el pago
+            return RedirectToAction("Index");
         }
 
 
